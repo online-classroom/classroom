@@ -1,54 +1,89 @@
 
-#Home {
-    width: 100%;
-    height: 95vh;
-    color: black;
+
+.home-container{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 
-    .login-container {
-        width: 40vw;
-        height: 40vh;
-        margin: 5vw 5vw;
-        background-color: rgb(235, 235, 235);
+    #Home {
+        width: 100%;
+        height: 600px;
+        color: black;
+        display: flex;
+        justify-content: space-between;
 
-        .login-content{
-            margin: 10%;
+        .login-container {
+            width: 40vw;
+            height: 375px;
+            margin: 5vw 5vw;
+            background-color: rgb(235, 235, 235);
 
-            .login-title{
-                font-size: 28px;
+            .login-content{
+                margin: 7.5% 10%;
+
+                .login-title{
+                    font-size: 28px;
+                }
+
+                .login-input{
+                    width: 100%;
+                    height: 22px;
+                    border: none;
+                    margin: 15px auto;
+                }
+
+                .login-button{
+                    height: 40px;
+                    border-radius: 25px;
+                    width: 75px;
+                    color: white;
+                    background-color: rgb(101, 101, 101);
+                    border: none;
+                    font-size: 16px;
+                    margin: 15px auto;
+                }
             }
+        }
 
-            .login-input{
-                width: 100%;
-                height: 22px;
-                border: none;
+        .register-buttons {
+            width: 40vw;
+            height: 375px;
+            margin: 5vw 5vw;
+
+            .register-button-container{
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .reg-button{
+                    height: 150px;
+                    border-radius: 75px;
+                    background-color: rgb(235, 235, 235);
+                    border: none;
+                    font-size: 28px;
+                }
+                .reg-button:hover{
+                    outline: none;
+                    text-decoration: none;
+                }
             }
         }
     }
 
-    .register-buttons {
-        width: 40vw;
-        height: 40vh;
-        margin: 5vw 5vw;
+    .courses-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        background-color: rgb(235, 235, 235);
 
-        .register-button-container{
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-
-            .reg-button{
-                height: 15vh;
-                border-radius: 75px;
-                background-color: rgb(235, 235, 235);
-                border: none;
-                font-size: 28px;
-            }
-            .reg-button:hover{
-                outline: none;
-                text-decoration: none;
-            }
+        .subjects{
+            height: 200px;
+            width: 45%;
+            margin: 25px 5px;
+            // border: 1px solid black;
+            padding: 10px;
+            background-color: white;
         }
     }
 }
