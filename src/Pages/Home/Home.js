@@ -11,12 +11,12 @@ const Home =()=>{
                     <br/>
                     <span>Username:</span>
                     <br/>
-                    <input placeholder='Username'/>
+                    <input className='login-input' placeholder='Username'/>
                     <br/>
                     <br/>
                     <span>Password:</span>
                     <br/>
-                    <input placeholder='Password'/>
+                    <input className='login-input' placeholder='Password'/>
                 </div>
             </div>
             <div className='register-buttons'>
@@ -25,6 +25,7 @@ const Home =()=>{
                     <button className='reg-button'>REGISTER AS TEACHER</button>
                 </div>
             </div>
+            <hr/>
         </div>
     )
 }

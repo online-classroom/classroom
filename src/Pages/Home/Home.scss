@@ -13,10 +13,16 @@
         background-color: rgb(235, 235, 235);
 
         .login-content{
-            margin: 7.5%;
+            margin: 10%;
 
             .login-title{
                 font-size: 28px;
+            }
+
+            .login-input{
+                width: 100%;
+                height: 22px;
+                border: none;
             }
         }
     }
