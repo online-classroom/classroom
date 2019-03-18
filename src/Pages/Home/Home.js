@@ -25,7 +25,6 @@ const Home =()=>{
                     <button className='reg-button'>REGISTER AS TEACHER</button>
                 </div>
             </div>
-            <hr/>
         </div>
     )
 }
