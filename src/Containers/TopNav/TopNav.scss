@@ -1,6 +1,21 @@
 
-
-#TopNav {
+.topnav{
     height: 80px;
+    width: 100%;
+    background-color: rgb(60, 60, 60);
+    color: white;
+    display: flex;
+    align-items: center;
     
+    .logo{
+        padding: 0px 30px;
+        margin-right: auto;
+        font-size: 36px;
+    }
+
+    .auth-button {
+        padding: 0px 30px;
+        text-decoration: none;
+        margin-left: auto;
+    }
 }

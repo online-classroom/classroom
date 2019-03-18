@@ -1,9 +1,10 @@
 import React from 'react'
+import './TopNav.scss'
 
 const TopNav =()=>{
     return(
-        <div>
-            <div className='logo'>Logo</div>
+        <div className='topnav'>
+            <span className='logo'>Logo</span>
             <span className='auth-button'>Login</span>
         </div>
     )
