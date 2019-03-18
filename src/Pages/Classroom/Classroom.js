@@ -1,12 +1,13 @@
 import React from 'react'
 import './Classroom.scss'
+import VideoContainer from './../../Containers/VideoContainer/VideoContainer'
 
 const Classroom =()=>{
     return(
         <div className='classroom_main'>
             <div className='video_qchat_container'>
                 <div className='video_container'>
-                    Video
+                    <VideoContainer/>
                 </div>
                 <div className='qchat_container'>
                     Qchat
