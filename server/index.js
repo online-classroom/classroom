@@ -5,9 +5,11 @@ const express = require('express')
 const massive = require('massive')
 const socket = require('socket.io')
 const ssl = require('./setSocketListeners')
+const OpenTok = require('opentok')
+
 
 const app = express()
-
+const opentok = (apiKey,apiSecret)
 // // // // MIDDLEWARES // // // //
 
 app.use(express.json())
@@ -26,7 +28,7 @@ massive(CONNECTION_STRING).then((db) => {
 
     io.on('connection',socket=>{
         console.log('User Connected')
-        ssl.setSocketListeners(socket,db,io)       // reference to sockets' listeners
+        ssl.setSocketListeners(socket,db,io)       // reference to sockets' listeners' file
     })
 
 })
