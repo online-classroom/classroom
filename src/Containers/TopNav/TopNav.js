@@ -3,7 +3,8 @@ import React from 'react'
 const TopNav =()=>{
     return(
         <div>
-            TopNav
+            <div className='logo'>Logo</div>
+            <span className='auth-button'>Login</span>
         </div>
     )
 }

@@ -2,8 +2,8 @@
   "name": "classroom",
   "version": "0.1.0",
   "private": true,
-  "proxy":"http://localhost:6464",
-  "main":"server/index.js",
+  "proxy": "http://localhost:6464",
+  "main": "server/index.js",
   "dependencies": {
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
