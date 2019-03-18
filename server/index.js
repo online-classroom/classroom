@@ -1,14 +1,24 @@
-//constant etc.
+// // // // CONSTANTS // // // //
 require('dotenv').config()
 const express = require('express')
+const massive = require('massive')
+
 const app = express()
 
-//middlewares
+// // // // MIDDLEWARES // // // //
+
 app.use(express.json())
 
-//dotenv destructuring
-const {SERVER_PORT} = process.env
+// // // // DOTENV DESTRUCTURING // // // //
 
-app.listen(SERVER_PORT,()=>console.log(`Magic at ${SERVER_PORT}`))
+const {SERVER_PORT,CONNECTION_STRING} = process.env
 
-//endpoints
+// // // // DATABASE/SERVER/SOCKET SETUP // // // //
+
+massive(CONNECTION_STRING).then((db) => {
+    app.set('db', db)
+    console.log('Database Connected')
+    app.listen(SERVER_PORT, () => { console.log(`Magic at ${SERVER_PORT}`) })
+})
+
+// // // // ENDPOINTS // // // //
