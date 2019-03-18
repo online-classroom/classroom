@@ -5,11 +5,9 @@ const express = require('express')
 const massive = require('massive')
 const socket = require('socket.io')
 const ssl = require('./setSocketListeners')
-const OpenTok = require('opentok')
 
 
 const app = express()
-const opentok = (apiKey,apiSecret)
 // // // // MIDDLEWARES // // // //
 
 app.use(express.json())

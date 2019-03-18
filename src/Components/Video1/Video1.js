@@ -1,5 +1,6 @@
 import React from "react";
 import Video2 from "../Video2/Video2";
+import Video3 from "../Video3/Video3";
 
 const Video1 = () => {
   return (
