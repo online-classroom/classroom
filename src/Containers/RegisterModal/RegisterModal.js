@@ -10,7 +10,8 @@ export default class RegisterModal extends Component {
         email:'',
         username: '',
         password: '',
-        isTeacher: null
+        isTeacher: null,
+        errMessage:''
     }
 
     handleChange = (e) => {
@@ -19,8 +20,17 @@ export default class RegisterModal extends Component {
     }
 
     handleClick = () => {
-        axios.post(`/auth/register`)
-            .then()
+        const { firstName, lastName, email, username, password, isTeacher } = this.state
+        const newUser = { firstName, lastName, email, username, password, isTeacher } 
+
+        if(isTeacher === null){
+            this.setState({errMessage: <p>'* Please choose Student or Teacher'</p>})
+            return;
+        }
+        else if(email)
+
+        axios.post(`/auth/register`, newUser)
+            .then(res => console.log(res.data))
     }
 
     render() {
@@ -36,6 +46,9 @@ export default class RegisterModal extends Component {
                         <span className='login-left-subtitle-reg'>Join Khan Academy to get personalized help with what you’re studying or to learn something completely new. We’ll save all of your progress. By signing up for Khan Academy, you agree to our Terms of use and Privacy Policy.</span>
                     </div>
                     <div className='right-modal-reg'>
+                        <span style={{color: 'red'}}>{this.state.errMessage}</span>
+                        <br/>
+                        <br/>
                         <span>First name:</span>
                         <br/>
                         <input type='text' name='firstName' value={this.state.firstName} onChange={this.handleChange} />
