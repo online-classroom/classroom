@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useState } from 'react'
 import './LoginModal.scss'
 import PrimaryButton from '../../Components/Buttons/PrimaryButton';
 import { updateUser } from '../../ducks/reducer';
@@ -57,4 +57,4 @@ const LoginModal=(props)=>{
   
 }
 
-export default withRouter(connect(null,{updateUser})(LoginModal))
+export default memo(withRouter(connect(null,{updateUser})(LoginModal)))

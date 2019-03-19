@@ -1,0 +1,21 @@
+@import './../../variables';
+
+.secondary-button{
+    color:$accent5;
+    background-color:white;
+    box-sizing: border-box;
+    padding:1vh 2vw;
+    font-weight:bold;
+}
+
+.secondary-button:hover{
+    background-color:$accent6;
+    color:white;
+}
+
+.secondary-button-active{
+    background-color:$accent5;
+    color:white;
+    box-sizing:border-box;
+    padding:1vh 2vw;
+}

@@ -9,13 +9,13 @@ button{
     text-align:center;
     font-size: 18px;
     margin-top:4vh;
-    background-color:$accent1;
-    height: 7vh;
+    background-color:$accent7;
+    font-weight:bold;
+    height: auto;
     width: auto;
     max-width:20vw;
-    padding:0 1.5vw;
+    padding:1.5vh 1.5vw;
     color:$accent2;
-    font-weight: 600;    
     transition: background-color 0.2s linear
 }
 button:hover{
