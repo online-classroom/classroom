@@ -15,13 +15,19 @@ module.exports = {
 
     const usernameCheck = await db.auth.getUsernames(username);
     const emailCheck = await db.auth.getEmails(email);
+    
+    if(usernameCheck.length !== 0 || emailCheck.length !== 0){
+      let errMessages = []
 
-    if (usernameCheck.length !== 0) {
-      return res.status(409).send("Username Already Taken");
-    }
+      if (usernameCheck.length !== 0 ) {
+        errMessages.push("*Username Already Taken");
+      }
+  
+      if (emailCheck.length !== 0) {
+        errMessages.push("*Email already registered");
+      }
 
-    if (emailCheck.length !== 0) {
-      return res.status(409).send("Account exists with Email");
+      return res.status(409).send(errMessages)
     }
 
     const salt = bcrypt.genSaltSync(10);

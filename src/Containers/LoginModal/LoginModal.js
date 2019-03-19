@@ -1,9 +1,32 @@
-import React, { Component } from 'react'
-import './loginModal.scss'
+import React, { memo, useEffect, useState } from 'react'
+import './LoginModal.scss'
 import PrimaryButton from '../../Components/Buttons/PrimaryButton';
+import { updateUser } from '../../ducks/reducer';
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
+import Axios from 'axios';
 
-export default class LoginModal extends Component {
-  render() {
+const LoginModal=(props)=>{
+
+  const [username,setUsername] = useState('')
+  const [password,setPassword] = useState('')
+
+  window.setUsername = setUsername
+  window.setPassword = setPassword
+
+  const handleInput=(e)=>{
+    window[e.target.name](e.target.value)
+  }
+
+  const login=async()=>{
+    const userDetails = {username,password}
+
+    const loginRes = await Axios.post(`/auth/login`,userDetails)
+    const updateUser = await props.updateUser(loginRes.data)
+    props.history.push('/dashboard')
+  }
+
+  
     return (
       <div className='outer'>
         <div className='inner'>
@@ -16,20 +39,22 @@ export default class LoginModal extends Component {
             <div className='right-modal'>
                 <span>Email or username:</span>
                 <br/>
-                <input/>
+                <input value={username} name='setUsername' onChange={handleInput} />
                 <br/>
                 <span>Password:</span>
                 <br/>
-                <input/>
+                <input value={password} name='setPassword' type='password' onChange={handleInput} />
                 <br/>
                 <span>Forgot password?</span>
                 <br/>
-                <PrimaryButton>Log in</PrimaryButton>
+                <PrimaryButton onClick={login}>Log in</PrimaryButton>
                 <br/>
                 <span>Create an account</span>
             </div>
         </div>
       </div>
     )
-  }
+  
 }
+
+export default withRouter(connect(null,{updateUser})(LoginModal))
