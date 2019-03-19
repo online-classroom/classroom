@@ -3,6 +3,7 @@
     width: 100vw;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
     .video_qchat_container {
@@ -11,18 +12,21 @@
         height: 70%;
         display: flex;
         flex-direction: row;
+        box-sizing: border-box;
     }
 
         .video_container {
             border: 1px solid black;
             width: 60%;
             height: 100%;
+            box-sizing: border-box;
         }
         
         .qchat_container {
             border: 1px solid black;
             width: 40%;
             height: 100%;
+            box-sizing: border-box;
         }
 
     .bonus_description_container {
@@ -31,16 +35,19 @@
         height: 30%;
         display: flex;
         flex-direction: row;
+        box-sizing: border-box;
     }
 
         .description_container {
             border: 1px solid black;
             width: 50%;
             height: 100%;
+            box-sizing: border-box;
         }
 
         .bonus_container {
             border: 1px solid black;
             width: 50%;
             height: 100%;
+            box-sizing: border-box;
         }

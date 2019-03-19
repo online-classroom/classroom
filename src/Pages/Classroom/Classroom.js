@@ -1,6 +1,7 @@
 import React from 'react'
 import './Classroom.scss'
 import VideoContainer from './../../Containers/VideoContainer/VideoContainer'
+import QueueChatContainer from './../../Containers/QueueChatContainer/QueueChatContainer'
 
 const Classroom =()=>{
     return(
@@ -10,15 +11,15 @@ const Classroom =()=>{
                     <VideoContainer/>
                 </div>
                 <div className='qchat_container'>
-                    Qchat
+                    <QueueChatContainer/>
                 </div>
             </div>
             <div className='bonus_description_container'>
-                <div className='description_container'>
-                    Lecture Description 
-                </div>
                 <div className='bonus_container'>
                     Bonus
+                </div>
+                <div className='description_container'>
+                    Lecture Description 
                 </div>
             </div>
         </div>
