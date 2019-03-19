@@ -14,11 +14,11 @@ const Classroom =()=>{
                 </div>
             </div>
             <div className='bonus_description_container'>
-                <div className='description_container'>
-                    Lecture Description 
-                </div>
                 <div className='bonus_container'>
                     Bonus
+                </div>
+                <div className='description_container'>
+                    Lecture Description 
                 </div>
             </div>
         </div>
