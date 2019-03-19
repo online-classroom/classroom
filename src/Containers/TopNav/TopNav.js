@@ -7,7 +7,7 @@ const TopNav =()=>{
         <div className='topnav'>
             <span className='logo'>Logo</span>
             <span className='auth-button'>Login</span>
-            <span classname='reg-button'>Register</span>
+            <span className='reg-button'>Register</span>
         </div>
     )
 }
