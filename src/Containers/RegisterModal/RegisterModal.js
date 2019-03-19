@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './registerModal.scss'
 import PrimaryButton from '../../Components/Buttons/PrimaryButton';
+import axios from 'axios'
 
 export default class RegisterModal extends Component {
     state = {
@@ -18,11 +19,8 @@ export default class RegisterModal extends Component {
     }
 
     handleClick = () => {
-
-    }
-
-    setTeacher = () => {
-
+        axios.post(`/auth/register`)
+            .then()
     }
 
     render() {
