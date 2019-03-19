@@ -1,20 +1,28 @@
 // // // // CONSTANTS // // // //
 
 require('dotenv').config()
+
+const {SERVER_PORT,CONNECTION_STRING} = process.env
+
 const express = require('express')
 const massive = require('massive')
 const socket = require('socket.io')
-const ssl = require('./setSocketListeners')
+const session = require('express-session')
 
+// // // // CONTROLLERS/LISTENERS // // // //
+const ssl = require('./setSocketListeners')
+const ac = require('./controllers/authcontroller')
 
 const app = express()
 // // // // MIDDLEWARES // // // //
 
 app.use(express.json())
 
-// // // // DOTENV DESTRUCTURING // // // //
-
-const {SERVER_PORT,CONNECTION_STRING} = process.env
+app.use(session({
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
+}))
 
 // // // // DATABASE/SERVER/SOCKET SETUP // // // //
 
@@ -32,3 +40,8 @@ massive(CONNECTION_STRING).then((db) => {
 })
 
 // // // // ENDPOINTS // // // //
+
+app.post(`/auth/register`,ac.register)
+app.post(`/auth/login`,ac.login)
+app.post(`/auth/logout`,ac.logout)
+app.get(`/auth/user`, ac.getUser)
