@@ -1,6 +1,7 @@
 import React from 'react'
 import './Classroom.scss'
 import VideoContainer from './../../Containers/VideoContainer/VideoContainer'
+import QueueChatContainer from './../../Containers/QueueChatContainer/QueueChatContainer'
 
 const Classroom =()=>{
     return(

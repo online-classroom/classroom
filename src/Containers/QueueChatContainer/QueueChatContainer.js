@@ -10,7 +10,7 @@ class QueueChatContainer extends Component {
     render(){
         return (
             <div>
-                
+                this is the QueueChat
             </div>
         )
     }
