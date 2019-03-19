@@ -1,3 +1,4 @@
+@import './../../variables';
 
 .outer {
     position: fixed;
@@ -19,7 +20,7 @@
 
         .left-modal{
             width: 50%;
-            background-color: #00284A;
+            background-color: $accent3;
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
             box-sizing: border-box;
