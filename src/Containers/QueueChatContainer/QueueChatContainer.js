@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import Chat from '../../Components/QueueChat/Chat';
+import Queue from '../../Components/QueueChat/Queue';
 
 class QueueChatContainer extends Component {
     constructor(){
@@ -7,10 +9,28 @@ class QueueChatContainer extends Component {
             showChat: true
         }
     }
+    handleClickChat = ()=>{
+        this.setState({
+            showChat: true
+        })
+    }
+    handleClickQueue = ()=>{
+        this.setState({
+            showChat: false
+        })
+    }
     render(){
         return (
             <div>
-                this is the QueueChat
+                <div>
+                    <button onClick={this.handleClickChat}>Chat</button>
+                    <button onClick={this.handleClickQueue}>Queue</button>
+                </div>
+                {this.state.showChat ? (
+                    <Chat/>
+                ):(
+                    <Queue/>
+                )}
             </div>
         )
     }

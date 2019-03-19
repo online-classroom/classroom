@@ -2,8 +2,13 @@ import React from "react";
 
 const Queue = () => {
   return (
-    <div>
-      Queue
+    <div className='queue_component'>
+      <div>        
+        the Queue
+      </div>
+      <button>
+        Raise hand
+      </button>
     </div>
   );
 };

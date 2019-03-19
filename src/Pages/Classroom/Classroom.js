@@ -11,7 +11,7 @@ const Classroom =()=>{
                     <VideoContainer/>
                 </div>
                 <div className='qchat_container'>
-                    Qchat
+                    <QueueChatContainer/>
                 </div>
             </div>
             <div className='bonus_description_container'>
