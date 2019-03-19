@@ -1,9 +1,10 @@
+@import './../../variables';
 
 .topnav{
     height: 80px;
     width: 100%;
-    background-color: rgb(60, 60, 60);
-    color: white;
+    background-color: $accent1;
+    color: $accent2;
     display: flex;
     align-items: center;
     
