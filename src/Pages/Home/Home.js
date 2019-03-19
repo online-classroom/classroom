@@ -1,41 +1,31 @@
-import React,{useState} from 'react'
+import React from 'react'
 import './Home.scss'
-import PrimaryButton from '../../Components/Buttons/PrimaryButton';
-
-const Home =()=>{ 
-    
-    const [username,setUsername] = useState('')
-    const [password,setPassword] = useState('')
-    window.setUsername = setUsername
-    window.setPassword = setPassword
-
-    const handleInput=(e)=>{        
-        window[e.target.name](e.target.value)
-    }       
-
+const Home =()=>{
     return(
-        <div id='Home'>
-            <div className='login-container'>
-                <div className='login-content'>
-                    <span className='login-title'>LOGIN</span>
-                    <br/>
-                    <br/>
-                    <span>Username/Email:</span>
-                    <br/>
-                    <input className='login-input' placeholder='Username/Email' value={username} name='setUsername' onChange={handleInput}/>
-                    <br/>
-                    <br/>
-                    <span>Password:</span>
-                    <br/>
-                    <input className='login-input' placeholder='Password' value={password} type='password' name='setPassword' onChange={handleInput}/>
-                    <br/>
-                    <PrimaryButton>Login</PrimaryButton>
+        <div className='home-container'>
+            <div id='Home'>
+                <div className='login-container'>
+                    <div className='login-content'>
+                        <span className='login-title'>LOGIN</span>
+                        <br/>
+                        <br/>
+                        <span>Username:</span>
+                        <br/>
+                        <input className='login-input' placeholder='Username'/>
+                        <br/>
+                        <br/>
+                        <span>Password:</span>
+                        <br/>
+                        <input className='login-input' placeholder='Password'/>
+                        <br/>
+                        <button className='login-button'>LOGIN</button>
+                    </div>
                 </div>
-            </div>
-            <div className='register-buttons'>
-                <div className='register-button-container'>
-                    <PrimaryButton>REGISTER AS STUDENT</PrimaryButton>
-                    <PrimaryButton>REGISTER AS TEACHER</PrimaryButton>
+                <div className='register-buttons'>
+                    <div className='register-button-container'>
+                        <button className='reg-button'>REGISTER AS STUDENT</button>
+                        <button className='reg-button'>REGISTER AS TEACHER</button>
+                    </div>
                 </div>
             </div>
             <div className='courses-container'>
@@ -47,5 +37,4 @@ const Home =()=>{
         </div>
     )
 }
-
 export default Home

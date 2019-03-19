@@ -1,61 +1,76 @@
-@import './../../variables';
-
-
 .home-container{
     display: flex;
     flex-direction: column;
-
     #Home {
         width: 100%;
         height: 600px;
-        color: $accent3;
+        color: black;
         display: flex;
         justify-content: space-between;
-
         .login-container {
             width: 40vw;
             height: 375px;
             margin: 5vw 5vw;
-            background-color: $accent4;
-
+            background-color: rgb(235, 235, 235);
             .login-content{
                 margin: 7.5% 10%;
-
                 .login-title{
                     font-size: 28px;
                 }
-
                 .login-input{
                     width: 100%;
                     height: 22px;
                     border: none;
                     margin: 15px auto;
                 }
-
                 .login-button{
                     height: 40px;
                     border-radius: 25px;
                     width: 75px;
                     color: white;
-                    background-color: $accent1;
+                    background-color: rgb(101, 101, 101);
                     border: none;
                     font-size: 16px;
                     margin: 15px auto;
                 }
             }
         }
-
         .register-buttons {
             width: 40vw;
             height: 375px;
             margin: 5vw 5vw;
-
             .register-button-container{
                 height: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
+                .reg-button{
+                    height: 150px;
+                    border-radius: 75px;
+                    background-color: rgb(235, 235, 235);
+                    border: none;
+                    font-size: 28px;
+                }
+                .reg-button:hover{
+                    outline: none;
+                    text-decoration: none;
+                }
             }
         }
-    }    
+    }
+    .courses-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        background-color: rgb(235, 235, 235);
+        .subjects{
+            height: 200px;
+            width: 45%;
+            margin: 25px 5px;
+            // border: 1px solid black;
+            padding: 10px;
+            background-color: white;
+        }
+    }
 }
