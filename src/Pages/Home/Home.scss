@@ -1,41 +1,61 @@
 @import './../../variables';
 
-#Home {
-    width: 100%;
-    height: 95vh;
-    color: $accent3;
+
+.home-container{
     display: flex;
-    justify-content: space-between;
-    .login-container {
-        width: 40vw;
-        height: 60vh;
-        margin: 5vw 5vw;
-        background-color: $accent4;
+    flex-direction: column;
 
-        .login-content{
-            margin: 10%;
+    #Home {
+        width: 100%;
+        height: 600px;
+        color: $accent3;
+        display: flex;
+        justify-content: space-between;
 
-            .login-title{
-                font-size: 28px;
-            }
+        .login-container {
+            width: 40vw;
+            height: 375px;
+            margin: 5vw 5vw;
+            background-color: $accent4;
 
-            .login-input{
-                width: 100%;
-                height: 22px;
-                border: none;
+            .login-content{
+                margin: 7.5% 10%;
+
+                .login-title{
+                    font-size: 28px;
+                }
+
+                .login-input{
+                    width: 100%;
+                    height: 22px;
+                    border: none;
+                    margin: 15px auto;
+                }
+
+                .login-button{
+                    height: 40px;
+                    border-radius: 25px;
+                    width: 75px;
+                    color: white;
+                    background-color: $accent1;
+                    border: none;
+                    font-size: 16px;
+                    margin: 15px auto;
+                }
             }
         }
-    }
 
-    .register-buttons {
-        width: 40vw;
-        height: 40vh;
-        margin: 5vw 5vw;
+        .register-buttons {
+            width: 40vw;
+            height: 375px;
+            margin: 5vw 5vw;
 
-        .register-button-container{
-            height: 100%;
-            display: flex;
-            flex-direction: column;
+            .register-button-container{
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
         }
-    }
+    }    
 }

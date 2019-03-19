@@ -38,6 +38,12 @@ const Home =()=>{
                     <PrimaryButton>REGISTER AS TEACHER</PrimaryButton>
                 </div>
             </div>
+            <div className='courses-container'>
+                <div className='subjects'>Subject 1</div>
+                <div className='subjects'>Subject 2</div>
+                <div className='subjects'>Subject 3</div>
+                <div className='subjects'>Subject 4</div>
+            </div>
         </div>
     )
 }
