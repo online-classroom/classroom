@@ -21,8 +21,8 @@ const Home =()=>{
                 <div className='subjects'>Subject 3</div>
                 <div className='subjects'>Subject 4</div>
             </div>
-            {/* <LoginModal /> */}
-            <RegisterModal/>
+            <LoginModal />
+            {/* <RegisterModal/> */}
         </div>
     )
 }

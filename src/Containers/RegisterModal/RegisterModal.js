@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import './registerModal.scss'
 import PrimaryButton from '../../Components/Buttons/PrimaryButton';
 import axios from 'axios'
+import {connect} from 'react-redux'
+import {updateUser} from './../../ducks/reducer';
+import {withRouter} from 'react-router-dom'
 
-export default class RegisterModal extends Component {
+class RegisterModal extends Component {
     state = {
         firstName: '',
         lastName: '',
@@ -11,7 +14,7 @@ export default class RegisterModal extends Component {
         username: '',
         password: '',
         isTeacher: null,
-        errMessage: <div>Test data</div>
+        errMessage: []
     }
 
     handleChange = (e) => {
@@ -19,29 +22,44 @@ export default class RegisterModal extends Component {
         this.setState({[name]: value})
     }
 
-    handleClick = () => {
+    handleClick = async() => {
         const { firstName, lastName, email, username, password, isTeacher } = this.state
         const newUser = { firstName, lastName, email, username, password, isTeacher } 
 
-
         const emailValidator = email.match(/^(?:(?:[\w`~!#$%^&*\-=+;:{}'|,?\/]+(?:(?:\.(?:"(?:\\?[\w`~!#$%^&*\-=+;:{}'|,?\/\.()<>\[\] @]|\\"|\\\\)*"|[\w`~!#$%^&*\-=+;:{}'|,?\/]+))*\.[\w`~!#$%^&*\-=+;:{}'|,?\/]+)?)|(?:"(?:\\?[\w`~!#$%^&*\-=+;:{}'|,?\/\.()<>\[\] @]|\\"|\\\\)+"))@(?:[a-zA-Z\d\-]+(?:\.[a-zA-Z\d\-]+)*|\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])$/gm)
 
-        let errMessage = ''
-
+        let errMessage = []
         if(isTeacher === null){
-            errMessage+= <p> * Please choose Student or Teacher option</p>
-            return;
+            errMessage.push('*Please choose between Student and Teacher option')
         }
-        else if(emailValidator === null){
-            errMessage+= <p> * Please enter a valid email</p>
+        if(emailValidator === null){
+            console.log('hit')
+            errMessage.push('*Invalid Email Address')
+        }
+        
+        if(errMessage.length!==0){
+            this.setState({errMessage})
+            return
         }
 
-        axios.post(`/auth/register`, newUser)
-            .then(res => console.log(res.data))
+        // axios.post(`/auth/register`, newUser)
+        //     .then(res => console.log(res.data))
+        try{
+            const regRes = await axios.post(`/auth/register`,newUser)        
+            console.log(regRes.data)
+            const updateUser = await this.props.updateUser(regRes.data)
+            this.props.history.push('/dashboard')
+        }
+        catch(err){
+            this.setState({errMessage:err.response.data})
+        }
     }
 
     render() {
-        console.log(this.state)
+        // console.log(this.state)
+
+        const errMapper = this.state.errMessage.map((err)=><p>{err}</p>)
+
         return (
             <div className='outer-reg'>
                 <div className='inner-reg'>
@@ -53,7 +71,7 @@ export default class RegisterModal extends Component {
                         <span className='login-left-subtitle-reg'>Join Khan Academy to get personalized help with what you’re studying or to learn something completely new. We’ll save all of your progress. By signing up for Khan Academy, you agree to our Terms of use and Privacy Policy.</span>
                     </div>
                     <div className='right-modal-reg'>
-                        <span style={{color: 'red'}}>{this.state.errMessage}</span>
+                        <span style={{color: 'red'}}>{errMapper}</span>
                         {console.log(this.state.errMessage)}
                         <br/>
                         <br/>
@@ -90,3 +108,5 @@ export default class RegisterModal extends Component {
         )
     }
 }
+
+export default withRouter(connect(null,{updateUser})(RegisterModal))
