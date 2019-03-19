@@ -11,7 +11,7 @@ export default class RegisterModal extends Component {
         username: '',
         password: '',
         isTeacher: null,
-        errMessage:''
+        errMessage: <div>Test data</div>
     }
 
     handleChange = (e) => {
@@ -23,11 +23,18 @@ export default class RegisterModal extends Component {
         const { firstName, lastName, email, username, password, isTeacher } = this.state
         const newUser = { firstName, lastName, email, username, password, isTeacher } 
 
+
+        const emailValidator = email.match(/^(?:(?:[\w`~!#$%^&*\-=+;:{}'|,?\/]+(?:(?:\.(?:"(?:\\?[\w`~!#$%^&*\-=+;:{}'|,?\/\.()<>\[\] @]|\\"|\\\\)*"|[\w`~!#$%^&*\-=+;:{}'|,?\/]+))*\.[\w`~!#$%^&*\-=+;:{}'|,?\/]+)?)|(?:"(?:\\?[\w`~!#$%^&*\-=+;:{}'|,?\/\.()<>\[\] @]|\\"|\\\\)+"))@(?:[a-zA-Z\d\-]+(?:\.[a-zA-Z\d\-]+)*|\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])$/gm)
+
+        let errMessage = ''
+
         if(isTeacher === null){
-            this.setState({errMessage: <p>'* Please choose Student or Teacher'</p>})
+            errMessage+= <p> * Please choose Student or Teacher option</p>
             return;
         }
-        else if(email)
+        else if(emailValidator === null){
+            errMessage+= <p> * Please enter a valid email</p>
+        }
 
         axios.post(`/auth/register`, newUser)
             .then(res => console.log(res.data))
@@ -47,6 +54,7 @@ export default class RegisterModal extends Component {
                     </div>
                     <div className='right-modal-reg'>
                         <span style={{color: 'red'}}>{this.state.errMessage}</span>
+                        {console.log(this.state.errMessage)}
                         <br/>
                         <br/>
                         <span>First name:</span>
