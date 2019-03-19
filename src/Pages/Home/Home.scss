@@ -1,16 +1,16 @@
+@import './../../variables';
 
 #Home {
     width: 100%;
     height: 95vh;
-    color: black;
+    color: $accent3;
     display: flex;
     justify-content: space-between;
-
     .login-container {
         width: 40vw;
-        height: 40vh;
+        height: 60vh;
         margin: 5vw 5vw;
-        background-color: rgb(235, 235, 235);
+        background-color: $accent4;
 
         .login-content{
             margin: 10%;
@@ -36,19 +36,6 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-
-            .reg-button{
-                height: 15vh;
-                border-radius: 75px;
-                background-color: rgb(235, 235, 235);
-                border: none;
-                font-size: 28px;
-            }
-            .reg-button:hover{
-                outline: none;
-                text-decoration: none;
-            }
         }
     }
 }

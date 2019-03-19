@@ -2,6 +2,7 @@ import React from 'react'
 import './TopNav.scss'
 
 const TopNav =()=>{
+    
     return(
         <div className='topnav'>
             <span className='logo'>Logo</span>
@@ -11,3 +12,4 @@ const TopNav =()=>{
 }
 
 export default TopNav
+
