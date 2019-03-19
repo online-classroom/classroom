@@ -1,0 +1,21 @@
+.dashboardMainPage {
+  border: 2px solid black;
+  height: 100vh;
+  padding: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.dashContainer {
+  border: 2px solid red;
+  padding: 1%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.courseListContainer {
+  padding: 1%;
+  border: 2px solid red;
+  width: 40%;
+}
