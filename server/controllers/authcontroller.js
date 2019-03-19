@@ -6,9 +6,9 @@ module.exports = {
       username,
       email,
       password,
-      first_name,
-      last_name,
-      is_teacher
+      firstName,
+      lastName,
+      isTeacher
     } = req.body;
     const { session } = req;
     const db = req.app.get("db");
@@ -31,9 +31,9 @@ module.exports = {
       username,
       email,
       hash,
-      first_name,
-      last_name,
-      is_teacher
+      firstName,
+      lastName,
+      isTeacher
     ]);
     newUser = newUser[0];
 
