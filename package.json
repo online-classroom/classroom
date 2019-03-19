@@ -5,6 +5,7 @@
   "proxy": "http://localhost:6464",
   "main": "server/index.js",
   "dependencies": {
+    "axios": "^0.18.0",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "express-session": "^1.15.6",

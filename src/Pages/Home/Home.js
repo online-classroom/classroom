@@ -1,30 +1,17 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './Home.scss'
+import PrimaryButton from './../../Components/Buttons/PrimaryButton'
+import LoginModal from '../../Containers/LoginModal/LoginModal';
+import RegisterModal from '../../Containers/RegisterModal/RegisterModal'
+
 const Home =()=>{
     return(
         <div className='home-container'>
             <div id='Home'>
-                <div className='login-container'>
-                    <div className='login-content'>
-                        <span className='login-title'>LOGIN</span>
-                        <br/>
-                        <br/>
-                        <span>Username:</span>
-                        <br/>
-                        <input className='login-input' placeholder='Username'/>
-                        <br/>
-                        <br/>
-                        <span>Password:</span>
-                        <br/>
-                        <input className='login-input' placeholder='Password'/>
-                        <br/>
-                        <button className='login-button'>LOGIN</button>
-                    </div>
-                </div>
                 <div className='register-buttons'>
                     <div className='register-button-container'>
-                        <button className='reg-button'>REGISTER AS STUDENT</button>
-                        <button className='reg-button'>REGISTER AS TEACHER</button>
+                        <PrimaryButton className='reg-button'>REGISTER AS STUDENT</PrimaryButton>
+                        <PrimaryButton className='reg-button'>REGISTER AS TEACHER</PrimaryButton>
                     </div>
                 </div>
             </div>
@@ -34,7 +21,9 @@ const Home =()=>{
                 <div className='subjects'>Subject 3</div>
                 <div className='subjects'>Subject 4</div>
             </div>
+            {/* <LoginModal /> */}
+            <RegisterModal/>
         </div>
     )
 }
-export default Home
+export default memo(Home)
