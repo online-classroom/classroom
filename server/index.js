@@ -45,3 +45,4 @@ app.post(`/auth/register`,ac.register)
 app.post(`/auth/login`,ac.login)
 app.post(`/auth/logout`,ac.logout)
 app.get(`/auth/user`, ac.getUser)
+
