@@ -1,50 +1,53 @@
 @import './../../variables';
 
 .topnav{
-    height: 80px;
+    height: 60px;
     width: 100%;
-    background-color: $accent1;
     color: $accent2;
+    border-bottom: 1px solid rgb(59, 156, 191);
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-family: $primaryfontfam;
+    font-size: 16px;
+    font-weight: bold;
     
     .searchbar-container{
         padding: 0px 30px;
         width: 33vw;
         
         .searchbar, .searchbar:focus, .searchbar:active {
-            height: 28px;
-            width: 350px;
-            border-radius: 5px;
+            height: 40px;
+            width: 200px;
+            background-color: rgba(255, 255, 255, 0.25);
+            border-radius: 4px;
             border: none;
             outline: none;
             text-decoration: none;
             box-sizing: border-box;
             padding: 15px;
+            color: white;
+            font-family: $primaryfontfam;
         }
-    
     }
 
     .logo{
-        padding: 0px 30px;
-        font-size: 28px;
         height:80%;
         display:flex;
         align-items: center;
         justify-content: center;
         width: 33vw;
+        letter-spacing: 2px;
+        font-size: 20px;
 
         img{
-            height:80%;
+            height: 60%;
         }
     }
 
     .links-container{
         display: flex;
         justify-content: flex-end;
-        font-size: 18px;
         padding: 0px 30px;
         width: 33vw;
         text-decoration: none;
@@ -62,7 +65,33 @@
 
         .nav-button:hover{
             transition: color 0.2s linear;
-            color: $accent6;
+            color: #026EE2;
         }
     }
+}
+
+.topnav:hover{
+    background-color: white;
+    color: #026EE2;
+    transition: background-color 0.1s linear;
+
+    .logo{
+        color:  rgb(0, 54, 111);
+    }
+    
+    .nav-button{
+        color: #026EE2;
+    }
+    .nav-button:hover{
+        transition: color 0.2s linear;
+        color: rgb(0, 68, 140);
+    }
+
+    .searchbar, .searchbar:focus, .searchbar:active{
+        background-color: rgba(128, 128, 128, 0.25);
+    }
+}
+
+.navbackground{
+    background-color: #0A2A66;
 }
