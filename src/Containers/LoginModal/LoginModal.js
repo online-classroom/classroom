@@ -11,13 +11,8 @@ const LoginModal=(props)=>{
   const [username,setUsername] = useState('')
   const [password,setPassword] = useState('')
 
-  window.setUsername = setUsername
-  window.setPassword = setPassword
 
-  const handleInput=(e)=>{
-    window[e.target.name](e.target.value)
-  }
-
+  
   const login=async()=>{
     const userDetails = {username,password}
 
@@ -39,11 +34,11 @@ const LoginModal=(props)=>{
             <div className='right-modal'>
                 <span>Email or username:</span>
                 <br/>
-                <input value={username} name='setUsername' onChange={handleInput} />
+                <input value={username} name='setUsername' onChange={(e)=>setUsername(e.target.value)} />
                 <br/>
                 <span>Password:</span>
                 <br/>
-                <input value={password} name='setPassword' type='password' onChange={handleInput} />
+                <input value={password} name='setPassword' type='password' onChange={(e)=>setPassword(e.target.value)} />
                 <br/>
                 <span>Forgot password?</span>
                 <br/>
