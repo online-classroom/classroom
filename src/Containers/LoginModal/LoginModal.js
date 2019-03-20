@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react'
-import './LoginModal.scss'
+import './loginModal.scss'
 import PrimaryButton from '../../Components/Buttons/PrimaryButton';
 import { updateUser } from '../../ducks/reducer';
 import {connect} from 'react-redux'
