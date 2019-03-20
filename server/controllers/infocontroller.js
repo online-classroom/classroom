@@ -3,10 +3,10 @@
 // const opentok = new OpenTok(OPENTOK_API_KEY,OPENTOK_SECRET)
 
 module.exports={
-    createNewCourse:function(req,res){
-      const {title,subject_id,description,date,lectures} = req.body
+    // createNewCourse:function(req,res){
+    //   const {title,subject_id,description,date,lectures} = req.body
         
-    },
+    // },
 
     getAllCourses:async(req,res)=>{
         const db = req.app.get('db')
