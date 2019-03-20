@@ -1,0 +1,24 @@
+
+@import './../../variables';
+
+button{
+    @include buttonReset;
+}
+
+.register-button{
+    @include buttonReset;
+    text-align: center;
+    background-color: white;
+    color: #00243e;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 5px;
+    border-radius: 3px;
+    height: 50px;
+    width: 365px;
+    transition: color 0.2s linear;
+}
+
+.register-button:hover{
+    color: #2d77ac;
+}

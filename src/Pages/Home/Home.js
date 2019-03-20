@@ -1,15 +1,26 @@
 import React, { memo } from 'react'
 import './Home.scss'
 import PrimaryButton from './../../Components/Buttons/PrimaryButton'
+import RegisterButton from './../../Components/Buttons/RegisterButton'
+import LoginButton from './../../Components/Buttons/LoginButton'
+import Background from '../../assets/Background.jpg'
+import LoginModal from '../../Containers/LoginModal/LoginModal';
+import RegisterModal from '../../Containers/RegisterModal/RegisterModal'
 
 const Home =()=>{
     return(
         <div className='home-container'>
+            <img className='background-home' src={Background} alt='blue-gradient'/>
             <div id='Home'>
                 <div className='register-buttons'>
                     <div className='register-button-container'>
-                        <PrimaryButton className='reg-button'>REGISTER AS STUDENT</PrimaryButton>
-                        <PrimaryButton className='reg-button'>REGISTER AS TEACHER</PrimaryButton>
+                        <div className='subtitle-text'>
+                            <span className='subtitle-title'>You can learn anything.</span><br/>
+                            <span className='subtitle-subtext'>For free. For everyone. Forever.</span>
+                        </div>
+                        <LoginButton className='reg-button'>Browse classes</LoginButton>
+                        <RegisterButton className='reg-button'>Register as Student</RegisterButton>
+                        <RegisterButton className='reg-button'>Register as Teacher</RegisterButton>
                     </div>
                 </div>
             </div>
