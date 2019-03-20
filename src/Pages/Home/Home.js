@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import './Home.scss'
+import PrimaryButton from './../../Components/Buttons/PrimaryButton'
 import RegisterButton from './../../Components/Buttons/RegisterButton'
 import LoginButton from './../../Components/Buttons/LoginButton'
 import Background from '../../assets/Background.jpg'

@@ -12,7 +12,7 @@ const TopNav =(props)=>{
             <span className='logo'><img src={logo} alt='Logo'/>&ensp;VLASSROOM</span>
             <div className='links-container'>
                 <NavLink to='/login'><span className='nav-button'>LOGIN</span></NavLink>
-                <NavLink to='/login'><span className='nav-button'>REGISTER</span></NavLink>
+                <NavLink to='/register'><span className='nav-button'>REGISTER</span></NavLink>
             </div>
         </div>
     )
