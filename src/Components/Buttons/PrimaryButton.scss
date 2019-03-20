@@ -18,6 +18,6 @@ button{
     color:$accent2;
     transition: background-color 0.2s linear
 }
-button:hover{
+.primary-button:hover{
     background-color: $accent3;    
 }
