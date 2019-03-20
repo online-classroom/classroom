@@ -5,6 +5,7 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import {updateUser} from './../../ducks/reducer';
 import {withRouter} from 'react-router-dom'
+import SecondaryButton from '../../Components/Buttons/SecondaryButton';
 
 class RegisterModal extends Component {
     state = {
@@ -13,8 +14,10 @@ class RegisterModal extends Component {
         email:'',
         username: '',
         password: '',
-        isTeacher: null,
-        errMessage: []
+        isTeacher: false,
+        errMessage: [],
+        studentOption:true,
+        teacherOption:false
     }
 
     handleChange = (e) => {
@@ -57,6 +60,7 @@ class RegisterModal extends Component {
 
     render() {
         // console.log(this.state)
+        const {studentOption,teacherOption} = this.state
 
         const errMapper = this.state.errMessage.map((err)=><p>{err}</p>)
 
@@ -72,7 +76,10 @@ class RegisterModal extends Component {
                     </div>
                     <div className='right-modal-reg'>
                         <span style={{color: 'red'}}>{errMapper}</span>
-                        {console.log(this.state.errMessage)}
+                        <br/>
+                        <br/>
+                        <SecondaryButton onClick={() => {this.setState({isTeacher: false,studentOption:true,teacherOption:false})}} isActive={studentOption} id='studentChoice'>Student</SecondaryButton>
+                        <SecondaryButton onClick={() => {this.setState({isTeacher: true,teacherOption:true,studentOption:false})}} id='teacherChoice' isActive={teacherOption}>Teacher</SecondaryButton>
                         <br/>
                         <br/>
                         <span>First name:</span>
@@ -94,12 +101,6 @@ class RegisterModal extends Component {
                         <span>Password:</span>
                         <br/>
                         <input type='password' name='password' value={this.state.password} onChange={this.handleChange}/>
-                        <br/>
-                        <br/>
-                        <span>Join as a:</span>
-                        <br/>
-                        <button onClick={() => {this.setState({isTeacher: false})}}>Student</button>
-                        <button onClick={() => {this.setState({isTeacher: true})}}>Teacher</button>
                         <br/>
                         <PrimaryButton onClick={this.handleClick}>Create Account</PrimaryButton>
                     </div>
