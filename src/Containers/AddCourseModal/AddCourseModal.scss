@@ -1,0 +1,29 @@
+@import './../../variables';
+
+.AddCourseModal{
+    @include defaultInputBox;
+    padding: 30px 10vh;
+    .lecture-input-box{
+        display:flex;
+        div,p{
+            margin-right:20px;
+        }
+        input{
+            text-overflow: ellipsis
+        }
+    }
+    .lectures{
+        display:flex;
+        flex-wrap: wrap;
+        width:auto;
+        #lecture{
+            margin-right:20px;
+            margin-bottom:2vh;
+            width:20vw;
+            padding:1vh 1vw;
+            word-wrap: break-word;
+            background-color: white;
+            box-shadow: 1px 1px 1px 1px black;
+        }
+    }
+}

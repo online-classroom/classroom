@@ -1,9 +1,10 @@
 import React from "react";
 import './Queue.scss'
+import {connect} from 'react-redux';
 
 class Queue extends React.Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       peopleInQueue: [
         {name: 'Sam', time: '4:32', question: 'What is google'},
@@ -42,6 +43,7 @@ class Queue extends React.Component {
     })
   }
   render(){
+    console.log(this.props.user_id)
     return (
       <div className='queue_component'>
         <div>        
@@ -56,4 +58,12 @@ class Queue extends React.Component {
   }
 }
 
-export default Queue;
+const mapToProps = reduxState => {
+  return {
+    user_id: reduxState.user_id,
+    username: reduxState.username,
+    is_teacher: reduxState.is_teacher
+  }
+};
+
+export default connect(mapToProps, null)(Queue);
