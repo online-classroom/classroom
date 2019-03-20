@@ -12,6 +12,7 @@ const session = require('express-session')
 // // // // CONTROLLERS/LISTENERS // // // //
 const ssl = require('./setSocketListeners')
 const ac = require('./controllers/authcontroller')
+const ic = require('./controllers/infocontroller')
 
 const app = express()
 // // // // MIDDLEWARES // // // //
@@ -41,8 +42,13 @@ massive(CONNECTION_STRING).then((db) => {
 
 // // // // ENDPOINTS // // // //
 
+// // // // AUTH CONTROLLER // // // //
+
 app.post(`/auth/register`,ac.register)
 app.post(`/auth/login`,ac.login)
 app.post(`/auth/logout`,ac.logout)
 app.get(`/auth/user`, ac.getUser)
 
+// // // // INFO CONTROLLER // // // // 
+
+app.get(`/info/courses`,ic.getAllCourses)
