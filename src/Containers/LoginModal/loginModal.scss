@@ -1,6 +1,7 @@
 @import './../../variables';
 
 .outer {
+    @include defaultInputBox;
     position: fixed;
     top: 0px;
     left: 0px;

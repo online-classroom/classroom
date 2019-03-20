@@ -1,5 +1,7 @@
+@import './../../variables';
 
 .outer-reg {
+    @include defaultInputBox;
     position: fixed;
     top: 0px;
     left: 0px;
