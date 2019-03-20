@@ -1,15 +1,23 @@
 import React, { Component } from 'react'
 import './registerModal.scss'
 import PrimaryButton from '../../Components/Buttons/PrimaryButton';
+import axios from 'axios'
+import {connect} from 'react-redux'
+import {updateUser} from './../../ducks/reducer';
+import {withRouter} from 'react-router-dom'
+import SecondaryButton from '../../Components/Buttons/SecondaryButton';
 
-export default class RegisterModal extends Component {
+class RegisterModal extends Component {
     state = {
         firstName: '',
         lastName: '',
         email:'',
         username: '',
         password: '',
-        isTeacher: null
+        isTeacher: false,
+        errMessage: [],
+        studentOption:true,
+        teacherOption:false
     }
 
     handleChange = (e) => {
@@ -17,16 +25,45 @@ export default class RegisterModal extends Component {
         this.setState({[name]: value})
     }
 
-    handleClick = () => {
+    handleClick = async() => {
+        const { firstName, lastName, email, username, password, isTeacher } = this.state
+        const newUser = { firstName, lastName, email, username, password, isTeacher } 
 
-    }
+        const emailValidator = email.match(/^(?:(?:[\w`~!#$%^&*\-=+;:{}'|,?\/]+(?:(?:\.(?:"(?:\\?[\w`~!#$%^&*\-=+;:{}'|,?\/\.()<>\[\] @]|\\"|\\\\)*"|[\w`~!#$%^&*\-=+;:{}'|,?\/]+))*\.[\w`~!#$%^&*\-=+;:{}'|,?\/]+)?)|(?:"(?:\\?[\w`~!#$%^&*\-=+;:{}'|,?\/\.()<>\[\] @]|\\"|\\\\)+"))@(?:[a-zA-Z\d\-]+(?:\.[a-zA-Z\d\-]+)*|\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])$/gm)
 
-    setTeacher = () => {
+        let errMessage = []
+        if(isTeacher === null){
+            errMessage.push('*Please choose between Student and Teacher option')
+        }
+        if(emailValidator === null){
+            console.log('hit')
+            errMessage.push('*Invalid Email Address')
+        }
+        
+        if(errMessage.length!==0){
+            this.setState({errMessage})
+            return
+        }
 
+        // axios.post(`/auth/register`, newUser)
+        //     .then(res => console.log(res.data))
+        try{
+            const regRes = await axios.post(`/auth/register`,newUser)        
+            console.log(regRes.data)
+            const updateUser = await this.props.updateUser(regRes.data)
+            this.props.history.push('/dashboard')
+        }
+        catch(err){
+            this.setState({errMessage:err.response.data})
+        }
     }
 
     render() {
-        console.log(this.state)
+        // console.log(this.state)
+        const {studentOption,teacherOption} = this.state
+
+        const errMapper = this.state.errMessage.map((err)=><p>{err}</p>)
+
         return (
             <div className='outer-reg'>
                 <div className='inner-reg'>
@@ -38,6 +75,13 @@ export default class RegisterModal extends Component {
                         <span className='login-left-subtitle-reg'>Join Khan Academy to get personalized help with what you’re studying or to learn something completely new. We’ll save all of your progress. By signing up for Khan Academy, you agree to our Terms of use and Privacy Policy.</span>
                     </div>
                     <div className='right-modal-reg'>
+                        <span style={{color: 'red'}}>{errMapper}</span>
+                        <br/>
+                        <br/>
+                        <SecondaryButton onClick={() => {this.setState({isTeacher: false,studentOption:true,teacherOption:false})}} isActive={studentOption} id='studentChoice'>Student</SecondaryButton>
+                        <SecondaryButton onClick={() => {this.setState({isTeacher: true,teacherOption:true,studentOption:false})}} id='teacherChoice' isActive={teacherOption}>Teacher</SecondaryButton>
+                        <br/>
+                        <br/>
                         <span>First name:</span>
                         <br/>
                         <input type='text' name='firstName' value={this.state.firstName} onChange={this.handleChange} />
@@ -58,12 +102,6 @@ export default class RegisterModal extends Component {
                         <br/>
                         <input type='password' name='password' value={this.state.password} onChange={this.handleChange}/>
                         <br/>
-                        <br/>
-                        <span>Join as a:</span>
-                        <br/>
-                        <button onClick={() => {this.setState({isTeacher: false})}}>Student</button>
-                        <button onClick={() => {this.setState({isTeacher: true})}}>Teacher</button>
-                        <br/>
                         <PrimaryButton onClick={this.handleClick}>Create Account</PrimaryButton>
                     </div>
                 </div>
@@ -71,3 +109,5 @@ export default class RegisterModal extends Component {
         )
     }
 }
+
+export default withRouter(connect(null,{updateUser})(RegisterModal))
