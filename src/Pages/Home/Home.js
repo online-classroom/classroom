@@ -22,7 +22,7 @@ const Home =()=>{
                 <div className='subjects'>Subject 4</div>
             </div>
             {/* <LoginModal /> */}
-            {/* <RegisterModal/> */}
+            <RegisterModal/>
         </div>
     )
 }

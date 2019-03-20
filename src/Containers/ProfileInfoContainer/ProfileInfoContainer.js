@@ -2,20 +2,19 @@
 import React, { Component } from 'react';
 import './ProfileInfoContainer.scss';
 import CourseInfo from '../../Components/Dashboard/CourseInfo';
-import StudentInfo from '../../Components/Dashboard/StudentInfo';
+import ProfileInfo from '../../Components/Dashboard/ProfileInfo';
+import SecondaryButton from './../../Components/Buttons/SecondaryButton';
 
 export default class ProfileInfoContainer extends Component {
   state = {
     toggleCourseInfo: false
   };
   setToggleCourseInfo = () => {
-    console.log(this.state.toggleCourseInfo);
     this.setState({
       toggleCourseInfo: true
     });
   };
   setToggleStudentInfo = () => {
-    console.log(this.state.toggleCourseInfo);
     this.setState({
       toggleCourseInfo: false
     });
@@ -25,10 +24,10 @@ export default class ProfileInfoContainer extends Component {
     return (
       <div className='MainInfoContainer'>
         <div className='toggleButtons'>
-          <button onClick={this.setToggleStudentInfo}>Student Info</button>
-          <button onClick={this.setToggleCourseInfo}>Course Info</button>
+          <SecondaryButton onClick={this.setToggleStudentInfo} isActive={!toggleCourseInfo}>Student Info</SecondaryButton>
+          <SecondaryButton onClick={this.setToggleCourseInfo} isActive={toggleCourseInfo}>Course Info</SecondaryButton>
         </div>
-        {!toggleCourseInfo ? <StudentInfo /> : <CourseInfo />}
+        {!toggleCourseInfo ? <ProfileInfo /> : <CourseInfo />}
       </div>
     );
   }
