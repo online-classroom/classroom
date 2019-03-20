@@ -7,29 +7,62 @@
     color: $accent2;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    font-family: $primaryfontfam;
     
+    .searchbar-container{
+        padding: 0px 30px;
+        width: 33vw;
+        
+        .searchbar, .searchbar:focus, .searchbar:active {
+            height: 28px;
+            width: 350px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            text-decoration: none;
+            box-sizing: border-box;
+            padding: 15px;
+        }
+    
+    }
+
     .logo{
         padding: 0px 30px;
-        margin-right: auto;
-        font-size: 36px;
+        font-size: 28px;
         height:80%;
         display:flex;
         align-items: center;
         justify-content: center;
+        width: 33vw;
+
         img{
             height:80%;
         }
     }
 
-    .auth-button {
+    .links-container{
+        display: flex;
+        justify-content: flex-end;
+        font-size: 18px;
         padding: 0px 30px;
+        width: 33vw;
         text-decoration: none;
-        margin-left: auto;
-    }
+        color: white;
+        font-weight: bold;
 
-    .reg-button {
-        padding: 0px 30px;
-        text-decoration: none;
-        margin-left: auto;
+        a, a:visited{
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-button {
+            padding: 0px 30px;
+        }
+
+        .nav-button:hover{
+            transition: color 0.2s linear;
+            color: $accent6;
+        }
     }
 }
