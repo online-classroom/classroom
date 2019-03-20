@@ -21,15 +21,17 @@
         }
     }
 
-    .auth-button {
-        padding: 0px 30px;
-        text-decoration: none;
-        margin-left: auto;
-    }
+    .links-container{
+        display: flex;
 
-    .reg-button {
-        padding: 0px 30px;
-        text-decoration: none;
-        margin-left: auto;
+        .auth-button {
+            padding: 0px 30px;
+            text-decoration: none;
+        }
+
+        .reg-button {
+            padding: 0px 30px;
+            text-decoration: none;
+        }
     }
 }
