@@ -1,7 +1,9 @@
 .MainInfoContainer {
   border: 2px solid blue;
   height: 40%;
+  box-sizing:border-box;
 }
 .toggleButtons {
-  height: 10%;
+  height: 11%;
+  box-sizing:border-box;
 }
