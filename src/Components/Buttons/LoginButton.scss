@@ -1,0 +1,24 @@
+
+@import './../../variables';
+
+button{
+    @include buttonReset;
+}
+
+.login-button{
+    @include buttonReset;
+    text-align: center;
+    background-color: #00243e;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 5px;
+    border-radius: 3px;
+    height: 50px;
+    width: 365px;
+    transition: background-color 0.2s linear;
+}
+
+.login-button:hover{
+    background-color: #003e6a;
+}

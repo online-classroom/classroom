@@ -1,13 +1,23 @@
 .home-container{
     display: flex;
     flex-direction: column;
-
+    
+    .background-home{
+        height: 505px;
+        width: 100vw;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        box-sizing: border-box;
+    }
     #Home {
         width: 100%;
-        height: 400px;
+        height: 450px;
         color: black;
         display: flex;
         justify-content: space-between;
+
 
         .login-container {
             width: 40vw;
@@ -42,14 +52,29 @@
         .register-buttons {
             width: 100%;
             height: 375px;
-            margin: 5vw 5vw;
+            margin: 50px auto;
 
             .register-button-container{
                 height: 100%;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                // justify-content: space-between;
+
+                .subtitle-text{
+                    color: white;
+                    font-weight: bold;
+                    margin: 20px;
+                    text-align: center;
+                }
+                
+                .subtitle-title{
+                    font-size: 36px;
+
+                }
+
+                .subtitle-subtext{
+                    font-size: 18px;
+                }
 
                 .reg-button{
                     height: 150px;
