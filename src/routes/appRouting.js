@@ -5,6 +5,7 @@ import Dashboard from './../Pages/Dashboard/Dashboard'
 import Classroom from './../Pages/Classroom/Classroom'
 import LoginModal from "../Containers/LoginModal/LoginModal";
 import RegisterModal from "../Containers/RegisterModal/RegisterModal";
+import AddCourseModal from './../Containers/AddCourseModal/AddCourseModal';
 
 export default (
   <Switch>
@@ -12,6 +13,7 @@ export default (
       <Route path='/classroom' component={Classroom}/>
       <Route path='/login' component={LoginModal}/>
       <Route path='/register' component={RegisterModal}/>
+      <Route path='/addCourse' component={AddCourseModal}/>
       <Route path='/' component={Home}/>
   </Switch>
 );

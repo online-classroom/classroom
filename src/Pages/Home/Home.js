@@ -1,8 +1,6 @@
 import React, { memo } from 'react'
 import './Home.scss'
 import PrimaryButton from './../../Components/Buttons/PrimaryButton'
-import LoginModal from '../../Containers/LoginModal/LoginModal';
-import RegisterModal from '../../Containers/RegisterModal/RegisterModal'
 
 const Home =()=>{
     return(

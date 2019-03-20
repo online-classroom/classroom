@@ -52,3 +52,4 @@ app.get(`/auth/user`, ac.getUser)
 // // // // INFO CONTROLLER // // // // 
 
 app.get(`/info/courses`,ic.getAllCourses)
+app.get(`/info/subjects`,ic.getAllSubjects)

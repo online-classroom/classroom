@@ -3,25 +3,10 @@
 // const opentok = new OpenTok(OPENTOK_API_KEY,OPENTOK_SECRET)
 
 module.exports={
-    // createNewCourse:function(req,res){
-    //     // need to take the courseId        
-    //     const {title,subject_id,description,teacher_id} = req.body
-    //     opentok.createSession({mediaMode:'routed'},async(err,session)=>{
-    //         if(err)return console.log(err);
-
-    //         const db = req.app.get('db')
-
-    //         const session_id = session.sessionId
-
-    //         const createNewCourse = await db.video.createNewCourse([title,subject_id,description,teacher_id,session_id])
-            
-    //         const courses = await db.info.getAllCourses()
-
-    //         res.send(courses)            
-    //     })
+    createNewCourse:function(req,res){
+      const {title,subject_id,description,date,lectures} = req.body
         
-        
-    // },
+    },
 
     getAllCourses:async(req,res)=>{
         const db = req.app.get('db')
@@ -29,5 +14,14 @@ module.exports={
         const courses = await db.info.getAllCourses()
 
         res.send(courses)
+    },
+
+    getAllSubjects:async(req,res)=>{
+        const db = req.app.get('db')
+
+        const subjects = await db.info.getAllSubjects()
+
+        res.send(subjects)
     }
+
 }

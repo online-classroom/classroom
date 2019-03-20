@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./ClassListContainer.scss";
 import PrimaryButton from "./../../Components/Buttons/PrimaryButton";
 import Axios from "axios";
+import {NavLink} from 'react-router-dom'
 
 export default class ClassListContainer extends Component {
   state = {
@@ -28,7 +29,7 @@ export default class ClassListContainer extends Component {
     });
     return (
       <div className="listContainer">
-          <PrimaryButton>Add Course</PrimaryButton>
+          <NavLink to='/addCourse'><PrimaryButton>Add Course</PrimaryButton></NavLink>
         {courseMapper}
       </div>
     );
