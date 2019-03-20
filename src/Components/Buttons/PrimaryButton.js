@@ -3,7 +3,7 @@ import './PrimaryButton.scss';
 
 const PrimaryButton = (props)=>{
     return(
-        <button className='primary-button' onClick={props.onClick}>
+        <button className='primary-button' id='primary-button' onClick={props.onClick}>
             {props.children}
         </button>
     )
