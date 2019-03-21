@@ -3,19 +3,37 @@
 .AddCourseModal{
     @include defaultInputBox;
     padding: 30px 10vh;
+    font-size: 18px;
+    background-color: #F7F8FA;
+    color: rgb(40, 40, 40);
+    
+    .title-type{
+        font-weight: bold;
+        font-size: 28px;
+        color: #0A2A66;
+    }
+
+    .react-quill{
+        background-color: white;
+    }
+
     .lecture-input-box{
         display:flex;
+
         div,p{
-            margin-right:20px;
+            margin-right:18px;
         }
+
         input{
-            text-overflow: ellipsis
+            text-overflow: ellipsis;
         }
     }
+
     .lectures{
         display:flex;
         flex-wrap: wrap;
         width:auto;
+
         #lecture{
             margin-right:20px;
             margin-bottom:2vh;
