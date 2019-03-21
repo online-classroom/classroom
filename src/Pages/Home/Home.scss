@@ -1,23 +1,24 @@
 .home-container{
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
     
     .background-home{
         height: 505px;
-        width: 100vw;
+        width: 100%;
         position: absolute;
         top: 0;
         left: 0;
         z-index: -1;
         box-sizing: border-box;
     }
+
     #Home {
         width: 100%;
-        height: 450px;
+        height: 444px;
         color: black;
         display: flex;
         justify-content: space-between;
-
 
         .login-container {
             width: 40vw;
@@ -49,6 +50,7 @@
                 }
             }
         }
+
         .register-buttons {
             width: 100%;
             height: 375px;
@@ -66,16 +68,12 @@
                     margin: 20px;
                     text-align: center;
                 }
-                
                 .subtitle-title{
                     font-size: 36px;
-
                 }
-
                 .subtitle-subtext{
                     font-size: 18px;
                 }
-
                 .reg-button{
                     height: 150px;
                     border-radius: 75px;
@@ -90,17 +88,18 @@
             }
         }
     }
+
     .courses-container {
         width: 100%;
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
         background-color: rgb(235, 235, 235);
+
         .subjects{
             height: 200px;
             width: 45%;
             margin: 25px 5px;
-            // border: 1px solid black;
             padding: 10px;
             background-color: white;
         }
