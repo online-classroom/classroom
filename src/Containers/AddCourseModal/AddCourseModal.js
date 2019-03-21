@@ -20,12 +20,12 @@ class AddCourseModal extends Component {
     lecEndTime: "",
     lecDate: "",
     lecDescription: "",
-    lectures: [],
     startDate: new Date(),
     endDate: new Date(),
     newLectureDate: new Date(),
     startTime: new Date(),
     endTime: new Date(),
+    lectures: [],
   };
 
   componentDidMount = async () => {
@@ -67,13 +67,13 @@ class AddCourseModal extends Component {
   addLecture = () => {
     let lectures = this.state.lectures.slice();
 
-    const { lecStartTime, lecEndTime, lecDescription, lecDate } = this.state;
+    const { startTime, endTime, lecDescription, newLectureDate } = this.state;
 
     lectures.push({
-      startTime: lecStartTime,
-      endTime: lecEndTime,
+      startTime,
+      endTime,
       lecture_description: lecDescription,
-      lecture_date: lecDate
+      lecture_date: newLectureDate
     });
 
     this.setState({ lectures });
@@ -92,7 +92,7 @@ class AddCourseModal extends Component {
     this.setState({
       newLectureDate: date
     });
-  }
+  } 
   handleStartTimeChange = (date)=>{
     this.setState({
       startTime: date
@@ -129,10 +129,10 @@ class AddCourseModal extends Component {
     const lectureMapper = lectures.map(lecture => {
       return (
         <div id="lecture">
-          <p>Date:{lecture.lecture_date}</p>
-          <p>From: {lecture.startTime}</p>
-          <p>To: {lecture.endTime}</p>
-          <p>Description: {lecture.lecture_description}</p>
+          <p>Date:{`${lecture.lecture_date.getMonth() + 1}/${lecture.lecture_date.getDate()}/${lecture.lecture_date.getFullYear()}`}</p>
+          <p>From: {lecture.startTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</p>
+          <p>To: {lecture.endTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</p>
+          <p>Description: <div dangerouslySetInnerHTML={{__html: lecture.lecture_description}}></div></p>
         </div>
       );
     });
