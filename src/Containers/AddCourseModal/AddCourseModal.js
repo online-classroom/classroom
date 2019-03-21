@@ -4,7 +4,9 @@ import "./AddCourseModal.scss";
 import PrimaryButton from "../../Components/Buttons/PrimaryButton";
 import Axios from "axios";
 import ReactQuill from "react-quill";
+import DatePicker from "react-datepicker";
 import "react-quill/dist/quill.snow.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 class AddCourseModal extends Component {
   state = {
@@ -18,7 +20,12 @@ class AddCourseModal extends Component {
     lecEndTime: "",
     lecDate: "",
     lecDescription: "",
-    lectures: []
+    startDate: new Date(),
+    endDate: new Date(),
+    newLectureDate: new Date(),
+    startTime: new Date(),
+    endTime: new Date(),
+    lectures: [],
   };
 
   componentDidMount = async () => {
@@ -60,18 +67,42 @@ class AddCourseModal extends Component {
   addLecture = () => {
     let lectures = this.state.lectures.slice();
 
-    const { lecStartTime, lecEndTime, lecDescription, lecDate } = this.state;
+    const { startTime, endTime, lecDescription, newLectureDate } = this.state;
 
     lectures.push({
-      startTime: lecStartTime,
-      endTime: lecEndTime,
+      startTime,
+      endTime,
       lecture_description: lecDescription,
-      lecture_date: lecDate
+      lecture_date: newLectureDate
     });
 
     this.setState({ lectures });
   };
-
+  handleChangeStart = (date)=>{
+    this.setState({
+      startDate: date
+    });
+  }
+  handleChangeEnd = (date)=>{
+    this.setState({
+      endDate: date
+    });
+  }
+  handleNewLectureDateChange = (date)=>{
+    this.setState({
+      newLectureDate: date
+    });
+  } 
+  handleStartTimeChange = (date)=>{
+    this.setState({
+      startTime: date
+    })
+  }
+  handleEndTimeChange = (date)=>{
+    this.setState({
+      endTime: date
+    })
+  }
   render() {
     const {
       subjects,
@@ -98,10 +129,10 @@ class AddCourseModal extends Component {
     const lectureMapper = lectures.map(lecture => {
       return (
         <div id="lecture">
-          <p>Date:{lecture.lecture_date}</p>
-          <p>From: {lecture.startTime}</p>
-          <p>To: {lecture.endTime}</p>
-          <p>Description: {lecture.lecture_description}</p>
+          <p>Date:{`${lecture.lecture_date.getMonth() + 1}/${lecture.lecture_date.getDate()}/${lecture.lecture_date.getFullYear()}`}</p>
+          <p>From: {lecture.startTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</p>
+          <p>To: {lecture.endTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</p>
+          <p>Description: <div dangerouslySetInnerHTML={{__html: lecture.lecture_description}}></div></p>
         </div>
       );
     });
@@ -131,13 +162,50 @@ class AddCourseModal extends Component {
         />
         <br />
         <br />
-        <p>Date Picker</p>
+        <div>
+          <DatePicker
+              selected={this.state.startDate}
+              selectsStart
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              onChange={this.handleChangeStart}
+          />
+
+          <DatePicker
+              selected={this.state.endDate}
+              selectsEnd
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              onChange={this.handleChangeEnd}
+          />
+        </div>
         <br />
         <h1>Lectures</h1>
         <br />
         <div className="lecture-input-box">
-          <p>start time picker</p>
-          <p>end time picker</p>
+          <DatePicker
+              selected={this.state.newLectureDate}
+              onChange={this.handleNewLectureDateChange}
+          />
+          <br/>
+          <DatePicker
+              selected={this.state.startTime}
+              onChange={this.handleStartTimeChange}
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={15}
+              dateFormat="h:mm aa"
+              timeCaption="Time"
+          />
+          <DatePicker
+            selected={this.state.endTime}
+            onChange={this.handleEndTimeChange}
+            showTimeSelect
+            showTimeSelectOnly
+            timeIntervals={15}
+            dateFormat="h:mm aa"
+            timeCaption="Time"
+          />
         </div>
         <p>Enter Lecture Description</p>
         <ReactQuill
