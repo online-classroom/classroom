@@ -4,9 +4,11 @@
 
 module.exports={
     // createNewCourse:function(req,res){
-    //   const {title,subject_id,description,date,lectures} = req.body
-        
-    // },
+    //   const {title,subject_id,description,teacher_id,start_date,end_date,lectures} = req.body
+      
+      
+
+    // }
 
     getAllCourses:async(req,res)=>{
         const db = req.app.get('db')
