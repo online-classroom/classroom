@@ -141,7 +141,8 @@ class AddCourseModal extends Component {
       <div className="AddCourseModal">
         <br />
         <br />
-        <h1>Course</h1>
+        <h1 className='title-type'>COURSE INFO</h1>
+        <br />
         <br />
         Choose a subject
         <br />
@@ -152,14 +153,19 @@ class AddCourseModal extends Component {
         <p>Enter Title</p>
         <br />
         <input name="title" value={title} onChange={handleInput} />
+        <br/>
+        <br/>
+        <br/>
         <p>Enter Description</p>
         <br />
         <ReactQuill
+          className='react-quill'
           value={description}
           name="lecDescription"
           onChange={handleCourseDescInput}
           style={{height:'30vh',width:'50vw'}}
         />
+        <br />
         <br />
         <br />
         <div>
@@ -169,7 +175,7 @@ class AddCourseModal extends Component {
               startDate={this.state.startDate}
               endDate={this.state.endDate}
               onChange={this.handleChangeStart}
-          />
+          />&emsp;&emsp;
 
           <DatePicker
               selected={this.state.endDate}
@@ -180,7 +186,9 @@ class AddCourseModal extends Component {
           />
         </div>
         <br />
-        <h1>Lectures</h1>
+        <br />
+        <h1 className='title-type'>LECTURE INFO</h1>
+        <br />
         <br />
         <div className="lecture-input-box">
           <DatePicker
@@ -207,8 +215,12 @@ class AddCourseModal extends Component {
             timeCaption="Time"
           />
         </div>
+        <br/>
+        <br/>
         <p>Enter Lecture Description</p>
+        <br/>
         <ReactQuill
+          className='react-quill'
           value={lecDescription}
           name="lecDescription"
           onChange={handlelectureDescInput}
