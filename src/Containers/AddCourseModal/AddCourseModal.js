@@ -4,7 +4,9 @@ import "./AddCourseModal.scss";
 import PrimaryButton from "../../Components/Buttons/PrimaryButton";
 import Axios from "axios";
 import ReactQuill from "react-quill";
+import DatePicker from "react-datepicker";
 import "react-quill/dist/quill.snow.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 class AddCourseModal extends Component {
   state = {
@@ -18,7 +20,12 @@ class AddCourseModal extends Component {
     lecEndTime: "",
     lecDate: "",
     lecDescription: "",
-    lectures: []
+    lectures: [],
+    startDate: new Date(),
+    endDate: new Date(),
+    newLectureDate: new Date(),
+    startTime: new Date(),
+    endTime: new Date(),
   };
 
   componentDidMount = async () => {
@@ -71,7 +78,31 @@ class AddCourseModal extends Component {
 
     this.setState({ lectures });
   };
-
+  handleChangeStart = (date)=>{
+    this.setState({
+      startDate: date
+    });
+  }
+  handleChangeEnd = (date)=>{
+    this.setState({
+      endDate: date
+    });
+  }
+  handleNewLectureDateChange = (date)=>{
+    this.setState({
+      newLectureDate: date
+    });
+  }
+  handleStartTimeChange = (date)=>{
+    this.setState({
+      startTime: date
+    })
+  }
+  handleEndTimeChange = (date)=>{
+    this.setState({
+      endTime: date
+    })
+  }
   render() {
     const {
       subjects,
@@ -131,13 +162,50 @@ class AddCourseModal extends Component {
         />
         <br />
         <br />
-        <p>Date Picker</p>
+        <div>
+          <DatePicker
+              selected={this.state.startDate}
+              selectsStart
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              onChange={this.handleChangeStart}
+          />
+
+          <DatePicker
+              selected={this.state.endDate}
+              selectsEnd
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              onChange={this.handleChangeEnd}
+          />
+        </div>
         <br />
         <h1>Lectures</h1>
         <br />
         <div className="lecture-input-box">
-          <p>start time picker</p>
-          <p>end time picker</p>
+          <DatePicker
+              selected={this.state.newLectureDate}
+              onChange={this.handleNewLectureDateChange}
+          />
+          <br/>
+          <DatePicker
+              selected={this.state.startTime}
+              onChange={this.handleStartTimeChange}
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={15}
+              dateFormat="h:mm aa"
+              timeCaption="Time"
+          />
+          <DatePicker
+            selected={this.state.endTime}
+            onChange={this.handleEndTimeChange}
+            showTimeSelect
+            showTimeSelectOnly
+            timeIntervals={15}
+            dateFormat="h:mm aa"
+            timeCaption="Time"
+          />
         </div>
         <p>Enter Lecture Description</p>
         <ReactQuill
