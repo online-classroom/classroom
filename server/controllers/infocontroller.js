@@ -1,7 +1,6 @@
 const OpenTok = require('opentok')
 const {OPENTOK_API_KEY,OPENTOK_API_SECRET} = process.env
 const opentok = new OpenTok(OPENTOK_API_KEY, OPENTOK_API_SECRET);
-const vc = require('./videocontroller')
 
 module.exports={
     createNewCourse:async(req,res)=>{
@@ -11,6 +10,8 @@ module.exports={
         if(err)return console.log(err)
         
         const session_id=session.sessionId
+
+    
 
         const createNewCourse = await db.info.create.course([title,subject_id,description,teacher_id,start_date,end_date,session_id])
         const course_id = createNewCourse[0].course_id;
@@ -61,6 +62,23 @@ module.exports={
         const subjects = await db.info.getAllSubjects()
         console.log(subjects)
         res.send(subjects)
+    },
+
+    generateToken:async(req,res)=>{
+        console.log('hit')
+        const db = req.app.get('db')
+        let {course_id} = req.params
+        course_id = parseInt(course_id)
+
+        console.log({course_id})
+
+        let session_id = await db.info.getSessionId([course_id])
+
+        session_id = session_id[0].session_id
+
+        const token = opentok.generateToken(session_id)
+
+        res.send(token)
     }
 
 }

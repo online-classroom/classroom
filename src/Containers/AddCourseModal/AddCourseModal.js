@@ -12,7 +12,7 @@ import {connect} from 'react-redux'
 class AddCourseModal extends Component {
   state = {
     subjects: [],
-    choosenSubject: { subject_id: 1, subject_name: "Math" },
+    choosenSubject: { subject_id: 8, subject_name: "Math" },
     title: "",
     description: "",
     lecture_description: "",
