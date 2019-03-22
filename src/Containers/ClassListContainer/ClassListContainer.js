@@ -3,10 +3,13 @@ import "./ClassListContainer.scss";
 import PrimaryButton from "./../../Components/Buttons/PrimaryButton";
 import Axios from "axios";
 import {NavLink} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {updateCourseInfo} from './../../ducks/reducer'
 
-export default class ClassListContainer extends Component {
+class ClassListContainer extends Component {
   state = {
-    courses: []
+    courses: [],
+    selectedCourse:''
   };
 
   componentDidMount = async () => {
@@ -16,15 +19,21 @@ export default class ClassListContainer extends Component {
     this.setState({ courses: cRes.data });
   };
 
+  handleCourseSelection = (course) => {
+    this.setState({
+      selectedCourse:course
+    },()=>this.props.updateCourseInfo(this.state.selectedCourse))
+  }
+
   render() {
     const { courses } = this.state;
+    const {handleCourseSelection} = this
+
     const courseMapper = courses.map(course => {
       return (
         <div key={course.course_id}>
-          <h3>{course.title}</h3>
-          <p>{course.description}</p>
-          <p>{course.teacher_name}</p>
-        </div>
+          <h1 onClick={()=>handleCourseSelection(course)}>{course.title}</h1>
+        </div>        
       );
     });
     return (
@@ -35,3 +44,5 @@ export default class ClassListContainer extends Component {
     );
   }
 }
+
+export default connect(null,{updateCourseInfo})(ClassListContainer)

@@ -1,10 +1,32 @@
 import React from 'react';
 import './InfoContainerStyling.scss';
+import {connect} from 'react-redux'
 
-export default function CourseInfo() {
+function CourseInfo(props) {
+  const {course} = props
+  // const {title,description,subject_id,teacher_id,start_date,end_date} = course
   return (
-    <div className='infoContainer'>
-      <p>Course Info .js</p>
+    <>
+    {course
+    ?<div className='infoContainer'>
+      <p>{course.title}</p>
+      <p>{course.description}</p>
     </div>
+    :<div className='infoContainer'>
+      No course selected
+    </div>
+  }
+    </>
   );
 }
+
+const m2p = (state) => {
+  const {course} = state
+  return{
+    course
+  }
+}
+
+export default connect(m2p,null)(CourseInfo)
+
+
