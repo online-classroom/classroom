@@ -7,6 +7,7 @@ import ReactQuill from "react-quill";
 import DatePicker from "react-datepicker";
 import "react-quill/dist/quill.snow.css";
 import "react-datepicker/dist/react-datepicker.css";
+import {connect} from 'react-redux'
 
 class AddCourseModal extends Component {
   state = {
@@ -42,9 +43,7 @@ class AddCourseModal extends Component {
     this.setState(
       {
         [e.target.name]: e.target.value
-      },
-      () => console.log(this.state)
-    );
+      });
   };
 
   handlelectureDescInput = val => {
@@ -104,6 +103,18 @@ class AddCourseModal extends Component {
     });
   };
 
+  createNewCourse = async() => {
+    const {choosenSubject,title,description,start_date,end_date,lectures} = this.state
+    const {teacher_id} = this.props
+    const {subject_id} = choosenSubject
+
+    const newCourse = {title,subject_id,description,teacher_id,start_date,end_date,lectures}
+
+    const createNewCourse = await Axios.post(`/info/create/course`,newCourse)
+
+    this.props.history.push('/dashboard')
+  }
+
   render() {
     const {
       subjects,
@@ -128,7 +139,8 @@ class AddCourseModal extends Component {
       handleNewLectureDateChange,
       handleStartTimeChange,
       handleEndTimeChange,
-      handleSubjectChoice
+      handleSubjectChoice,
+      createNewCourse
     } = this;
 
     const subjectOptionsMapper = subjects.map(subject => {
@@ -136,7 +148,7 @@ class AddCourseModal extends Component {
         <SecondaryButton
           key={subject.subject_id}
           isActive={choosenSubject.subject_name === subject.subject_name}
-          onClick={() => this.handleSubjectChoice(subject)}
+          onClick={() => handleSubjectChoice(subject)}
         >
           {subject.subject_name}
         </SecondaryButton>
@@ -152,14 +164,14 @@ class AddCourseModal extends Component {
               1}/${lecture.date.getDate()}/${lecture.date.getFullYear()}`}
           </p>
           <p>
-            From:{" "}
+            From: {" "}
             {lecture.lecture_start_time.toLocaleTimeString([], {
               hour: "2-digit",
               minute: "2-digit"
             })}
           </p>
           <p>
-            To:{" "}
+            To: {" "}
             {lecture.lecture_end_time.toLocaleTimeString([], {
               hour: "2-digit",
               minute: "2-digit"
@@ -167,7 +179,7 @@ class AddCourseModal extends Component {
           </p>
           <p>
             Description:{" "}
-            <div
+            <div id='lecture-description-add-course-modal'
               dangerouslySetInnerHTML={{ __html: lecture.lecture_description }}
             />
           </p>
@@ -201,7 +213,7 @@ class AddCourseModal extends Component {
           value={description}
           name="lecDescription"
           onChange={handleCourseDescInput}
-          style={{ height: "30vh", width: "50vw" }}
+          style={{ height: "40vh", width: "90vw" }}
         />
         <br />
         <br />
@@ -262,7 +274,7 @@ class AddCourseModal extends Component {
           value={lecture_description}
           name="lecDescription"
           onChange={handlelectureDescInput}
-          style={{ height: "30vh", width: "50vw" }}
+          style={{ height: "40vh", width: "90vw" }}
         />
         <br />
         <br />
@@ -271,9 +283,15 @@ class AddCourseModal extends Component {
         <br />
         <div className="lectures">{lectureMapper}</div>
         {console.log(this.state)}
+        <PrimaryButton onClick={createNewCourse}>Create Course</PrimaryButton>
       </div>
     );
   }
 }
 
-export default AddCourseModal;
+const m2p = (state) => {
+  return {
+    teacher_id:state.user_id
+  }
+}
+export default connect(m2p,null)(AddCourseModal);
