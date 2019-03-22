@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import "./ClassListContainer.scss";
 import PrimaryButton from "./../../Components/Buttons/PrimaryButton";
 import Axios from "axios";
-import {NavLink} from 'react-router-dom'
-import {connect} from 'react-redux'
-import {updateCourseInfo} from './../../ducks/reducer'
+import {NavLink} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {updateCourseInfo} from './../../ducks/reducer';
 
 class ClassListContainer extends Component {
   state = {
@@ -13,10 +13,12 @@ class ClassListContainer extends Component {
   };
 
   componentDidMount = async () => {
-    const cRes = await Axios.get(`/info/courses`);
+    const cRes = await Axios.get(`/info/course/?user_id=${this.props.user_id}&is_teacher=${this.props.is_teacher}`);
+
     console.log(cRes);
 
     this.setState({ courses: cRes.data });
+
   };
 
   handleCourseSelection = (course) => {
@@ -45,4 +47,12 @@ class ClassListContainer extends Component {
   }
 }
 
-export default connect(null,{updateCourseInfo})(ClassListContainer)
+const m2p = (state)=>{
+  const {user_id,is_teacher} = state
+  return{
+    user_id,
+    is_teacher
+  }
+}
+
+export default connect(m2p,{updateCourseInfo})(ClassListContainer)
