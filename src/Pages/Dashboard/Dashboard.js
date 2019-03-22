@@ -11,10 +11,10 @@ export default class Dashboard extends Component {
       <div className='dashboardMainPage'>
         <div className='dashContainer'>
           <ProfileInfoContainer />
-          <Schedule />
+          <ClassListContainer />
         </div>
         <div className='courseListContainer'>
-          <ClassListContainer />
+          <Schedule />
         </div>
       </div>
     );

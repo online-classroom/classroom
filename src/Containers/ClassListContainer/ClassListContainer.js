@@ -43,6 +43,7 @@ class ClassListContainer extends Component {
     return (
       <div className="listContainer">
           {is_teacher && <NavLink to='/addCourse'><PrimaryButton>Add Course</PrimaryButton></NavLink>}
+          <p>Select a course to view course info.</p>
         {courseMapper}
       </div>
     );

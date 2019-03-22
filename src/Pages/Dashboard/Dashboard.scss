@@ -3,18 +3,21 @@
 .dashboardMainPage {
   padding: 3em;
   display: flex;
+  flex-direction: column;
   background-color: #F7F8FA;
 
   .dashContainer {
     // border: 2px solid red;
-    width: 80%;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    padding: 0px 25px 0px 0px;
+    justify-content: space-between;
+    padding: 0px 0px 25px 0px;
+    box-sizing: border-box;
   }
-
+  
   .courseListContainer {
     // border: 2px solid red;
-    width: 40%;
+    width: 100%;
+    box-sizing: border-box;
   }
 }
