@@ -22,7 +22,7 @@ module.exports={
         const db = req.app.get('db')
 
         const subjects = await db.info.getAllSubjects()
-
+        console.log(subjects)
         res.send(subjects)
     }
 

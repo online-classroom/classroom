@@ -1,9 +1,15 @@
 .MainInfoContainer {
-  border: 2px solid blue;
-  height: 40%;
+  // border: 2px solid blue;
+  height: 400px;
   box-sizing:border-box;
-}
-.toggleButtons {
-  height: 11%;
-  box-sizing:border-box;
+  background-color: white;
+  border-radius: 25px;
+  box-shadow: 2px 5px 24px rgb(200, 200, 200);
+
+  .toggleButtons {
+    height: 10%;
+    box-sizing:border-box;
+    background-color: white;
+    border-radius: 25px;
+  }
 }
