@@ -30,6 +30,7 @@ class ClassListContainer extends Component {
   render() {
     const { courses } = this.state;
     const {handleCourseSelection} = this
+    const {is_teacher} = this.props
 
     const courseMapper = courses.map(course => {
       return (
@@ -40,7 +41,10 @@ class ClassListContainer extends Component {
     });
     return (
       <div className="listContainer">
-          <NavLink to='/addCourse'><PrimaryButton>Add Course</PrimaryButton></NavLink>
+          {is_teacher
+          ?<NavLink to='/addCourse'><PrimaryButton>Add Course</PrimaryButton></NavLink>
+          :<p></p>
+        }
         {courseMapper}
       </div>
     );
