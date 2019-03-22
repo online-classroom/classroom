@@ -34,17 +34,14 @@ class ClassListContainer extends Component {
 
     const courseMapper = courses.map(course => {
       return (
-        <div key={course.course_id}>
+        <div key={course.course_id} className='classlist-course-title'>
           <h1 onClick={()=>handleCourseSelection(course)}>{course.title}</h1>
         </div>        
       );
     });
     return (
       <div className="listContainer">
-          {is_teacher
-          ?<NavLink to='/addCourse'><PrimaryButton>Add Course</PrimaryButton></NavLink>
-          :<p></p>
-        }
+          {is_teacher && <NavLink to='/addCourse'><PrimaryButton>Add Course</PrimaryButton></NavLink>}
         {courseMapper}
       </div>
     );
