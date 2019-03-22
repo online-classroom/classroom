@@ -53,3 +53,4 @@ app.get(`/auth/user`, ac.getUser)
 
 app.get(`/info/courses`,ic.getAllCourses)
 app.get(`/info/subjects`,ic.getAllSubjects)
+app.post(`/info/create/course`,ic.createNewCourse)
