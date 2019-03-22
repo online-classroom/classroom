@@ -10,7 +10,7 @@ function CourseInfo(props) {
     {course
     ?<div className='infoContainer'>
       <p>{course.title}</p>
-      <p>{course.description}</p>
+      <p dangerouslySetInnerHTML={{ __html: course.description }}></p>
     </div>
     :<div className='infoContainer'>
       No course selected

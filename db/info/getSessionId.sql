@@ -1,0 +1,1 @@
+select session_id from courses where course_id = $1;

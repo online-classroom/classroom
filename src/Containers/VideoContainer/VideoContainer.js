@@ -1,11 +1,10 @@
 import React from "react";
 import Video1 from "../../Components/Video1/Video1";
 
-const VideoContainer = () => {
+const VideoContainer = (props) => {
   return (
     <div className="VideoContainer">
-      VideoContainer
-      <Video1 />
+      <Video1 token={props.token}/>
     </div>
   );
 };

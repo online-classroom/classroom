@@ -5,6 +5,7 @@ import Axios from "axios";
 import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {updateCourseInfo} from './../../ducks/reducer';
+import SecondaryButton from "../../Components/Buttons/SecondaryButton";
 
 class ClassListContainer extends Component {
   state = {
@@ -28,14 +29,14 @@ class ClassListContainer extends Component {
   }
 
   render() {
-    const { courses } = this.state;
+    const { courses,selectedCourse } = this.state;
     const {handleCourseSelection} = this
     const {is_teacher} = this.props
 
     const courseMapper = courses.map(course => {
       return (
         <div key={course.course_id}>
-          <h1 onClick={()=>handleCourseSelection(course)}>{course.title}</h1>
+          <SecondaryButton isActive={course===selectedCourse} onClick={()=>handleCourseSelection(course)}>{course.title}</SecondaryButton>
         </div>        
       );
     });
@@ -45,6 +46,8 @@ class ClassListContainer extends Component {
           ?<NavLink to='/addCourse'><PrimaryButton>Add Course</PrimaryButton></NavLink>
           :<p></p>
         }
+        <br/>
+        <br/>
         {courseMapper}
       </div>
     );
