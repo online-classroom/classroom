@@ -58,7 +58,7 @@ module.exports = {
     user = user[0];
 
     if (!user) {
-      return res.status(404).send("Username/Email does not exist");
+      return res.status(404).send("*Username/Email does not exist");
     }
 
     const foundUser = bcrypt.compareSync(password, user.password);
@@ -67,7 +67,7 @@ module.exports = {
       session.user = user;
       return res.status(200).send(session.user);
     } else {
-      res.status(401).send("Incorrect Password! Try Again");
+      res.status(401).send("*Incorrect Password! Try Again");
     }
   },
 
