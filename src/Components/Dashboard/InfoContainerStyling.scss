@@ -1,6 +1,15 @@
 .infoContainer {
-  border: 2px solid green;
-  // padding-top: 10%;
-  height: 89%;
+  height: 90%;
   box-sizing: border-box;
+  padding: 30px 60px;
+
+  p{
+    margin: 10px 30px 30px 20px;
+    font-size: 22px;
+  }
+  span {
+    font-style: italic;
+    color: grey;
+    font-size: 14px;
+  }
 }

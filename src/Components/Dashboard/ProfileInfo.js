@@ -6,10 +6,12 @@ const ProfileInfo = props => {
   const { user_id, username, email, password, first_name, last_name } = props;
   return (
     <div className="infoContainer">
+      <span>name:</span>
+      <p>{first_name} {last_name}</p>
+      <span>username:</span>
       <p>{username}</p>
+      <span>email:</span>
       <p>{email}</p>
-      <p>{first_name}</p>
-      <p>{last_name}</p>
     </div>
   );
 };

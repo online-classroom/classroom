@@ -1,21 +1,20 @@
+@import './../../variables';
+
 .dashboardMainPage {
-  border: 2px solid black;
-  height: 100vh;
-  padding: 2em;
+  padding: 3em;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-.dashContainer {
-  border: 2px solid red;
-  padding: 1%;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-.courseListContainer {
-  padding: 1%;
-  border: 2px solid red;
-  width: 40%;
+  background-color: #F7F8FA;
+
+  .dashContainer {
+    // border: 2px solid red;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 25px 0px 0px;
+  }
+
+  .courseListContainer {
+    // border: 2px solid red;
+    width: 40%;
+  }
 }
