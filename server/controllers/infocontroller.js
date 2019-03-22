@@ -38,6 +38,23 @@ module.exports={
         res.send(courses)
     },
 
+    getCoursesForUser:async(req,res)=>{
+        const db = req.app.get('db')
+        const {user_id,is_teacher} = req.query
+
+        if(is_teacher){
+            const courses = await db.info.getTeacherCourses([user_id])
+            console.log({courses})
+            res.send(courses)
+        }
+        else{
+            const courses =  await db.info.getStudentCourses([user_id])
+            console.log({courses})
+            res.send(courses)
+        }
+
+    },
+
     getAllSubjects:async(req,res)=>{
         const db = req.app.get('db')
 
