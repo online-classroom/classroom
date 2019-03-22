@@ -4,8 +4,6 @@ import PrimaryButton from './../../Components/Buttons/PrimaryButton'
 import RegisterButton from './../../Components/Buttons/RegisterButton'
 import LoginButton from './../../Components/Buttons/LoginButton'
 import Background from '../../assets/Background.jpg'
-import LoginModal from '../../Containers/LoginModal/LoginModal';
-import RegisterModal from '../../Containers/RegisterModal/RegisterModal'
 
 const Home =()=>{
     return(
@@ -30,8 +28,6 @@ const Home =()=>{
                 <div className='subjects'>Subject 3</div>
                 <div className='subjects'>Subject 4</div>
             </div>
-            {/* <LoginModal /> */}
-            {/* <RegisterModal/> */}
         </div>
     )
 }
