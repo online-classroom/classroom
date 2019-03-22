@@ -1,13 +1,29 @@
-import React, { memo } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import './Home.scss'
-import PrimaryButton from './../../Components/Buttons/PrimaryButton'
+import axios from 'axios'
 import RegisterButton from './../../Components/Buttons/RegisterButton'
 import LoginButton from './../../Components/Buttons/LoginButton'
 import Background from '../../assets/Background.jpg'
-import LoginModal from '../../Containers/LoginModal/LoginModal';
-import RegisterModal from '../../Containers/RegisterModal/RegisterModal'
 
 const Home =()=>{
+
+    const [subject, renderSubject] = useState([])
+    const [course, renderCourse] = useState([])
+
+    useEffect(() => {
+        if(subject.length===0){
+            axios.get(`/info/subjects`)
+            .then(res => {
+                console.log(res.data)
+                renderSubject(res.data)
+            })
+        }
+    })
+
+    const mappedSubjects = subject.map((val, i) => {
+        return <p key={i}>{val.subject_name}</p>
+    })
+
     return(
         <div className='home-container'>
             <img className='background-home' src={Background} alt='blue-gradient'/>
@@ -25,13 +41,10 @@ const Home =()=>{
                 </div>
             </div>
             <div className='courses-container'>
-                <div className='subjects'>Subject 1</div>
-                <div className='subjects'>Subject 2</div>
-                <div className='subjects'>Subject 3</div>
-                <div className='subjects'>Subject 4</div>
+                <div className='subjects'>
+                    {mappedSubjects}
+                </div>
             </div>
-            {/* <LoginModal /> */}
-            {/* <RegisterModal/> */}
         </div>
     )
 }
