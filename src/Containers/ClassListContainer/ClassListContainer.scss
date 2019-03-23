@@ -2,15 +2,17 @@
 
 .listContainer {
   // border: 2px solid blue;
-  height: 80vh;
+  height: 400px;
+  width: 400px;
   background-color: white;
   border-radius: 25px;
-  margin: 0 0 25px 0;
+  margin: 0;
   box-shadow: 2px 5px 24px rgb(200, 200, 200);
   padding: 30px;
   text-align: center;
+  box-sizing: border-box;
 
-  .classlist-course-title{
-    margin: 20px;
+  p {
+    margin: 20px 0;
   }
 }
