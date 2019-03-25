@@ -56,3 +56,5 @@ app.get(`/info/course/`,ic.getCoursesForUser)
 app.get(`/info/subjects`,ic.getAllSubjects)
 app.post(`/info/create/course`,ic.createNewCourse)
 app.post(`/info/generatetoken/:course_id`,ic.generateToken)
+
+app.get(`/info/lectures`, ic.getLectureTimes)

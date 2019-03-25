@@ -1,4 +1,4 @@
-export default [
+let eventInfo = [
     {
         id: 1,
         title: 'Course 1',
@@ -48,3 +48,5 @@ export default [
         end: new Date(2019, 2, 23, 13, 0, 0, 0),
     },
   ]
+
+export default eventInfo;

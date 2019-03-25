@@ -79,6 +79,17 @@ module.exports={
         const token = opentok.generateToken(session_id)
 
         res.send(token)
+    },
+
+    getLectureTimes: async (req, res)=>{
+        console.log('hit getLectureTimes')
+        const db = req.app.get('db')
+
+        let lectureTimes = await db.info.getLectureTimes()
+
+        console.log(lectureTimes)
+
+        res.send(lectureTimes).status(200)
     }
 
 }
