@@ -45,12 +45,10 @@ module.exports={
 
         if(is_teacher){
             const courses = await db.info.getTeacherCourses([user_id])
-            console.log({courses})
             res.send(courses)
         }
         else{
             const courses =  await db.info.getStudentCourses([user_id])
-            console.log({courses})
             res.send(courses)
         }
 
@@ -60,7 +58,6 @@ module.exports={
         const db = req.app.get('db')
 
         const subjects = await db.info.getAllSubjects()
-        console.log(subjects)
         res.send(subjects)
     },
 
@@ -70,7 +67,6 @@ module.exports={
         let {course_id} = req.params
         course_id = parseInt(course_id)
 
-        console.log({course_id})
 
         let session_id = await db.info.getSessionId([course_id])
 
@@ -78,7 +74,7 @@ module.exports={
 
         const token = opentok.generateToken(session_id)
 
-        res.send(token)
+        res.send({token,session_id})
     },
 
     getLectureTimes: async (req, res)=>{
@@ -90,6 +86,7 @@ module.exports={
         console.log(lectureTimes)
 
         res.send(lectureTimes).status(200)
+        
     }
 
 }

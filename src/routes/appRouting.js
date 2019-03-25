@@ -9,9 +9,8 @@ import AddCourseModal from './../Containers/AddCourseModal/AddCourseModal';
 
 export default (
   <Switch>
-      <Route path='/lecture/:course_id' component={Classroom} />
       <Route path='/dashboard' component={Dashboard}/>
-      <Route path='/classroom' component={Classroom}/>
+      <Route path='/classroom/:course_id' component={Classroom}/>
       <Route path='/login' component={LoginModal}/>
       <Route path='/register' component={RegisterModal}/>
       <Route path='/addCourse' component={AddCourseModal}/>
