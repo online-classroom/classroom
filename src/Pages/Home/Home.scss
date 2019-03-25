@@ -97,11 +97,18 @@
         background-color: rgb(235, 235, 235);
 
         .subjects{
+            display: flex;
             height: 200px;
             width: 45%;
             margin: 25px 5px;
             padding: 10px;
             background-color: white;
+            font-size: 22px;
+            color: rgb(0, 54, 111);
+
+            .courses{
+                border: 1px solid red;
+            }
         }
     }
 }

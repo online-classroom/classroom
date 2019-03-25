@@ -14,15 +14,32 @@ const Home =()=>{
         if(subject.length===0){
             axios.get(`/info/subjects`)
             .then(res => {
-                console.log(res.data)
                 renderSubject(res.data)
+            })
+            axios.get(`/info/courses`)
+            .then(res => {
+                console.log(res.data)
+                renderCourse(res.data)
             })
         }
     })
 
     const mappedSubjects = subject.map((val, i) => {
-        return <p key={i}>{val.subject_name}</p>
+        return <div className='subjects' key={i}>
+                <div>
+                    {val.subject_name}
+                </div>
+                <div>
+                    {mappedCourses}
+                </div>
+            </div>
     })
+
+    const mappedCourses = course.map((val, i) => {
+        return <div className='courses' key={i}>{val.title}</div>
+    })
+
+    console.log(mappedCourses)
 
     return(
         <div className='home-container'>
@@ -41,9 +58,8 @@ const Home =()=>{
                 </div>
             </div>
             <div className='courses-container'>
-                <div className='subjects'>
-                    {mappedSubjects}
-                </div>
+                {mappedSubjects}
+                {/* {mappedCourses} */}
             </div>
         </div>
     )
