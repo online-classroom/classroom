@@ -31,7 +31,7 @@ const Classroom = props => {
           )}
         </div>
         <div className="qchat_container">
-          <QueueChatContainer />
+          <QueueChatContainer course_id={course_id}/>
         </div>
       </div>
       <div className="bonus_description_container">
