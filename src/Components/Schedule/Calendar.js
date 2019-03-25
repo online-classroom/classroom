@@ -11,30 +11,55 @@ let Basic = (props) => {
   const localizer = BigCalendar.momentLocalizer(moment)
 
   let lectures = []
-
-  axios.get(`/info/lectures/${props.user_id}`).then(
-    (res)=>{
-      console.log(res.data)
-      res.data.forEach((ele, i)=>{
-        let year = parseInt(ele.date.split('-')[0])
-        let month = parseInt(ele.date.split('-')[1]) - 1
-        let day = parseInt(ele.date.split('-')[2])
-        let hour = parseInt(ele.lecture_start_time.split('T')[1].split(':')[0]) - 6
-        let endHour = parseInt(ele.lecture_end_time.split('T')[1].split(':')[0]) - 6
-        let minute = parseInt(ele.lecture_start_time.split('T')[1].split(':')[1])
-        let endMinute = parseInt(ele.lecture_end_time.split('T')[1].split(':')[1])
-        console.log(ele.date.split('-')[0])
-        lectures.push(
-          {
-            id: i,
-            title: ele.title,
-            start: new Date(year, month, day, hour, minute, 0, 0),
-            end: new Date(year, month, day, endHour, endMinute, 0, 0),
-          }
-        )
-      })
-    }
-  )
+  if(props.is_teacher){
+    axios.get(`/info/teacherlectures/${props.user_id}`).then(
+      (res)=>{
+        console.log(res.data)
+        res.data.forEach((ele, i)=>{
+          let year = parseInt(ele.date.split('-')[0])
+          let month = parseInt(ele.date.split('-')[1]) - 1
+          let day = parseInt(ele.date.split('-')[2])
+          let hour = parseInt(ele.lecture_start_time.split('T')[1].split(':')[0]) - 6
+          let endHour = parseInt(ele.lecture_end_time.split('T')[1].split(':')[0]) - 6
+          let minute = parseInt(ele.lecture_start_time.split('T')[1].split(':')[1])
+          let endMinute = parseInt(ele.lecture_end_time.split('T')[1].split(':')[1])
+          console.log(ele.date.split('-')[0])
+          lectures.push(
+            {
+              id: i,
+              title: ele.title,
+              start: new Date(year, month, day, hour, minute, 0, 0),
+              end: new Date(year, month, day, endHour, endMinute, 0, 0),
+            }
+          )
+        })
+      }
+    )
+  }else{
+    axios.get(`/info/studentlectures/${props.user_id}`).then(
+      (res)=>{
+        console.log(res.data)
+        res.data.forEach((ele, i)=>{
+          let year = parseInt(ele.date.split('-')[0])
+          let month = parseInt(ele.date.split('-')[1]) - 1
+          let day = parseInt(ele.date.split('-')[2])
+          let hour = parseInt(ele.lecture_start_time.split('T')[1].split(':')[0]) - 6
+          let endHour = parseInt(ele.lecture_end_time.split('T')[1].split(':')[0]) - 6
+          let minute = parseInt(ele.lecture_start_time.split('T')[1].split(':')[1])
+          let endMinute = parseInt(ele.lecture_end_time.split('T')[1].split(':')[1])
+          console.log(ele.date.split('-')[0])
+          lectures.push(
+            {
+              id: i,
+              title: ele.title,
+              start: new Date(year, month, day, hour, minute, 0, 0),
+              end: new Date(year, month, day, endHour, endMinute, 0, 0),
+            }
+          )
+        })
+      }
+    )
+  }
 
   return (
     <BigCalendar
@@ -51,8 +76,8 @@ let Basic = (props) => {
 }
 
 const m2p = (state) => {
-  const {user_id} = state
-  return {user_id}
+  const {user_id, is_teacher} = state
+  return {user_id, is_teacher}
 }
 
 export default connect(m2p, null)(Basic)
