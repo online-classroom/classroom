@@ -1,0 +1,30 @@
+@import '../../variables';
+
+.subject-nav-container{
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 2px solid rgb(179, 183, 213);
+
+    .subject-name-container{
+        // border: 1px solid black;
+        display: flex;
+        align-items: center;
+
+        .subject-name{
+            // border: 1px solid red;
+            font-size: 22px;
+            color: rgb(0, 28, 58);
+
+            a {
+                text-decoration: none;
+                color: rgb(0, 54, 111);
+            }
+
+            a:hover{
+                color: green;
+            }
+        }
+
+    }
+}

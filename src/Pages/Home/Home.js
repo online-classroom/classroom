@@ -4,6 +4,7 @@ import axios from 'axios'
 import RegisterButton from './../../Components/Buttons/RegisterButton'
 import LoginButton from './../../Components/Buttons/LoginButton'
 import Background from '../../assets/Background.jpg'
+import SubjectNav from '../../Containers/SubjectNav/SubjectNav'
 
 const Home =()=>{
 
@@ -18,28 +19,34 @@ const Home =()=>{
             })
             axios.get(`/info/courses`)
             .then(res => {
-                console.log(res.data)
                 renderCourse(res.data)
             })
         }
     })
 
+    const displayLecturesBySubjectId=(id)=>{
+        const mappedCourses=course.map((course,i)=>{
+            if(id===course.subject_id){
+                return(
+                    <p key={i} className='courses'>
+                        {course.title}
+                    </p>
+                )
+            }
+        })
+        return mappedCourses
+    }
+
     const mappedSubjects = subject.map((val, i) => {
         return <div className='subjects' key={i}>
-                <div>
+                <div className='subject-container'>
                     {val.subject_name}
                 </div>
-                <div>
-                    {mappedCourses}
+                <div className='course-container'>
+                    {displayLecturesBySubjectId(val.subject_id)}
                 </div>
             </div>
     })
-
-    const mappedCourses = course.map((val, i) => {
-        return <div className='courses' key={i}>{val.title}</div>
-    })
-
-    console.log(mappedCourses)
 
     return(
         <div className='home-container'>
@@ -57,9 +64,11 @@ const Home =()=>{
                     </div>
                 </div>
             </div>
-            <div className='courses-container'>
+            <div className=''>
+                <SubjectNav />
+            </div>
+            <div className='courses-container' id='sub'>
                 {mappedSubjects}
-                {/* {mappedCourses} */}
             </div>
         </div>
     )

@@ -36,6 +36,8 @@ module.exports={
 
         const courses = await db.info.getAllCourses()
 
+        
+
         res.send(courses)
     },
 
