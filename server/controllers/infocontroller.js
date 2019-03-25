@@ -43,7 +43,7 @@ module.exports={
         const db = req.app.get('db')
         const {user_id,is_teacher} = req.query
 
-        if(is_teacher){
+        if(is_teacher === 'true'){
             const courses = await db.info.getTeacherCourses([user_id])
             res.send(courses)
         }
@@ -78,12 +78,14 @@ module.exports={
     },
 
     getLectureTimes: async (req, res)=>{
-        console.log('hit getLectureTimes')
+        // console.log('hit getLectureTimes')
+        let {user_id} = req.params;
+        // console.log(user_id);
         const db = req.app.get('db')
 
-        let lectureTimes = await db.info.getLectureTimes()
+        let lectureTimes = await db.info.getLectureTimes([user_id])
 
-        console.log(lectureTimes)
+        // console.log(lectureTimes)
 
         res.send(lectureTimes).status(200)
         
