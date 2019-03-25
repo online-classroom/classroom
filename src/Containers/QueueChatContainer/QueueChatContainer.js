@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Chat from '../../Components/QueueChat/Chat';
 import Queue from '../../Components/QueueChat/Queue';
+import SecondaryButton from './../../Components/Buttons/SecondaryButton';
 
 class QueueChatContainer extends Component {
     constructor(){
@@ -23,13 +24,13 @@ class QueueChatContainer extends Component {
         return (
             <div>
                 <div>
-                    <button onClick={this.handleClickChat}>Chat</button>
-                    <button onClick={this.handleClickQueue}>Queue</button>
+                    <SecondaryButton onClick={this.handleClickChat} isActive={this.state.showChat}>Chat</SecondaryButton>
+                    <SecondaryButton onClick={this.handleClickQueue} isActive={!this.state.showChat}>Queue</SecondaryButton>
                 </div>
                 {this.state.showChat ? (
                     <Chat/>
                 ):(
-                    <Queue/>
+                    <Queue course_id={this.props.course_id}/>
                 )}
             </div>
         )
