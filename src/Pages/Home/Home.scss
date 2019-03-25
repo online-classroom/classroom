@@ -97,11 +97,35 @@
         background-color: rgb(235, 235, 235);
 
         .subjects{
+            display: flex;
             height: 200px;
             width: 45%;
             margin: 25px 5px;
             padding: 10px;
             background-color: white;
+            font-size: 22px;
+            color: rgb(0, 54, 111);
+            box-shadow: 5px 7px 24px rgb(201, 201, 201);
+
+            .subject-container{
+                // border: 1px solid black;
+                display: flex;
+                flex-wrap: wrap;
+                width: 125px;
+                padding: 10px;
+                border-right: 1px solid rgb(237, 237, 237);
+            }
+
+            .course-container{
+                // border: 1px solid black;
+                width: calc(100% - 150px);
+            }
+
+            .courses{
+                // border: 1px solid red;
+                margin: 10px 30px;
+                font-size: 16px;
+            }
         }
     }
 }
