@@ -1,36 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./Queue.scss";
-import io from 'socket.io-client';
-import {connect} from 'react-redux'
-
-const socket = io()
 
 const Queue = props => {
   
   const [question,handleQuestion] = useState('')
-  const [handRaised,handleHandleRaised] = useState(false)
-  const [queue,setQueue] = useState([])
   
-  const {user_id,course_id} = props
-  
-  useEffect(()=>{
-
-    socket.emit('join classroom',course_id)
-
-    socket.on('classroom joined',(queue)=>{
-      setQueue(queue)
-    })
-
-    socket.on('queue joined',(queue)=>{
-      setQueue(queue)
-    })
-
-  },[])
+  const {user_id,course_id,socket,queue} = props
 
   const joinQueue = (e) =>{
     if(e.which===13){
-      console.log('join queue')
       socket.emit('join queue',{user_id,course_id,question})
+      handleQuestion('')
     }
   }
 
@@ -42,6 +22,7 @@ const Queue = props => {
 
   return (
   <div>
+    {console.log(queue)}
     {queueMapper}
     <input onChange={(e)=>handleQuestion(e.target.value)} value={question} onKeyDown={(e)=>joinQueue(e)}/>
   </div>
@@ -55,4 +36,4 @@ const m2p = (state) => {
   }
 }
 
-export default connect(m2p)(Queue);
+export default Queue;

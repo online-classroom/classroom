@@ -6,17 +6,18 @@ module.exports = {
       
       socket.join(classroom)
 
-      let queue = await db.info.getQueueByCourseId([classroom])
+      const queue = await db.info.getQueueByCourseId([classroom])
+      
+      const messages = await db.info.getMessagesByCourseId([classroom])
 
-      io.to(classroom).emit('classroom joined',queue)
+      io.to(classroom).emit('classroom joined',{queue,messages})
     })
 
     socket.on('join queue',async(data)=>{
-      console.log(data)
       const {user_id,course_id,question} = data
 
       let queue = await db.info.enterQueue([user_id,course_id,question])
-
+      
       io.to(course_id).emit('queue joined',queue)
 
     })

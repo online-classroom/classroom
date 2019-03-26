@@ -1,40 +1,60 @@
-import React, {Component} from 'react';
+import React , {useState,useEffect} from 'react'
 import Chat from '../../Components/QueueChat/Chat';
 import Queue from '../../Components/QueueChat/Queue';
 import SecondaryButton from './../../Components/Buttons/SecondaryButton';
+import io from 'socket.io-client';
+import {connect} from 'react-redux'
 
-class QueueChatContainer extends Component {
-    constructor(){
-        super()
-        this.state = {
-            showChat: true
-        }
-    }
-    handleClickChat = ()=>{
-        this.setState({
-            showChat: true
+const socket = io()
+
+const QueueChatContainer = (props) => {
+    const [showChat, setShowChat] = useState(true)
+    const [queue,setQueue] = useState([])
+    const [messages,setMessages] = useState([])
+
+    const {user_id,course_id} = props
+
+    useEffect(()=>{
+        socket.emit('join classroom',course_id)
+        
+        socket.on('classroom joined',(data)=>{
+            setQueue(data.queue)
+            setMessages(data.messages)
         })
-    }
-    handleClickQueue = ()=>{
-        this.setState({
-            showChat: false
+      
+        socket.on('queue joined',(queue)=>{
+            setQueue(queue)
         })
-    }
-    render(){
-        return (
+
+        socket.on('messages updated',(messages)=>{
+            setMessages(messages)
+        })
+    },[])
+
+    return (
+        <div>
             <div>
-                <div>
-                    <SecondaryButton onClick={this.handleClickChat} isActive={this.state.showChat}>Chat</SecondaryButton>
-                    <SecondaryButton onClick={this.handleClickQueue} isActive={!this.state.showChat}>Queue</SecondaryButton>
-                </div>
-                {this.state.showChat ? (
-                    <Chat/>
-                ):(
-                    <Queue course_id={this.props.course_id}/>
-                )}
+                {console.log(queue)}
+                <SecondaryButton onClick={()=>setShowChat(true)} isActive={showChat}>Chat</SecondaryButton>
+                <SecondaryButton onClick={()=>setShowChat(false)} isActive={!showChat}>Queue</SecondaryButton>
             </div>
-        )
+            {showChat ? (
+                <Chat user_id={user_id} course_id={course_id} socket={socket} queue={queue} messages={messages}/>
+            ):(
+                <Queue user_id={user_id} course_id={course_id} socket={socket} queue={queue} messages={messages}/>
+            )}
+        </div>
+    )
+
+
+}
+
+const m2p = (state) => {
+    const {user_id} = state
+    return{
+        user_id
     }
 }
 
-export default QueueChatContainer
+export default connect(m2p,null)(QueueChatContainer)
+
