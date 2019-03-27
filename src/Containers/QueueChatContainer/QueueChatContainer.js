@@ -1,40 +1,42 @@
-import React, {Component} from 'react';
+import React , {useState,useEffect} from 'react'
 import Chat from '../../Components/QueueChat/Chat';
 import Queue from '../../Components/QueueChat/Queue';
 import SecondaryButton from './../../Components/Buttons/SecondaryButton';
+import {connect} from 'react-redux';
 
-class QueueChatContainer extends Component {
-    constructor(){
-        super()
-        this.state = {
-            showChat: true
-        }
-    }
-    handleClickChat = ()=>{
-        this.setState({
-            showChat: true
-        })
-    }
-    handleClickQueue = ()=>{
-        this.setState({
-            showChat: false
-        })
-    }
-    render(){
-        return (
+
+
+
+const QueueChatContainer = (props) => {
+    const [showChat, setShowChat] = useState(true)
+    
+
+    const {user_id,course_id,is_teacher,socket,queue, messages} = props
+    
+    return (
+        <div>
             <div>
-                <div>
-                    <SecondaryButton onClick={this.handleClickChat} isActive={this.state.showChat}>Chat</SecondaryButton>
-                    <SecondaryButton onClick={this.handleClickQueue} isActive={!this.state.showChat}>Queue</SecondaryButton>
-                </div>
-                {this.state.showChat ? (
-                    <Chat/>
-                ):(
-                    <Queue course_id={this.props.course_id}/>
-                )}
+                <SecondaryButton onClick={()=>setShowChat(true)} isActive={showChat}>Chat</SecondaryButton>
+                <SecondaryButton onClick={()=>setShowChat(false)} isActive={!showChat}>Queue</SecondaryButton>
             </div>
-        )
+            {showChat ? (
+                <Chat user_id={user_id} course_id={course_id} socket={socket} queue={queue} messages={messages} is_teacher={is_teacher} />
+            ):(
+                <Queue user_id={user_id} course_id={course_id} socket={socket} queue={queue} messages={messages} is_teacher={is_teacher} />
+            )}
+        </div>
+    )
+
+
+}
+
+const m2p = (state) => {
+    const {user_id,is_teacher} = state
+    return{
+        user_id,
+        is_teacher
     }
 }
 
-export default QueueChatContainer
+export default connect(m2p,null)(QueueChatContainer)
+
