@@ -58,48 +58,63 @@ class ProfileInfo extends Component {
           </div>
         ) : (
           <div className='infoContainer'>
-            {/* {console.log('edit info state', this.state)} */}
-            <span>First Name:</span>
-            <p>
-              <input
-                placeholder={first_name}
-                type='text'
-                name='first_name'
-                value={this.state.first_name}
-                onChange={this.handleChange}
+            <div className='infoRow'>
+              <img
+                className='profileImg'
+                alt='stuff'
+                // src={'https://via.placeholder.com/150'}
+                src={'https://img.labnol.org/di/bo.jpg'}
               />
-            </p>
-            <span>Last Name</span>
-            <p>
-              <input
-                placeholder={last_name}
-                type='text'
-                name='last_name'
-                value={this.state.last_name}
-                onChange={this.handleChange}
-              />
-            </p>
-            <span>username:</span>
-            <p>
-              <input
-                placeholder={username}
-                type='text'
-                name='username'
-                value={this.state.username}
-                onChange={this.handleChange}
-              />
-            </p>
-            <span>email:</span>
-            <p>
-              <input
-                placeholder={email}
-                type='text'
-                name='email'
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
-            </p>
-            <button onClick={this.submitEdit}>Submit</button>
+              <button className='submitButton' onClick={this.submitEdit}>
+                Submit
+              </button>
+            </div>
+            <div className='infoRow'>
+              <div className='infoCol'>
+                <span>First Name:</span>
+                <p>
+                  <input
+                    placeholder={first_name}
+                    type='text'
+                    name='first_name'
+                    value={this.state.first_name}
+                    onChange={this.handleChange}
+                  />
+                </p>
+                <span>Last Name</span>
+                <p>
+                  <input
+                    placeholder={last_name}
+                    type='text'
+                    name='last_name'
+                    value={this.state.last_name}
+                    onChange={this.handleChange}
+                  />
+                </p>
+              </div>
+              <div className='infoCol'>
+                <span>username:</span>
+                <p>
+                  <input
+                    placeholder={username}
+                    type='text'
+                    name='username'
+                    value={this.state.username}
+                    onChange={this.handleChange}
+                  />
+                </p>
+                <span>email:</span>
+                <p>
+                  <input
+                    placeholder={email}
+                    type='text'
+                    name='email'
+                    value={this.state.email}
+                    onChange={this.handleChange}
+                  />
+                </p>
+              </div>
+            </div>
           </div>
         )}
       </div>
