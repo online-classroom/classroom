@@ -14,12 +14,21 @@ module.exports = {
     })
 
     socket.on('join queue',async(data)=>{
+      
       const {user_id,course_id,question} = data
-
-      let queue = await db.info.enterQueue([user_id,course_id,question])
+      
+      let queue = await db.info.enterQueue([user_id,course_id,question,false])
       
       io.to(course_id).emit('queue joined',queue)
 
+    })
+
+    socket.on('toggle video',async(data)=>{
+      const {user_id,course_id,display} = data
+
+      let queue = await db.info.updateQueue([user_id,course_id,display])
+      console.log(queue)
+      io.to(course_id).emit('video toggled', queue)
     })
 
     socket.on('m2b',async(data)=>{
@@ -29,6 +38,16 @@ module.exports = {
       let messages = await db.info.addMessage([user_id,course_id,message])
 
       io.to(course_id).emit('messages updated',messages)
+
+    })
+
+    socket.on('leave queue',async(data)=>{
+
+      const {user_id,course_id} = data
+
+      let queue = await db.info.leaveQueue([user_id,course_id])
+
+      io.to(course_id).emit('queue left', queue)
 
     })
 

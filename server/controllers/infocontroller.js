@@ -64,7 +64,6 @@ module.exports={
     },
 
     generateToken:async(req,res)=>{
-        console.log('hit')
         const db = req.app.get('db')
         let {course_id} = req.params
         course_id = parseInt(course_id)
