@@ -1,7 +1,6 @@
 const OpenTok = require('opentok');
 const { OPENTOK_API_KEY, OPENTOK_API_SECRET } = process.env;
 const opentok = new OpenTok(OPENTOK_API_KEY, OPENTOK_API_SECRET);
-
 module.exports = {
   createNewCourse: async (req, res) => {
     const {
@@ -19,9 +18,7 @@ module.exports = {
       session
     ) {
       if (err) return console.log(err);
-
       const session_id = session.sessionId;
-
       const createNewCourse = await db.info.create.course([
         title,
         subject_id,
@@ -32,7 +29,6 @@ module.exports = {
         session_id
       ]);
       const course_id = createNewCourse[0].course_id;
-
       for (let i = 0; i < lectures.length; i++) {
         const lecture = lectures[i];
         const {
@@ -41,7 +37,6 @@ module.exports = {
           lecture_start_time,
           lecture_end_time
         } = lecture;
-
         const addLectures = await db.info.create.lecture([
           course_id,
           date,
@@ -50,23 +45,17 @@ module.exports = {
           lecture_end_time
         ]);
       }
-
       res.sendStatus(201);
     });
   },
-
   getAllCourses: async (req, res) => {
     const db = req.app.get('db');
-
     const courses = await db.info.getAllCourses();
-
     res.send(courses);
   },
-
   getCoursesForUser: async (req, res) => {
     const db = req.app.get('db');
     const { user_id, is_teacher } = req.query;
-
     if (is_teacher === 'true') {
       const courses = await db.info.getTeacherCourses([user_id]);
       res.send(courses);
@@ -75,43 +64,30 @@ module.exports = {
       res.send(courses);
     }
   },
-
   getAllSubjects: async (req, res) => {
     const db = req.app.get('db');
-
     const subjects = await db.info.getAllSubjects();
     res.send(subjects);
   },
-
   generateToken: async (req, res) => {
     const db = req.app.get('db');
     let { course_id } = req.params;
     course_id = parseInt(course_id);
-
     let session_id = await db.info.getSessionId([course_id]);
-
     session_id = session_id[0].session_id;
-
     const token = opentok.generateToken(session_id);
-
     res.send({ token, session_id });
   },
-
   getLectureTimesTeacher: async (req, res) => {
     let { user_id } = req.params;
     const db = req.app.get('db');
-
     let lectureTimes = await db.info.getLectureTimesTeacher([user_id]);
-
     res.send(lectureTimes).status(200);
   },
-
   getLectureTimesStudent: async (req, res) => {
     let { user_id } = req.params;
     const db = req.app.get('db');
-
     let lectureTimes = await db.info.getLectureTimesStudent([user_id]);
-
     res.send(lectureTimes).status(200);
   },
   editProfileInfo: async (req, res) => {
@@ -131,5 +107,26 @@ module.exports = {
     } catch (error) {
       console.log(error);
     }
-  }
+  },
+    getLectureTimesStudent: async (req, res)=>{
+        // console.log('hit getLectureTimes')
+        let {user_id} = req.params;
+        // console.log(user_id);
+        const db = req.app.get('db')
+
+        let lectureTimes = await db.info.getLectureTimesStudent([user_id])
+
+        // console.log(lectureTimes)
+
+        res.send(lectureTimes).status(200)
+        
+    },
+
+    addStudentToCourse: (req, res)=>{
+        let {user_id, course_id} = req.params;
+        const db = req.app.get('db');
+        console.log(user_id, course_id);
+        db.info.addStudentToCourse([user_id, course_id]);
+        res.sendStatus(200);
+    }
 };
