@@ -107,6 +107,14 @@ module.exports={
 
         res.send(lectureTimes).status(200)
         
+    },
+
+    addStudentToCourse: (req, res)=>{
+        let {user_id, course_id} = req.params;
+        const db = req.app.get('db');
+        console.log(user_id, course_id);
+        db.info.addStudentToCourse([user_id, course_id]);
+        res.sendStatus(200);
     }
 
 }

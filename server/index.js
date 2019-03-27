@@ -60,3 +60,5 @@ app.post(`/info/generatetoken/:course_id`,ic.generateToken)
 app.get(`/info/teacherlectures/:user_id`, ic.getLectureTimesTeacher)
 
 app.get(`/info/studentlectures/:user_id`, ic.getLectureTimesStudent)
+
+app.post(`/info/students/course/:user_id/:course_id`, ic.addStudentToCourse)
