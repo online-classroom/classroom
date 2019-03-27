@@ -1,11 +1,13 @@
 insert into queue(
     user_id,
     course_id,
-    question
+    question,
+    display
 )values(
     $1,
     $2,
-    $3
+    $3,
+    $4
 );
 
 select * 
