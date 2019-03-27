@@ -1,0 +1,22 @@
+.browse_class_container {
+    height: calc(100vh - 80px);
+    display: grid;
+    grid-template-columns: 12px 360px 12px 1fr 12px;
+    grid-template-rows: 12px 1fr 12px;
+}
+
+.side_bar {
+    background-color: aqua;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.class_list {
+    background-color: tomato;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 4;
+    grid-column-end: 5;
+}

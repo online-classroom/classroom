@@ -67,7 +67,7 @@ module.exports = {
     const db = req.app.get('db');
     const { user_id, is_teacher } = req.query;
 
-    if (is_teacher) {
+    if (is_teacher === 'true') {
       const courses = await db.info.getTeacherCourses([user_id]);
       res.send(courses);
     } else {
@@ -84,7 +84,6 @@ module.exports = {
   },
 
   generateToken: async (req, res) => {
-    console.log('hit');
     const db = req.app.get('db');
     let { course_id } = req.params;
     course_id = parseInt(course_id);
@@ -98,13 +97,20 @@ module.exports = {
     res.send({ token, session_id });
   },
 
-  getLectureTimes: async (req, res) => {
-    console.log('hit getLectureTimes');
+  getLectureTimesTeacher: async (req, res) => {
+    let { user_id } = req.params;
     const db = req.app.get('db');
 
-    let lectureTimes = await db.info.getLectureTimes();
+    let lectureTimes = await db.info.getLectureTimesTeacher([user_id]);
 
-    console.log(lectureTimes);
+    res.send(lectureTimes).status(200);
+  },
+
+  getLectureTimesStudent: async (req, res) => {
+    let { user_id } = req.params;
+    const db = req.app.get('db');
+
+    let lectureTimes = await db.info.getLectureTimesStudent([user_id]);
 
     res.send(lectureTimes).status(200);
   },

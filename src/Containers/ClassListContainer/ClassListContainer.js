@@ -16,10 +16,10 @@ class ClassListContainer extends Component {
   componentDidMount = async () => {
     const cRes = await Axios.get(`/info/course/?user_id=${this.props.user_id}&is_teacher=${this.props.is_teacher}`);
 
-    console.log(cRes);
-
+    
     this.setState({ courses: cRes.data });
-
+    
+    console.log('the courses on state', this.state.courses);
   };
 
   handleCourseSelection = (course) => {
@@ -29,6 +29,7 @@ class ClassListContainer extends Component {
   }
 
   render() {
+    console.log(this.state.courses)
     const { courses,selectedCourse } = this.state;
     const {handleCourseSelection} = this
     const {is_teacher} = this.props
