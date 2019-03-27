@@ -63,7 +63,6 @@ app.post(`/info/create/course`, ic.createNewCourse);
 app.post(`/info/generatetoken/:course_id`, ic.generateToken);
 app.put(`/info/update/profile`, ic.editProfileInfo);
 
-app.get(`/info/lectures`, ic.getLectureTimes);
 app.get(`/info/teacherlectures/:user_id`, ic.getLectureTimesTeacher);
 
 app.get(`/info/studentlectures/:user_id`, ic.getLectureTimesStudent);
