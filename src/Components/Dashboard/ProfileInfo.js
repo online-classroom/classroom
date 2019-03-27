@@ -1,20 +1,111 @@
-import React from "react";
-import "./InfoContainerStyling.scss";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import './InfoContainerStyling.scss';
+import { connect } from 'react-redux';
+import axios from 'axios';
 
-const ProfileInfo = props => {
-  const { user_id, username, email, password, first_name, last_name } = props;
-  return (
-    <div className="infoContainer">
-      <span>name:</span>
-      <p>{first_name} {last_name}</p>
-      <span>username:</span>
-      <p>{username}</p>
-      <span>email:</span>
-      <p>{email}</p>
-    </div>
-  );
-};
+class ProfileInfo extends Component {
+  state = {
+    user_id: this.props.user_id,
+    username: this.props.username,
+    email: this.props.email,
+    first_name: this.props.first_name,
+    last_name: this.props.last_name
+  };
+  handleChange = e => {
+    let { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
+  submitEdit = () => {
+    const { user_id, username, email, first_name, last_name } = this.state;
+    axios
+      .put(`/info/update/profile`, {
+        user_id,
+        username,
+        email,
+        first_name,
+        last_name
+      })
+      .then(res => {
+        console.log(res);
+      });
+  };
+
+  render() {
+    console.log('cool state', this.state);
+    console.log('password', this.props.password);
+    const {
+      user_id,
+      username,
+      email,
+      // password,
+      first_name,
+      last_name,
+      editActive
+    } = this.props;
+    return (
+      <div>
+        {!editActive ? (
+          <div className='infoContainer'>
+            <span>name:</span>
+            <p>
+              {first_name} {last_name}
+            </p>
+            <span>username:</span>
+            <p>{username}</p>
+            <span>email:</span>
+            <p>{email}</p>
+          </div>
+        ) : (
+          <div className='infoContainer'>
+            {/* {console.log('edit info state', this.state)} */}
+            <span>First Name:</span>
+            <p>
+              <input
+                placeholder={first_name}
+                type='text'
+                name='first_name'
+                value={this.state.first_name}
+                onChange={this.handleChange}
+              />
+            </p>
+            <span>Last Name</span>
+            <p>
+              <input
+                placeholder={last_name}
+                type='text'
+                name='last_name'
+                value={this.state.last_name}
+                onChange={this.handleChange}
+              />
+            </p>
+            <span>username:</span>
+            <p>
+              <input
+                placeholder={username}
+                type='text'
+                name='username'
+                value={this.state.username}
+                onChange={this.handleChange}
+              />
+            </p>
+            <span>email:</span>
+            <p>
+              <input
+                placeholder={email}
+                type='text'
+                name='email'
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+            </p>
+            <button onClick={this.submitEdit}>Submit</button>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
 
 const m2p = state => {
   const { user_id, username, email, password, first_name, last_name } = state;
