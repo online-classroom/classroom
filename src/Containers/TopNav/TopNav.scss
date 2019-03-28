@@ -39,9 +39,18 @@
         width: 33vw;
         letter-spacing: 2px;
         font-size: 20px;
+        text-decoration: none;
 
         img{
             height: 60%;
+        }
+
+        .logo-title{
+            letter-spacing: 3px;
+        }
+        a, a:visited{
+            text-decoration: none;
+            color: white;
         }
     }
 
@@ -75,7 +84,7 @@
     color: #026EE2;
     transition: background-color 0.1s linear;
 
-    .logo{
+    .logo-title{
         color:  rgb(0, 54, 111);
     }
     

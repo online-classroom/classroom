@@ -52,7 +52,7 @@ const TopNav = props => {
       </div>
       <span className="logo">
         <img src={logo} alt="Logo" />
-        &ensp;<p style={{letterSpacing: '3px'}}>CLASSCAST</p>
+        &ensp;<NavLink to='/'><p className='logo-title'>CLASSCAST</p></NavLink>
       </span>
       <div className="links-container">
         {username ? (
