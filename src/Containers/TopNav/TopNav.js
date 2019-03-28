@@ -52,7 +52,7 @@ const TopNav = props => {
       </div>
       <span className="logo">
         <img src={logo} alt="Logo" />
-        &ensp;VLASSROOM
+        &ensp;<p style={{letterSpacing: '3px'}}>CLASSCAST</p>
       </span>
       <div className="links-container">
         {username ? (
