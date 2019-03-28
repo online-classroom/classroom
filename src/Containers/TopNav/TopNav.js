@@ -22,7 +22,7 @@ const TopNav = props => {
         const user = uRes.data;
         props.updateUser(user);
       } catch (err) {
-        props.history.push("/");
+        props.history.push('/')
       }
     }
   };
