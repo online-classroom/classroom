@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, Fragment} from "react";
 import axios from 'axios';
 import "./BrowseClasses.scss";
 import {connect} from 'react-redux';
@@ -7,6 +7,7 @@ const BrowseClasses = (props)=>{
 
     const [subject, renderSubject] = useState([])
     const [course, renderCourse] = useState([])
+    const [selectedCourse, changeCourse] = useState(undefined)
 
     useEffect(() => {
         if(subject.length===0){
@@ -23,12 +24,12 @@ const BrowseClasses = (props)=>{
         console.log('course', course)
     })
 
-    const [selectedCourse, courseSelector] = useState('Math')
+    const [selectedSubject, subjectSelector] = useState('Math')
 
     const hangleCategoriesChange = (category)=>{
         return ()=>{
-            courseSelector(category)
-            console.log(selectedCourse)
+            subjectSelector(category)
+            console.log(selectedSubject)
         }
     }
 
@@ -37,12 +38,18 @@ const BrowseClasses = (props)=>{
         axios.post(`/info/students/course/${props.user_id}/${courseId}`)
     }
 
+    const handleClickOnDetails = (num)=>{
+        return ()=>changeCourse(num)
+    }
+
+    let classYouAreIn = [4, 9, 10, 11, 7, 8, 5, 6]
+
     const selectedCategoryCourses = ()=>{
-        let categoryCourses = course.filter((ele)=>ele.subject_name === selectedCourse)
+        let categoryCourses = course.filter((ele)=>ele.subject_name === selectedSubject)
         console.log(categoryCourses)
         let courseTitles = categoryCourses.map((ele)=>{
             return (
-                <div className='courses_in_browse'>
+                <div className='courses_in_browse' key={ele.course_id}>
                     <div>
                         {ele.title}
                     </div>
@@ -52,12 +59,37 @@ const BrowseClasses = (props)=>{
                     <div 
                         dangerouslySetInnerHTML={{ __html: ele.description }}
                     />
-                    <button>Details</button>
-                    <button onClick={()=>addCourseToDatabase(ele.course_id)}>Add Class</button>
+                    <button onClick={handleClickOnDetails(ele.course_id)}>Details</button><br/>
+                    {
+                        props.user_id ? (
+                            <>
+                            {
+                                classYouAreIn.includes(ele.course_id) ? (
+                                    <div>You are already in this class</div>
+                                ):(
+                                    <button onClick={()=>addCourseToDatabase(ele.course_id)}>Add Class</button>
+                                )
+                            }
+                            </>
+                        ):(
+                            <div>Login to Join Course</div>
+                        )
+                    }
                 </div>
             )
         })
         return courseTitles
+    }
+
+    const viewedCourse = ()=>{
+        return (
+            <div>
+                <div>
+                    you have selected a course {selectedCourse}
+                </div>
+                <button onClick={handleClickOnDetails(undefined)}>Back</button>
+            </div>
+        )
     }
 
     return (
@@ -73,12 +105,21 @@ const BrowseClasses = (props)=>{
                 <button onClick={hangleCategoriesChange('Economics')}>Economics</button>
                 <button onClick={hangleCategoriesChange('Other')}>Other</button>
             </div>
-            <div className='class_list'>
-                {selectedCategoryCourses()}
-            </div>
+            {
+                selectedCourse ? (
+                    <div className='class_list'>
+                        {viewedCourse()}
+                    </div>
+                ):(
+                    <div className='class_list'>
+                        {selectedCategoryCourses()}
+                    </div>
+                )
+            }
         </div>
     )
-};
+}
+
 const m2p = state => {
     const { user_id } = state;
 
