@@ -60,29 +60,20 @@ class ProfileInfoContainer extends Component {
           >
             Course Info
           </SecondaryButton>
+          <SecondaryButton
+            // style={{ float: 'right' }}
+            className='editButton'
+            onClick={this.setToggleEditProfileInfo}
+            isActive={toggleEditProfile}
+          >
+            Edit Profile:
+          </SecondaryButton>
         </div>
         {!toggleCourseInfo ? (
           <ProfileInfo editActive={this.state.toggleEditProfile} />
         ) : (
           <CourseInfo />
         )}
-        {/* //Edit Profile Button */}
-        <SecondaryButton
-          onClick={this.setToggleEditProfileInfo}
-          isActive={toggleEditProfile}
-        >
-          Edit:
-          <img
-            style={{
-              height: '20px',
-              border: '1px solid black',
-              borderRadius: '20%',
-              padding: '5%'
-            }}
-            alt='edit profile'
-            src={`https://icongr.am/entypo/edit.svg`}
-          />
-        </SecondaryButton>
       </div>
     );
   }
