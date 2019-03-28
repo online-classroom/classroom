@@ -10,7 +10,7 @@ import BrowseClasses from '../Pages/BrowseClasses/BrowseClasses';
 
 export default (
   <Switch>
-      <Route path='/browseclasses' component={BrowseClasses}/>
+      <Route exact path='/browseclasses' component={BrowseClasses}/>
       <Route path='/dashboard' component={Dashboard}/>
       <Route path='/classroom/:course_id' component={Classroom}/>
       <Route path='/login' component={LoginModal}/>
