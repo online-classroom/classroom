@@ -15,6 +15,11 @@
     .searchbar-container{
         padding: 0px 30px;
         width: 33vw;
+
+        .searchbar::placeholder{
+            color: white;
+            font-size: 18px;
+        }
         
         .searchbar, .searchbar:focus, .searchbar:active {
             height: 40px;
@@ -98,6 +103,10 @@
 
     .searchbar, .searchbar:focus, .searchbar:active{
         background-color: rgba(128, 128, 128, 0.25);
+    }
+
+    .searchbar::placeholder{
+        color: grey;
     }
 }
 
