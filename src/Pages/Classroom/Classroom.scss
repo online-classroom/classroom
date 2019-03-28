@@ -1,53 +1,58 @@
 .classroom_main {
-    height: calc(100vh - 80px);
+    height: 100vh;
     width: 100vw;
     display: flex;
+    margin: 25px;
     flex-direction: column;
     box-sizing: border-box;
-}
 
     .video_qchat_container {
         border: 1px solid black;
+        padding: 20px;
         width: 100%;
         height: 70%;
         display: flex;
         flex-direction: row;
         box-sizing: border-box;
-    }
 
         .video_container {
-            border: 1px solid black;
+            border: 1px solid blue;
             width: 60%;
             height: 100%;
             box-sizing: border-box;
         }
-        
+
         .qchat_container {
-            border: 1px solid black;
+            border: 1px solid red;
             width: 40%;
             height: 100%;
             box-sizing: border-box;
         }
+    }
 
     .bonus_description_container {
         border: 1px solid black;
+        padding: 20px;
         width: 100%;
         height: 30%;
         display: flex;
         flex-direction: row;
         box-sizing: border-box;
-    }
-
-        .description_container {
-            border: 1px solid black;
-            width: 50%;
-            height: 100%;
-            box-sizing: border-box;
-        }
 
         .bonus_container {
-            border: 1px solid black;
+            border: 1px solid red;
+            // margin: 20px;
             width: 50%;
             height: 100%;
             box-sizing: border-box;
         }
+        
+        .description_container {
+            border: 1px solid blue;
+            // margin: 20px;
+            width: 50%;
+            height: 100%;
+            box-sizing: border-box;
+        }
+    }
+}

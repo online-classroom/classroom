@@ -28,7 +28,7 @@ const TeacherStream = props => {
 
   return (
     <div className='teacherStream'>
-      <OTPublisher properties={{width:'50vw', height:'50vh'}} session={sessionHelper.session} />
+      <OTPublisher properties={{width:'60vw', height:'63.25vh'}} session={sessionHelper.session} />
       {streams.map(stream => {
         return (
           <OTSubscriber
