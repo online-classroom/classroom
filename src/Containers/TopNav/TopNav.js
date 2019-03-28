@@ -12,7 +12,7 @@ const TopNav = props => {
   const {username} = props
 
   useEffect(() => {
-    getUser();
+    // getUser();
   }, []);
 
   const getUser = async () => {
