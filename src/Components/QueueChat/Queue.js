@@ -15,21 +15,23 @@ const Queue = props => {
     }
   };
 
-  const toggleVideo = (user_id, course_id) => {
-    socket.emit("toggle video", { user_id, course_id, display: true });
+  const toggleVideo = (user_id, course_id, display) => {
+    socket.emit("toggle video", { user_id, course_id, display});
   };
 
   const queueMapper = queue.map((queueItem, i) => {
     return (
       <div key={i}>
         <p>{queueItem.question}</p>
-        {is_teacher && (
+        {is_teacher && queueItem.display===false 
+        ? (
           <SecondaryButton
-            onClick={() => toggleVideo(queueItem.user_id, queueItem.course_id)}
+            onClick={() => toggleVideo(queueItem.user_id, queueItem.course_id,true)}
           >
-            Toggle Video
+            See Stream
           </SecondaryButton>
-        )}
+        )
+        :is_teacher && (<SecondaryButton onClick={()=>toggleVideo(queueItem.user_id, queueItem.course_id,false)}>Hide Stream</SecondaryButton>)}
       </div>
     );
   });
