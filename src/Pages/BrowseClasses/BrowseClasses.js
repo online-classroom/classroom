@@ -14,7 +14,7 @@ const BrowseClasses = (props)=>{
             .then(res => {
                 renderSubject(res.data)
             })
-            axios.get(`/info/courses`)
+            axios.get(`/info/courses/teacher`)
             .then(res => {
                 renderCourse(res.data)
             })
@@ -47,8 +47,11 @@ const BrowseClasses = (props)=>{
                         {ele.title}
                     </div>
                     <div>
-                        {ele.description}
+                        Taught by {ele.first_name} {ele.last_name}
                     </div>
+                    <div 
+                        dangerouslySetInnerHTML={{ __html: ele.description }}
+                    />                       
                     <button onClick={()=>addCourseToDatabase(ele.course_id)}>Add Class</button>
                 </div>
             )
@@ -65,7 +68,7 @@ const BrowseClasses = (props)=>{
                 <button onClick={hangleCategoriesChange('Math')}>Math</button>
                 <button onClick={hangleCategoriesChange('Science')}>Science</button>
                 <button onClick={hangleCategoriesChange('Computing')}>Computing</button>
-                <button onClick={hangleCategoriesChange('Arts and Humanities')}>Arts and Humanities</button>
+                <button onClick={hangleCategoriesChange('Arts & Humanities')}>Arts and Humanities</button>
                 <button onClick={hangleCategoriesChange('Economics')}>Economics</button>
                 <button onClick={hangleCategoriesChange('Other')}>Other</button>
             </div>
