@@ -51,7 +51,8 @@ const BrowseClasses = (props)=>{
                     </div>
                     <div 
                         dangerouslySetInnerHTML={{ __html: ele.description }}
-                    />                       
+                    />
+                    <button>Details</button>
                     <button onClick={()=>addCourseToDatabase(ele.course_id)}>Add Class</button>
                 </div>
             )
