@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { OTPublisher, OTSubscriber, createSession } from "opentok-react";
 
+import './TeacherStream.scss'
+
 const TeacherStream = props => {
   const [streams, setStreams] = useState([]);
   const { session_id, token} = props;
@@ -25,7 +27,7 @@ const TeacherStream = props => {
   
 
   return (
-    <div>
+    <div className='teacherStream'>
       <OTPublisher session={sessionHelper.session} />
       {streams.map(stream => {
         return (

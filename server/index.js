@@ -8,6 +8,7 @@ const express = require('express');
 const massive = require('massive');
 const socket = require('socket.io');
 const session = require('express-session');
+const path = require('path');
 
 // // // // CONTROLLERS/LISTENERS // // // //
 const ssl = require('./setSocketListeners');
@@ -16,6 +17,7 @@ const ic = require('./controllers/infocontroller');
 
 const app = express();
 // // // // MIDDLEWARES // // // //
+app.use( express.static( `${__dirname}/../build` ) )
 
 app.use(express.json());
 
@@ -69,3 +71,7 @@ app.get(`/info/teacherlectures/:user_id`, ic.getLectureTimesTeacher);
 app.get(`/info/studentlectures/:user_id`, ic.getLectureTimesStudent)
 
 app.post(`/info/students/course/:user_id/:course_id`, ic.addStudentToCourse)
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+});
