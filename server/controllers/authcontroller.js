@@ -72,8 +72,13 @@ module.exports = {
   },
 
   logout: (req, res) => {
-    req.session.destroy();
-    res.sendStatus(200);
+    try{
+      req.session.destroy();
+      res.sendStatus(200);
+    }
+    catch(err){
+      console.log('hit')
+    }
   },
 
   getUser: (req, res) => {
