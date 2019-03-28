@@ -22,9 +22,7 @@ const TopNav = props => {
         const user = uRes.data;
         props.updateUser(user);
       } catch (err) {
-        if(props.match.path === '/browseclasses'){
-          props.history.push("/");
-        }
+        props.history.push('/')
       }
     }
   };
