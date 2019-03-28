@@ -49,6 +49,8 @@ const Home =()=>{
             </div>
     })
 
+    console.log(mappedSubjects)
+
     return(
         <div className='home-container'>
             <img className='background-home' src={Background} alt='blue-gradient'/>
