@@ -29,8 +29,9 @@ const TopNav = props => {
 
   const logout = async() => {
     try{
-      const uRes = await Axios.get(`/auth/logout`);
+      const uRes = await Axios.post(`/auth/logout`);
       props.clearUser()
+      props.history.push('/')
     }
     catch{
       console.log(`Error with logout`)
