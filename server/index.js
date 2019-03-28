@@ -8,6 +8,7 @@ const express = require('express');
 const massive = require('massive');
 const socket = require('socket.io');
 const session = require('express-session');
+const path = require('path');
 
 // // // // CONTROLLERS/LISTENERS // // // //
 const ssl = require('./setSocketListeners');
