@@ -84,12 +84,14 @@ module.exports = {
     let lectureTimes = await db.info.getLectureTimesTeacher([user_id]);
     res.send(lectureTimes).status(200);
   },
+
   getLectureTimesStudent: async (req, res) => {
     let { user_id } = req.params;
     const db = req.app.get('db');
     let lectureTimes = await db.info.getLectureTimesStudent([user_id]);
     res.send(lectureTimes).status(200);
   },
+
   editProfileInfo: async (req, res) => {
     try {
       const db = req.app.get('db');
@@ -108,6 +110,7 @@ module.exports = {
       console.log(error);
     }
   },
+  
     getLectureTimesStudent: async (req, res)=>{
         // console.log('hit getLectureTimes')
         let {user_id} = req.params;
