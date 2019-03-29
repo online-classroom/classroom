@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <div className='footer-container'>
       <div>
-          Footer
+          <span className='footer-title'>ClassCast&ensp;|&ensp;2019</span>
       </div>
     </div>
   )

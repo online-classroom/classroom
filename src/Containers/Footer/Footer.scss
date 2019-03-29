@@ -6,4 +6,12 @@
     height: 80px;
     background-color: $accent3;
     color: white;
+    text-align: center;
+    padding: 30px;
+    box-sizing: border-box;
+    font-size: 18px;
+
+    .footer-title{
+        font-weight: bold;
+    }
 }
