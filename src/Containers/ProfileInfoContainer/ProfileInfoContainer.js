@@ -5,6 +5,7 @@ import CourseInfo from '../../Components/Dashboard/CourseInfo';
 import ProfileInfo from '../../Components/Dashboard/ProfileInfo';
 import SecondaryButton from './../../Components/Buttons/SecondaryButton';
 import { connect } from 'react-redux';
+import * as functions from './__test__/ProfileLogic.js';
 
 class ProfileInfoContainer extends Component {
   state = {
@@ -29,13 +30,15 @@ class ProfileInfoContainer extends Component {
   }
 
   setToggleCourseInfo = () => {
+    // functions.toggleCourseInfo().toBe(true)
     this.setState({
-      toggleCourseInfo: true
+      toggleCourseInfo: functions.toggleCourseInfo()
     });
   };
   setToggleStudentInfo = () => {
+    // functions.toggleStudentButton().toBe(false)
     this.setState({
-      toggleCourseInfo: false
+      toggleCourseInfo: functions.toggleStudentButton()
     });
   };
   setToggleEditProfileInfo = () => {

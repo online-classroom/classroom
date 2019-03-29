@@ -1,4 +1,5 @@
 const functions = require('./ProfileLogic');
+
 describe('Make sure library works', () => {
   test('Jest works', () => {
     expect(4).toBe(4);

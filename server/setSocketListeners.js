@@ -27,7 +27,7 @@ module.exports = {
       const {user_id,course_id,display} = data
 
       let queue = await db.info.updateQueue([user_id,course_id,display])
-      console.log(queue)
+      
       io.to(course_id).emit('video toggled', queue)
     })
 

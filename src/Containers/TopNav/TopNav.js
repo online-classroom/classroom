@@ -4,14 +4,15 @@ import "./TopNav.scss";
 import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Axios from "axios";
-import { updateUser } from "./../../ducks/reducer";
+import { updateUser, clearUser } from "./../../ducks/reducer";
+
 
 const TopNav = props => {
   const homePage = props.match.isExact;
   const {username} = props
 
   useEffect(() => {
-    getUser();
+    // getUser();
   }, []);
 
   const getUser = async () => {
@@ -21,10 +22,22 @@ const TopNav = props => {
         const user = uRes.data;
         props.updateUser(user);
       } catch (err) {
-        props.history.push("/");
+        props.history.push('/')
       }
     }
   };
+
+  const logout = async() => {
+    try{
+      const uRes = await Axios.post(`/auth/logout`);
+      props.clearUser()
+      props.history.push('/')
+    }
+    catch{
+      console.log(`Error with logout`)
+    }
+  }
+  
 
 
   return (
@@ -45,6 +58,7 @@ const TopNav = props => {
         {username ? (
           <NavLink to="/dashboard">
             <span className="nav-button">{username}</span>
+            <span className="nav-button" onClick={logout}>LOGOUT</span>
           </NavLink>
         ) : (
           <>
@@ -71,6 +85,6 @@ const m2p = state => {
 export default withRouter(
   connect(
     m2p,
-    { updateUser }
+    { updateUser, clearUser }
   )(TopNav)
 );

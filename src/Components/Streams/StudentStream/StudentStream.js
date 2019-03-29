@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { OTPublisher, OTSubscriber, createSession } from "opentok-react";
 import {connect} from 'react-redux'
+import './StudentStream.scss'
 
 const StudentStream = props => {
   const [streams, setStreams] = useState([]);

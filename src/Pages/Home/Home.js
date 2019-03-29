@@ -5,6 +5,7 @@ import RegisterButton from './../../Components/Buttons/RegisterButton'
 import LoginButton from './../../Components/Buttons/LoginButton'
 import Background from '../../assets/Background.jpg'
 import SubjectNav from '../../Containers/SubjectNav/SubjectNav'
+import {NavLink} from 'react-router-dom'
 
 const Home =()=>{
 
@@ -48,6 +49,8 @@ const Home =()=>{
             </div>
     })
 
+    console.log(mappedSubjects)
+
     return(
         <div className='home-container'>
             <img className='background-home' src={Background} alt='blue-gradient'/>
@@ -58,9 +61,9 @@ const Home =()=>{
                             <span className='subtitle-title'>You can learn anything.</span><br/>
                             <span className='subtitle-subtext'>For free. For everyone. Forever.</span>
                         </div>
-                        <LoginButton className='reg-button'>Browse classes</LoginButton>
-                        <RegisterButton className='reg-button'>Register as Student</RegisterButton>
-                        <RegisterButton className='reg-button'>Register as Teacher</RegisterButton>
+                        <NavLink to='/browseclasses'><LoginButton className='reg-button'>Browse classes</LoginButton></NavLink>
+                        <NavLink to='/register'><RegisterButton className='reg-button'>Register as Student</RegisterButton></NavLink>
+                        <NavLink to='/register'><RegisterButton className='reg-button'>Register as Teacher</RegisterButton></NavLink>
                     </div>
                 </div>
             </div>
