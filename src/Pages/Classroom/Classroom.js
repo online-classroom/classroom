@@ -60,7 +60,7 @@ const Classroom = props => {
       <div className="video_qchat_container">
         <div className="video_container">
           {token && session_id && (
-            <VideoContainer socket={socket} token={token} session_id={session_id} queue={queue} />
+            <VideoContainer socket={socket} token={token} session_id={session_id} queue={queue} course_id={course_id} />
           )}
         </div>
         <div className="qchat_container">

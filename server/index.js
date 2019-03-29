@@ -14,6 +14,7 @@ const path = require('path');
 const ssl = require('./setSocketListeners');
 const ac = require('./controllers/authcontroller');
 const ic = require('./controllers/infocontroller');
+const arc = require('./controllers/archivecontroller');
 
 const app = express();
 // // // // MIDDLEWARES // // // //
@@ -68,12 +69,21 @@ app.put(`/info/update/profile`, ic.editProfileInfo);
  
 app.get(`/info/teacherlectures/:user_id`, ic.getLectureTimesTeacher);
 
-app.get(`/info/studentlectures/:user_id`, ic.getLectureTimesStudent)
+app.get(`/info/lectures/course/:course_id`, ic.getLectureTimesCourse);
 
-app.post(`/info/students/course/:user_id/:course_id`, ic.addStudentToCourse)
+app.get(`/info/studentlectures/:user_id`, ic.getLectureTimesStudent);
 
-app.get(`/info/student/course/all/:student_id`, ic.getAllStudentCourses)
+app.post(`/info/students/course/:user_id/:course_id`, ic.addStudentToCourse);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build/index.html'));
-});
+app.get(`/info/student/course/all/:student_id`, ic.getAllStudentCourses);
+
+
+// // // // ARCHIVE CONTROLLER // // // // 
+
+app.post(`/archive/record/start`,arc.startArchive);
+app.post(`/archive/record/stop`,arc.stopArchive);
+
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../build/index.html'));
+// });

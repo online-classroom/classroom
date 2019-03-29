@@ -1,6 +1,7 @@
 const OpenTok = require('opentok');
 const { OPENTOK_API_KEY, OPENTOK_API_SECRET } = process.env;
 const opentok = new OpenTok(OPENTOK_API_KEY, OPENTOK_API_SECRET);
+
 module.exports = {
   createNewCourse: async (req, res) => {
     const {
@@ -94,6 +95,15 @@ module.exports = {
     let { user_id } = req.params;
     const db = req.app.get('db');
     let lectureTimes = await db.info.getLectureTimesStudent([user_id]);
+    res.send(lectureTimes).status(200);
+  },
+
+  getLectureTimesCourse: async (req, res) => {
+    let {course_id} = req.params;
+    console.log(course_id)
+    const db = req.app.get('db');
+    let lectureTimes = await db.info.getLectureFromOneCourse([course_id]);
+    console.log(lectureTimes)
     res.send(lectureTimes).status(200);
   },
 
