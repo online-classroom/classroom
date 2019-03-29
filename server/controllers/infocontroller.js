@@ -98,6 +98,15 @@ module.exports = {
     res.send(lectureTimes).status(200);
   },
 
+  getLectureTimesCourse: async (req, res) => {
+    let {course_id} = req.params;
+    console.log(course_id)
+    const db = req.app.get('db');
+    let lectureTimes = await db.info.getLectureFromOneCourse([course_id]);
+    console.log(lectureTimes)
+    res.send(lectureTimes).status(200);
+  },
+
   editProfileInfo: async (req, res) => {
     try {
       const db = req.app.get('db');

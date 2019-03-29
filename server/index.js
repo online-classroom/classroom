@@ -68,11 +68,13 @@ app.put(`/info/update/profile`, ic.editProfileInfo);
  
 app.get(`/info/teacherlectures/:user_id`, ic.getLectureTimesTeacher);
 
-app.get(`/info/studentlectures/:user_id`, ic.getLectureTimesStudent)
+app.get(`/info/lectures/course/:course_id`, ic.getLectureTimesCourse);
 
-app.post(`/info/students/course/:user_id/:course_id`, ic.addStudentToCourse)
+app.get(`/info/studentlectures/:user_id`, ic.getLectureTimesStudent);
 
-app.get(`/info/student/course/all/:student_id`, ic.getAllStudentCourses)
+app.post(`/info/students/course/:user_id/:course_id`, ic.addStudentToCourse);
+
+app.get(`/info/student/course/all/:student_id`, ic.getAllStudentCourses);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
