@@ -72,6 +72,8 @@ app.get(`/info/studentlectures/:user_id`, ic.getLectureTimesStudent)
 
 app.post(`/info/students/course/:user_id/:course_id`, ic.addStudentToCourse)
 
+app.get(`/info/student/course/all/:student_id`, ic.getAllStudentCourses)
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
 });

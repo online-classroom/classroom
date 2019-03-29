@@ -136,5 +136,14 @@ module.exports = {
         console.log(user_id, course_id);
         db.info.addStudentToCourse([user_id, course_id]);
         res.sendStatus(200);
+    },
+
+    getAllStudentCourses: async(req, res)=>{
+      console.log('hit')
+      let {student_id} = req.params;
+      console.log(student_id);
+      const db = req.app.get('db');
+      let coursesYouAreIn = await db.info.getYourCourses.sql([student_id]);
+      res.send(coursesYouAreIn).status(200)
     }
 };

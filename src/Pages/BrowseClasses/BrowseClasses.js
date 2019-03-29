@@ -19,9 +19,13 @@ const BrowseClasses = (props)=>{
             .then(res => {
                 renderCourse(res.data)
             })
+            axios.get(`/info/student/course/all/${props.user_id}`)
+            .then(res => {
+                console.log(res.data) 
+            })
         }
-        console.log('subject', subject)
-        console.log('course', course)
+        // console.log('subject', subject)
+        // console.log('course', course)
     })
 
     const [selectedSubject, subjectSelector] = useState('Math')
@@ -65,7 +69,7 @@ const BrowseClasses = (props)=>{
                             <>
                             {
                                 classYouAreIn.includes(ele.course_id) ? (
-                                    <div>You are already in this class</div>
+                                    <div>You are a student in this class</div>
                                 ):(
                                     <button onClick={()=>addCourseToDatabase(ele.course_id)}>Add Class</button>
                                 )
