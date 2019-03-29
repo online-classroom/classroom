@@ -14,6 +14,7 @@ const path = require('path');
 const ssl = require('./setSocketListeners');
 const ac = require('./controllers/authcontroller');
 const ic = require('./controllers/infocontroller');
+const arc = require('./controllers/archivecontroller');
 
 const app = express();
 // // // // MIDDLEWARES // // // //
@@ -76,6 +77,13 @@ app.post(`/info/students/course/:user_id/:course_id`, ic.addStudentToCourse);
 
 app.get(`/info/student/course/all/:student_id`, ic.getAllStudentCourses);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build/index.html'));
-});
+
+// // // // ARCHIVE CONTROLLER // // // // 
+
+app.post(`/archive/record/start`,arc.startArchive);
+app.post(`/archive/record/stop`,arc.stopArchive);
+
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../build/index.html'));
+// });
