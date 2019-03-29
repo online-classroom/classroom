@@ -30,18 +30,7 @@ const Home =()=>{
         return logic.mappedCoursesAgain(course, id)
     }
 
-    const mappedSubjects = subject.map((val, i) => {
-        return <div className='subjects' key={i}>
-                <div className='subject-container'>
-                    {val.subject_name}
-                </div>
-                <div className='course-container'>
-                    {displayLecturesBySubjectId(val.subject_id)}
-                </div>
-            </div>
-    })
-
-    // console.log(mappedSubjects)
+    const mappedSubjects = logic.mappedSubjectsAgain(subject, displayLecturesBySubjectId)
 
     return(
         <div className='home-container'>
@@ -50,8 +39,8 @@ const Home =()=>{
                 <div className='register-buttons'>
                     <div className='register-button-container'>
                         <div className='subtitle-text'>
-                            <span className='subtitle-title'>You can learn anything.</span><br/>
-                            <span className='subtitle-subtext'>For free. For everyone. Forever.</span>
+                            <span className='subtitle-title'>Optimize your learning experience.</span><br/><br/>
+                            <span className='subtitle-subtext'>Virtual environment. Live interactions.</span>
                         </div>
                         <NavLink to='/browseclasses'><LoginButton className='reg-button'>Browse classes</LoginButton></NavLink>
                         <NavLink to='/register'><RegisterButton className='reg-button'>Register as Student</RegisterButton></NavLink>
