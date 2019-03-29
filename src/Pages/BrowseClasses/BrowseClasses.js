@@ -2,6 +2,9 @@ import React, {useState, useEffect, Fragment} from "react";
 import axios from 'axios';
 import "./BrowseClasses.scss";
 import {connect} from 'react-redux';
+import BigCalendar from 'react-big-calendar';
+import dates from './../../Components/Schedule/dates';
+import moment from 'moment';
 
 const BrowseClasses = (props)=>{
 
@@ -10,6 +13,8 @@ const BrowseClasses = (props)=>{
     const [selectedCourse, changeCourse] = useState(undefined)
     const [classYouAreIn, addYourClasses] = useState([])
 
+    const localizer = BigCalendar.momentLocalizer(moment)
+    
     useEffect(() => {
         if(subject.length===0){
             axios.get(`/info/subjects`)
@@ -29,10 +34,35 @@ const BrowseClasses = (props)=>{
                 addYourClasses(yourCourses)
             })
         }
-        // console.log(classYouAreIn)
-        // console.log('subject', subject)
-        // console.log('course', course)
     })
+
+    let lectures = []
+    let theCourseDates = ()=>{
+        // console.log('hit on 41')
+        axios.get(`/info/lectures/course/${selectedCourse}`).then(
+        (res)=>{
+            console.log(res.data)
+            res.data.forEach((ele, i)=>{
+            let year = parseInt(ele.date.split('-')[0])
+            let month = parseInt(ele.date.split('-')[1]) - 1
+            let day = parseInt(ele.date.split('-')[2])
+            let hour = parseInt(ele.lecture_start_time.split('T')[1].split(':')[0]) - 6
+            let endHour = parseInt(ele.lecture_end_time.split('T')[1].split(':')[0]) - 6
+            let minute = parseInt(ele.lecture_start_time.split('T')[1].split(':')[1])
+            let endMinute = parseInt(ele.lecture_end_time.split('T')[1].split(':')[1])
+            // console.log(ele.date.split('-')[0])
+            lectures.push(
+                {
+                id: i,
+                title: ele.title,
+                start: new Date(year, month, day, hour, minute, 0, 0),
+                end: new Date(year, month, day, endHour, endMinute, 0, 0),
+                }
+            )
+            })
+        }
+        )
+    }
 
     const [selectedSubject, subjectSelector] = useState('Math')
 
@@ -55,7 +85,7 @@ const BrowseClasses = (props)=>{
 
     const selectedCategoryCourses = ()=>{
         let categoryCourses = course.filter((ele)=>ele.subject_name === selectedSubject)
-        console.log(categoryCourses)
+        // console.log(categoryCourses)
         let courseTitles = categoryCourses.map((ele)=>{
             return (
                 <div className='courses_in_browse' key={ele.course_id}>
@@ -91,12 +121,26 @@ const BrowseClasses = (props)=>{
     }
 
     const viewedCourse = ()=>{
+        theCourseDates()
         return (
             <div>
+                <button onClick={handleClickOnDetails(undefined)}>Back</button>
                 <div>
                     you have selected a course {selectedCourse}
                 </div>
-                <button onClick={handleClickOnDetails(undefined)}>Back</button>
+                <div>
+                    Here is a calendar of this courses lecture times
+                </div>
+                <BigCalendar
+                    events={lectures}
+                    views={['agenda', 'day', 'week', 'month']}
+                    defaultView='agenda'
+                    step={30}
+                    showMultiDayTimes
+                    max={dates.add(dates.endOf(new Date(2015, 17, 1), 'day'), -1, 'hours')}
+                    // defaultDate={new Date(2015, 3, 1)}
+                    localizer={localizer}
+                />
             </div>
         )
     }

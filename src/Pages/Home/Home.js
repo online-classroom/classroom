@@ -41,7 +41,7 @@ const Home =()=>{
             </div>
     })
 
-    console.log(mappedSubjects)
+    // console.log(mappedSubjects)
 
     return(
         <div className='home-container'>
