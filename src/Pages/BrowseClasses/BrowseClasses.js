@@ -8,6 +8,7 @@ const BrowseClasses = (props)=>{
     const [subject, renderSubject] = useState([])
     const [course, renderCourse] = useState([])
     const [selectedCourse, changeCourse] = useState(undefined)
+    const [classYouAreIn, addYourClasses] = useState([])
 
     useEffect(() => {
         if(subject.length===0){
@@ -19,9 +20,18 @@ const BrowseClasses = (props)=>{
             .then(res => {
                 renderCourse(res.data)
             })
+            axios.get(`/info/student/course/all/${props.user_id}`)
+            .then(res => {
+                let yourCourses = []
+                res.data.forEach(ele=>{
+                    yourCourses.push(ele.course_id)
+                })
+                addYourClasses(yourCourses)
+            })
         }
-        console.log('subject', subject)
-        console.log('course', course)
+        // console.log(classYouAreIn)
+        // console.log('subject', subject)
+        // console.log('course', course)
     })
 
     const [selectedSubject, subjectSelector] = useState('Math')
@@ -29,20 +39,19 @@ const BrowseClasses = (props)=>{
     const hangleCategoriesChange = (category)=>{
         return ()=>{
             subjectSelector(category)
-            console.log(selectedSubject)
+            // console.log(selectedSubject)
         }
     }
 
     const addCourseToDatabase = (courseId)=>{
-        console.log(props.user_id, courseId)
+        addYourClasses([...classYouAreIn, courseId])
+        // console.log(props.user_id, courseId)
         axios.post(`/info/students/course/${props.user_id}/${courseId}`)
     }
 
     const handleClickOnDetails = (num)=>{
         return ()=>changeCourse(num)
     }
-
-    let classYouAreIn = [4, 9, 10, 11, 7, 8, 5, 6]
 
     const selectedCategoryCourses = ()=>{
         let categoryCourses = course.filter((ele)=>ele.subject_name === selectedSubject)
@@ -65,7 +74,7 @@ const BrowseClasses = (props)=>{
                             <>
                             {
                                 classYouAreIn.includes(ele.course_id) ? (
-                                    <div>You are already in this class</div>
+                                    <div>You are a student in this class</div>
                                 ):(
                                     <button onClick={()=>addCourseToDatabase(ele.course_id)}>Add Class</button>
                                 )
