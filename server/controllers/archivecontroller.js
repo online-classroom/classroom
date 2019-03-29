@@ -1,15 +1,20 @@
-const Opentok = require('opentok');
+const OpenTok = require('opentok');
 const { OPENTOK_API_KEY, OPENTOK_API_SECRET } = process.env;
 const opentok = new OpenTok(OPENTOK_API_KEY, OPENTOK_API_SECRET);
 
 module.exports={
+
     startArchive:async(req,res)=>{
 
-        const {session_id,name,lecture_id} = req.body
+        const db = req.app.get('db')
 
-        opentok.startArchive(session_id, {name}, function(err, archive) {
+        const {session_id,description,lecture_id} = req.body
+        
+        console.log({lecture_id})
+
+        opentok.startArchive(session_id, {name:description}, async(err, archive)=> {
             if (err) {
-              return console.log(err);
+              return console.log({err},{archive});
             } else {
               // The id property is useful to save off into a database
               console.log("new archive:" + archive.id);
@@ -22,10 +27,12 @@ module.exports={
 
     stopArchive:async(req,res)=>{
 
+        const db = req.app.get('db')
+
         const {lecture_id} = req.body
 
         let archive_id = await db.archive.getArchiveIdByLectureId([lecture_id])
-        console.log(archive_id)
+        console.log({archive_id})
 
         opentok.stopArchive(archive_id, function(err, archive) {
             if (err) return console.log(err);
@@ -37,15 +44,15 @@ module.exports={
 
     },
 
-    deleteArchive:async(req,res)=>{
+    // deleteArchive:async(req,res)=>{
 
-        const {lecture_id} = req.body
+    //     const {lecture_id} = req.body
 
-        let archive_id = await db.archive.getArchiveIdByLectureId([lecture_id])
-        console.log(archive_id)
+    //     let archive_id = await db.archive.getArchiveIdByLectureId([lecture_id])
+    //     console.log(archive_id)
 
-        opentok.deleteArchive(archive_id, function(err) {
-            if (err) console.log(err);
-        });
-    }
+    //     opentok.deleteArchive(archive_id, function(err) {
+    //         if (err) console.log(err);
+    //     });
+    // }
 }

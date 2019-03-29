@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
+import PrimaryButton from './../../Buttons/PrimaryButton'
 
 import { OTPublisher, OTSubscriber, createSession } from "opentok-react";
 
 import './TeacherStream.scss'
 import Axios from "axios";
+import SecondaryButton from "../../Buttons/SecondaryButton";
 
 const TeacherStream = props => {
   const [streams, setStreams] = useState([]);
   const [publish,setPublish] = useState(false)
   const [lectures,setLectures] = useState([])
+  const [selectedLecture,setSelectedLecture] = useState({})
+  const [record,setRecord] = useState(false)
   const { session_id, token, course_id} = props;
 
   const sessionHelper = createSession({
@@ -44,21 +48,33 @@ const TeacherStream = props => {
     );
   })
 
-  const mappedLectures = lectures.map((lecture)=>{
+  const mappedLectures = lectures.map((lecture,i)=>{
     return(
-      <p>
+      <SecondaryButton key={i} onClick={()=>setSelectedLecture(lecture)} isActive={selectedLecture===lecture}>
         {lecture.lecture_description}     
-      </p>
+      </SecondaryButton>
     )
   })
 
-  const startStream = () => {
-    setPublish(true)
+  const startStream = async() => {
+    
+    if(Object.keys(selectedLecture).length===0){
+      return alert("You must select a lecture to start streaming")
+    }
+    else{
+      if(record){
+        const startRecording = await Axios.post(`/archive/record/start`,{session_id, lecture_id:selectedLecture.lecture_id, description:selectedLecture.lecture_description})
+      }
+      setPublish(true)
+    }
 
   }
 
-  const stopStream = () => {
+  const stopStream = async() => {
+    
     setPublish(false)
+    const stopRecording = await Axios.post(`/archive/record/stop`,{lecture_id:selectedLecture.lecture_id})
+  
   }
 
   return (
@@ -71,6 +87,9 @@ const TeacherStream = props => {
       </div>
       : <div>
         {mappedLectures}
+        {console.log(record)}
+        <p>Check to record this lecture</p>
+        <input type='checkbox' onChange={()=>setRecord(!record)} value={record}/>
         <PrimaryButton onClick={startStream}>Start Lecture</PrimaryButton>
       </div>
     }
