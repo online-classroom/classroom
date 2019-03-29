@@ -132,7 +132,7 @@ const BrowseClasses = (props)=>{
             <div>
                 <button onClick={handleClickOnDetails(undefined)}>Back</button>
                 <div>
-                    you have selected a course {selectedCourse} {course.title}
+                    you have selected a course {selectedCourse}
                 </div>
                 <div>
                     Here is a calendar of this courses lecture times
