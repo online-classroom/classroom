@@ -15,7 +15,6 @@ class ProfileInfoContainer extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      console.log('hit');
       if (this.props.is_teacher) {
         this.setState({
           buttonName: 'Teacher Info'
