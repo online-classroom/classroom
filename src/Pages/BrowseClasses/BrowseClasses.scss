@@ -14,11 +14,16 @@
 }
 
 .class_list {
-    background-color: tomato;
+    background-color: skyblue;
     grid-row-start: 4;
     grid-row-end: 5;
     grid-column-start: 4;
     grid-column-end: 5;
+    overflow: scroll;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .browse_categories {
@@ -34,4 +39,6 @@
 
 .courses_in_browse {
     border: solid 1px blue;
+    width: 30%;
+    height: 180px;
 }

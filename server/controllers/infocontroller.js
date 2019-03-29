@@ -53,6 +53,11 @@ module.exports = {
     const courses = await db.info.getAllCourses();
     res.send(courses);
   },
+  getAllCoursesAndTeachers: async (req, res) => {
+    const db = req.app.get('db');
+    const courses = await db.info.getAllCoursesAndTeachers();
+    res.send(courses);
+  },
   getCoursesForUser: async (req, res) => {
     const db = req.app.get('db');
     const { user_id, is_teacher } = req.query;
@@ -89,6 +94,15 @@ module.exports = {
     let { user_id } = req.params;
     const db = req.app.get('db');
     let lectureTimes = await db.info.getLectureTimesStudent([user_id]);
+    res.send(lectureTimes).status(200);
+  },
+
+  getLectureTimesCourse: async (req, res) => {
+    let {course_id} = req.params;
+    console.log(course_id)
+    const db = req.app.get('db');
+    let lectureTimes = await db.info.getLectureFromOneCourse([course_id]);
+    console.log(lectureTimes)
     res.send(lectureTimes).status(200);
   },
 
@@ -131,5 +145,14 @@ module.exports = {
         console.log(user_id, course_id);
         db.info.addStudentToCourse([user_id, course_id]);
         res.sendStatus(200);
+    },
+
+    getAllStudentCourses: async(req, res)=>{
+      console.log('hit')
+      let {student_id} = req.params;
+      console.log(student_id);
+      const db = req.app.get('db');
+      let coursesYouAreIn = await db.info.getYourCourses([student_id]);
+      res.send(coursesYouAreIn).status(200)
     }
 };

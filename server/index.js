@@ -59,17 +59,22 @@ app.get(`/auth/user`, ac.getUser);
 // // // // INFO CONTROLLER // // // //
 
 app.get(`/info/courses`, ic.getAllCourses);
+app.get(`/info/courses/teacher`, ic.getAllCoursesAndTeachers)
 app.get(`/info/course/`, ic.getCoursesForUser);
 app.get(`/info/subjects`, ic.getAllSubjects);
 app.post(`/info/create/course`, ic.createNewCourse);
 app.post(`/info/generatetoken/:course_id`, ic.generateToken);
 app.put(`/info/update/profile`, ic.editProfileInfo);
-
+ 
 app.get(`/info/teacherlectures/:user_id`, ic.getLectureTimesTeacher);
 
-app.get(`/info/studentlectures/:user_id`, ic.getLectureTimesStudent)
+app.get(`/info/lectures/course/:course_id`, ic.getLectureTimesCourse);
 
-app.post(`/info/students/course/:user_id/:course_id`, ic.addStudentToCourse)
+app.get(`/info/studentlectures/:user_id`, ic.getLectureTimesStudent);
+
+app.post(`/info/students/course/:user_id/:course_id`, ic.addStudentToCourse);
+
+app.get(`/info/student/course/all/:student_id`, ic.getAllStudentCourses);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));

@@ -16,7 +16,6 @@ class ProfileInfoContainer extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      console.log('hit');
       if (this.props.is_teacher) {
         this.setState({
           buttonName: 'Teacher Info'
@@ -51,6 +50,7 @@ class ProfileInfoContainer extends Component {
     return (
       <div className='MainInfoContainer'>
         <div className='toggleButtons'>
+        <div>
           <SecondaryButton
             onClick={this.setToggleStudentInfo}
             isActive={!toggleCourseInfo}
@@ -63,14 +63,16 @@ class ProfileInfoContainer extends Component {
           >
             Course Info
           </SecondaryButton>
+        </div>
+        <div>
           <SecondaryButton
-            // style={{ float: 'right' }}
             className='editButton'
             onClick={this.setToggleEditProfileInfo}
             isActive={toggleEditProfile}
           >
             Edit Profile:
           </SecondaryButton>
+        </div>
         </div>
         {!toggleCourseInfo ? (
           <ProfileInfo editActive={this.state.toggleEditProfile} />

@@ -1,59 +1,148 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, Fragment} from "react";
 import axios from 'axios';
 import "./BrowseClasses.scss";
 import {connect} from 'react-redux';
+import BigCalendar from 'react-big-calendar';
+import dates from './../../Components/Schedule/dates';
+import moment from 'moment';
 
 const BrowseClasses = (props)=>{
 
     const [subject, renderSubject] = useState([])
     const [course, renderCourse] = useState([])
+    const [selectedCourse, changeCourse] = useState(undefined)
+    const [classYouAreIn, addYourClasses] = useState([])
 
+    const localizer = BigCalendar.momentLocalizer(moment)
+    
     useEffect(() => {
         if(subject.length===0){
             axios.get(`/info/subjects`)
             .then(res => {
                 renderSubject(res.data)
             })
-            axios.get(`/info/courses`)
+            axios.get(`/info/courses/teacher`)
             .then(res => {
                 renderCourse(res.data)
             })
+            axios.get(`/info/student/course/all/${props.user_id}`)
+            .then(res => {
+                let yourCourses = []
+                res.data.forEach(ele=>{
+                    yourCourses.push(ele.course_id)
+                })
+                addYourClasses(yourCourses)
+            })
         }
-        console.log('subject', subject)
-        console.log('course', course)
     })
 
-    const [selectedCourse, courseSelector] = useState('Math')
+    let lectures = []
+    let theCourseDates = ()=>{
+        // console.log('hit on 41')
+        axios.get(`/info/lectures/course/${selectedCourse}`).then(
+        (res)=>{
+            console.log(res.data)
+            res.data.forEach((ele, i)=>{
+            let year = parseInt(ele.date.split('-')[0])
+            let month = parseInt(ele.date.split('-')[1]) - 1
+            let day = parseInt(ele.date.split('-')[2])
+            let hour = parseInt(ele.lecture_start_time.split('T')[1].split(':')[0]) - 6
+            let endHour = parseInt(ele.lecture_end_time.split('T')[1].split(':')[0]) - 6
+            let minute = parseInt(ele.lecture_start_time.split('T')[1].split(':')[1])
+            let endMinute = parseInt(ele.lecture_end_time.split('T')[1].split(':')[1])
+            // console.log(ele.date.split('-')[0])
+            lectures.push(
+                {
+                id: i,
+                title: ele.title,
+                start: new Date(year, month, day, hour, minute, 0, 0),
+                end: new Date(year, month, day, endHour, endMinute, 0, 0),
+                }
+            )
+            })
+        }
+        )
+    }
+
+    const [selectedSubject, subjectSelector] = useState('Math')
 
     const hangleCategoriesChange = (category)=>{
         return ()=>{
-            courseSelector(category)
-            console.log(selectedCourse)
+            subjectSelector(category)
+            // console.log(selectedSubject)
         }
     }
 
     const addCourseToDatabase = (courseId)=>{
-        console.log(props.user_id, courseId)
+        addYourClasses([...classYouAreIn, courseId])
+        // console.log(props.user_id, courseId)
         axios.post(`/info/students/course/${props.user_id}/${courseId}`)
     }
 
+    const handleClickOnDetails = (num)=>{
+        return ()=>changeCourse(num)
+    }
+
     const selectedCategoryCourses = ()=>{
-        let categoryCourses = course.filter((ele)=>ele.subject_name === selectedCourse)
-        console.log(categoryCourses)
+        let categoryCourses = course.filter((ele)=>ele.subject_name === selectedSubject)
+        // console.log(categoryCourses)
         let courseTitles = categoryCourses.map((ele)=>{
             return (
-                <div className='courses_in_browse'>
+                <div className='courses_in_browse' key={ele.course_id}>
                     <div>
                         {ele.title}
                     </div>
                     <div>
-                        {ele.description}
+                        Taught by {ele.first_name} {ele.last_name}
                     </div>
-                    <button onClick={()=>addCourseToDatabase(ele.course_id)}>Add Class</button>
+                    <div 
+                        dangerouslySetInnerHTML={{ __html: ele.description }}
+                    />
+                    <button onClick={handleClickOnDetails(ele.course_id)}>Details</button><br/>
+                    {
+                        props.user_id ? (
+                            <>
+                            {
+                                classYouAreIn.includes(ele.course_id) ? (
+                                    <div>You are a student in this class</div>
+                                ):(
+                                    <button onClick={()=>addCourseToDatabase(ele.course_id)}>Add Class</button>
+                                )
+                            }
+                            </>
+                        ):(
+                            <div>Login to Join Course</div>
+                        )
+                    }
                 </div>
             )
         })
         return courseTitles
+    }
+
+    const viewedCourse = ()=>{
+        theCourseDates()
+        return (
+            <div>
+                <button onClick={handleClickOnDetails(undefined)}>Back</button>
+                <div>
+                    you have selected a course {selectedCourse}
+                </div>
+                <div>
+                    Here is a calendar of this courses lecture times
+                </div>
+                <BigCalendar
+                    events={lectures}
+                    views={['agenda', 'day', 'week', 'month']}
+                    defaultView='agenda'
+                    step={30}
+                    showMultiDayTimes
+                    max={dates.add(dates.endOf(new Date(2015, 17, 1), 'day'), -1, 'hours')}
+                    // defaultDate={new Date(2015, 3, 1)}
+                    localizer={localizer}
+                />
+            </div>
+        )
     }
 
     return (
@@ -65,16 +154,25 @@ const BrowseClasses = (props)=>{
                 <button onClick={hangleCategoriesChange('Math')}>Math</button>
                 <button onClick={hangleCategoriesChange('Science')}>Science</button>
                 <button onClick={hangleCategoriesChange('Computing')}>Computing</button>
-                <button onClick={hangleCategoriesChange('Arts and Humanities')}>Arts and Humanities</button>
+                <button onClick={hangleCategoriesChange('Arts & Humanities')}>Arts and Humanities</button>
                 <button onClick={hangleCategoriesChange('Economics')}>Economics</button>
                 <button onClick={hangleCategoriesChange('Other')}>Other</button>
             </div>
-            <div className='class_list'>
-                {selectedCategoryCourses()}
-            </div>
+            {
+                selectedCourse ? (
+                    <div className='class_list'>
+                        {viewedCourse()}
+                    </div>
+                ):(
+                    <div className='class_list'>
+                        {selectedCategoryCourses()}
+                    </div>
+                )
+            }
         </div>
     )
-};
+}
+
 const m2p = state => {
     const { user_id } = state;
 
