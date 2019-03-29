@@ -143,7 +143,7 @@ module.exports = {
       let {student_id} = req.params;
       console.log(student_id);
       const db = req.app.get('db');
-      let coursesYouAreIn = await db.info.getYourCourses.sql([student_id]);
+      let coursesYouAreIn = await db.info.getYourCourses([student_id]);
       res.send(coursesYouAreIn).status(200)
     }
 };

@@ -8,6 +8,7 @@ const BrowseClasses = (props)=>{
     const [subject, renderSubject] = useState([])
     const [course, renderCourse] = useState([])
     const [selectedCourse, changeCourse] = useState(undefined)
+    const [classYouAreIn, addYourClasses] = useState([])
 
     useEffect(() => {
         if(subject.length===0){
@@ -21,9 +22,14 @@ const BrowseClasses = (props)=>{
             })
             axios.get(`/info/student/course/all/${props.user_id}`)
             .then(res => {
-                console.log(res.data) 
+                let yourCourses = []
+                res.data.forEach(ele=>{
+                    yourCourses.push(ele.course_id)
+                })
+                addYourClasses(yourCourses)
             })
         }
+        // console.log(classYouAreIn)
         // console.log('subject', subject)
         // console.log('course', course)
     })
@@ -33,20 +39,19 @@ const BrowseClasses = (props)=>{
     const hangleCategoriesChange = (category)=>{
         return ()=>{
             subjectSelector(category)
-            console.log(selectedSubject)
+            // console.log(selectedSubject)
         }
     }
 
     const addCourseToDatabase = (courseId)=>{
-        console.log(props.user_id, courseId)
+        addYourClasses([...classYouAreIn, courseId])
+        // console.log(props.user_id, courseId)
         axios.post(`/info/students/course/${props.user_id}/${courseId}`)
     }
 
     const handleClickOnDetails = (num)=>{
         return ()=>changeCourse(num)
     }
-
-    let classYouAreIn = [4, 9, 10, 11, 7, 8, 5, 6]
 
     const selectedCategoryCourses = ()=>{
         let categoryCourses = course.filter((ele)=>ele.subject_name === selectedSubject)
