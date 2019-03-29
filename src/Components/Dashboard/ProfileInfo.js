@@ -32,8 +32,6 @@ class ProfileInfo extends Component {
   };
 
   render() {
-    console.log('cool state', this.state);
-    console.log('password', this.props.password);
     const {
       user_id,
       username,

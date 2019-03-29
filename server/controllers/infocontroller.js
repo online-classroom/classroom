@@ -53,6 +53,11 @@ module.exports = {
     const courses = await db.info.getAllCourses();
     res.send(courses);
   },
+  getAllCoursesAndTeachers: async (req, res) => {
+    const db = req.app.get('db');
+    const courses = await db.info.getAllCoursesAndTeachers();
+    res.send(courses);
+  },
   getCoursesForUser: async (req, res) => {
     const db = req.app.get('db');
     const { user_id, is_teacher } = req.query;
