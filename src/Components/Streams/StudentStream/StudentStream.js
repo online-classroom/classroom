@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { OTPublisher, OTSubscriber, createSession } from "opentok-react";
 import {connect} from 'react-redux'
 import './StudentStream.scss'
+import * as logic from './StudentStreamLogic';
 
 const StudentStream = props => {
   const [streams, setStreams] = useState([]);
@@ -24,11 +25,9 @@ const StudentStream = props => {
   }, []);
 
   const isUserVideoAllowed = () => {
-    const finder = queue.filter(queueItem => {
-      console.log({queueItem})
-      return queueItem.user_id === user_id && queueItem.display;
-    });
     
+    const finder = logic.finder(queue,user_id)
+
     if (finder.length > 0) {
       return true;
     } else {
@@ -58,6 +57,8 @@ const m2p = (state) => {
     user_id
   }
 }
+
+
 
 
 export default connect(m2p,null)(StudentStream);

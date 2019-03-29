@@ -2,7 +2,6 @@ import React,{useEffect} from "react";
 import { connect } from "react-redux";
 import TeacherStream from "./../../Components/Streams/TeacherStream/TeacherStream";
 import StudentStream from "./../../Components/Streams/StudentStream/StudentStream";
-import Axios from "axios";
 import {updateUser} from './../../ducks/reducer'
 
 const VideoContainer = (props) => {
