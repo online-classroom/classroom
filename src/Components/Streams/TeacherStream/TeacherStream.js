@@ -24,20 +24,20 @@ const TeacherStream = props => {
     };
   }, []);
 
-  
+  const mappedStreams= streams.map(stream => {
+    return (
+      <OTSubscriber
+        key={stream.id}
+        session={sessionHelper.session}
+        stream={stream}
+      />
+    );
+  })
 
   return (
     <div className='teacherStream'> 
       <OTPublisher properties={{width: '100%', height: '58vh'}} session={sessionHelper.session} />
-      {streams.map(stream => {
-        return (
-          <OTSubscriber
-            key={stream.id}
-            session={sessionHelper.session}
-            stream={stream}
-          />
-        );
-      })}
+      {mappedStreams}
     </div>
   );
 };

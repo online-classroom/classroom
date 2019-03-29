@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as logic from './ChatLogic';
 
 const Chat = (props) => {
   const [message,handleMessage] = useState('')
@@ -10,11 +11,7 @@ const Chat = (props) => {
     }
   }
 
-  const messagesMapper = messages.map((message)=>{
-    return(
-      <p>{message.message}</p>
-    )
-  })
+  const messagesMapper = logic.messageDisplay(messages)
 
   return (
     <div>
