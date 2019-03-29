@@ -12,3 +12,17 @@ export function mappedCoursesAgain(course, id){
     })
     return mappedCourses
 }
+
+export function mappedSubjectsAgain(subject,displayLecturesBySubjectId){
+    const mappedSubjects = subject.map((val, i) => {
+        return <div className='subjects' key={i}>
+                <div className='subject-container'>
+                    {val.subject_name}
+                </div>
+                <div className='course-container'>
+                    {displayLecturesBySubjectId(val.subject_id)}
+                </div>
+            </div>
+    })
+    return mappedSubjects
+}

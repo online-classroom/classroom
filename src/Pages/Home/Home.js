@@ -30,18 +30,7 @@ const Home =()=>{
         return logic.mappedCoursesAgain(course, id)
     }
 
-    const mappedSubjects = subject.map((val, i) => {
-        return <div className='subjects' key={i}>
-                <div className='subject-container'>
-                    {val.subject_name}
-                </div>
-                <div className='course-container'>
-                    {displayLecturesBySubjectId(val.subject_id)}
-                </div>
-            </div>
-    })
-
-    // console.log(mappedSubjects)
+    const mappedSubjects = logic.mappedSubjectsAgain(subject, displayLecturesBySubjectId)
 
     return(
         <div className='home-container'>
