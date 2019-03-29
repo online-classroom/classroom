@@ -6,6 +6,7 @@ import LoginButton from './../../Components/Buttons/LoginButton'
 import Background from '../../assets/Background.jpg'
 import SubjectNav from '../../Containers/SubjectNav/SubjectNav'
 import {NavLink} from 'react-router-dom'
+import * as logic from './HomeLogic'
 
 const Home =()=>{
 
@@ -26,16 +27,7 @@ const Home =()=>{
     })
 
     const displayLecturesBySubjectId=(id)=>{
-        const mappedCourses=course.map((course,i)=>{
-            if(id===course.subject_id){
-                return(
-                    <p key={i} className='courses'>
-                        {course.title}
-                    </p>
-                )
-            }
-        })
-        return mappedCourses
+        return logic.mappedCoursesAgain(course, id)
     }
 
     const mappedSubjects = subject.map((val, i) => {
