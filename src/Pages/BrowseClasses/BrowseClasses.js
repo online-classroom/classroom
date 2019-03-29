@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import BigCalendar from 'react-big-calendar';
 import dates from './../../Components/Schedule/dates';
 import moment from 'moment';
+import {updateCourseInfo} from '../../ducks/reducer';
 
 const BrowseClasses = (props)=>{
 
@@ -34,6 +35,7 @@ const BrowseClasses = (props)=>{
                 addYourClasses(yourCourses)
             })
         }
+        console.log('course', props.course)
     })
 
     let lectures = []
@@ -41,7 +43,7 @@ const BrowseClasses = (props)=>{
         // console.log('hit on 41')
         axios.get(`/info/lectures/course/${selectedCourse}`).then(
         (res)=>{
-            console.log(res.data)
+            // console.log(res.data)
             res.data.forEach((ele, i)=>{
             let year = parseInt(ele.date.split('-')[0])
             let month = parseInt(ele.date.split('-')[1]) - 1
@@ -80,7 +82,10 @@ const BrowseClasses = (props)=>{
     }
 
     const handleClickOnDetails = (num)=>{
-        return ()=>changeCourse(num)
+        return ()=>{
+            changeCourse(num)
+            props.updateCourseInfo(selectedCourse)
+        }
     }
 
     const selectedCategoryCourses = ()=>{
@@ -122,11 +127,12 @@ const BrowseClasses = (props)=>{
 
     const viewedCourse = ()=>{
         theCourseDates()
+        const {course} = props;
         return (
             <div>
                 <button onClick={handleClickOnDetails(undefined)}>Back</button>
                 <div>
-                    you have selected a course {selectedCourse}
+                    you have selected a course {selectedCourse} {course.title}
                 </div>
                 <div>
                     Here is a calendar of this courses lecture times
@@ -174,10 +180,11 @@ const BrowseClasses = (props)=>{
 }
 
 const m2p = state => {
-    const { user_id } = state;
+    const { user_id, course } = state;
 
     return {
-        user_id
+        user_id,
+        course
     };
 };
-export default connect(m2p, null)(BrowseClasses);
+export default connect(m2p, {updateCourseInfo})(BrowseClasses);
