@@ -98,11 +98,11 @@ module.exports = {
   },
 
   getLectureTimesCourse: async (req, res) => {
-    let {course_id} = req.params;
-    console.log(course_id)
+    let { course_id } = req.params;
+    console.log(course_id);
     const db = req.app.get('db');
     let lectureTimes = await db.info.getLectureFromOneCourse([course_id]);
-    console.log(lectureTimes)
+    console.log(lectureTimes);
     res.send(lectureTimes).status(200);
   },
 
@@ -124,35 +124,56 @@ module.exports = {
       console.log(error);
     }
   },
-  
-    getLectureTimesStudent: async (req, res)=>{
-        // console.log('hit getLectureTimes')
-        let {user_id} = req.params;
-        // console.log(user_id);
-        const db = req.app.get('db')
 
-        let lectureTimes = await db.info.getLectureTimesStudent([user_id])
+  getLectureTimesStudent: async (req, res) => {
+    // console.log('hit getLectureTimes')
+    let { user_id } = req.params;
+    // console.log(user_id);
+    const db = req.app.get('db');
 
-        // console.log(lectureTimes)
+    let lectureTimes = await db.info.getLectureTimesStudent([user_id]);
 
-        res.send(lectureTimes).status(200)
-        
-    },
+    // console.log(lectureTimes)
 
-    addStudentToCourse: (req, res)=>{
-        let {user_id, course_id} = req.params;
-        const db = req.app.get('db');
-        console.log(user_id, course_id);
-        db.info.addStudentToCourse([user_id, course_id]);
-        res.sendStatus(200);
-    },
+    res.send(lectureTimes).status(200);
+  },
 
-    getAllStudentCourses: async(req, res)=>{
-      console.log('hit')
-      let {student_id} = req.params;
-      console.log(student_id);
+  addStudentToCourse: (req, res) => {
+    let { user_id, course_id } = req.params;
+    const db = req.app.get('db');
+    console.log(user_id, course_id);
+    db.info.addStudentToCourse([user_id, course_id]);
+    res.sendStatus(200);
+  },
+
+  getAllStudentCourses: async (req, res) => {
+    console.log('hit');
+    let { student_id } = req.params;
+    console.log(student_id);
+    const db = req.app.get('db');
+    let coursesYouAreIn = await db.info.getYourCourses([student_id]);
+    res.send(coursesYouAreIn).status(200);
+  },
+  addNewLecture: async (req, res) => {
+    try {
+      let { course_id } = req.params;
+      let {
+        date,
+        lecture_description,
+        lecture_start_time,
+        lecture_end_time
+      } = req.body;
       const db = req.app.get('db');
-      let coursesYouAreIn = await db.info.getYourCourses([student_id]);
-      res.send(coursesYouAreIn).status(200)
+      const addLecture = await db.info.create.lecture([
+        course_id,
+        date,
+        lecture_description,
+        lecture_start_time,
+        lecture_end_time
+      ]);
+      res.sendStatus(200);
+    } catch (error) {
+      console.log(error);
     }
+  }
 };
