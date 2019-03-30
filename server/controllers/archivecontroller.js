@@ -44,6 +44,28 @@ module.exports={
 
     },
 
+    getCourseArchives: async(req,res)=>{
+        const db = req.app.get('db')
+
+        const {course_id} = req.params
+
+        const archive_ids = await db.archive.getCourseArchives([course_id])
+        
+        let archives=[]
+
+        for(let i=0; i<archive_ids; i++){
+            opentok.getArchive(archiveId, function(err, archive) {
+                if (err) return console.log(err);
+              
+                archives.push(archive);
+            });
+        }
+
+        res.status(200).send(archives)
+        
+
+    }
+
     // deleteArchive:async(req,res)=>{
 
     //     const {lecture_id} = req.body

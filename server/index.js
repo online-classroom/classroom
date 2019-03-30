@@ -82,7 +82,7 @@ app.get(`/info/student/course/all/:student_id`, ic.getAllStudentCourses);
 
 app.post(`/archive/record/start`,arc.startArchive);
 app.post(`/archive/record/stop`,arc.stopArchive);
-
+app.get(`/archive/course/videos/:course_id`,arc.getCourseArchives);
 
 // app.get('*', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../build/index.html'));
