@@ -5,11 +5,15 @@ import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Axios from "axios";
 import { updateUser, clearUser } from "./../../ducks/reducer";
+import LoginModal from "../LoginModal/LoginModal";
+import RegisterModal from '../RegisterModal/RegisterModal';
 
 
 const TopNav = props => {
   const homePage = props.match.isExact;
   const {username} = props
+  const [login,setLogin] = useState(false)
+  const [register,setRegister] = useState(false)
 
   useEffect(() => {
     getUser();
@@ -41,6 +45,7 @@ const TopNav = props => {
 
 
   return (
+    <div>
     <div className={homePage ? "topnav" : "topnav navbackground"}>
       <div className="searchbar-container">
         <input
@@ -62,15 +67,14 @@ const TopNav = props => {
           </NavLink>
         ) : (
           <>
-            <NavLink to="/login">
-              <span className="nav-button">LOGIN</span>
-            </NavLink>
-            <NavLink to="/register">
-              <span className="nav-button">REGISTER</span>
-            </NavLink>
+            <button className="nav-button" onClick={()=>setLogin(true)}>LOGIN</button>
+            <button className="nav-button" onClick={()=>setRegister(true)}>REGISTER</button>
           </>
         )}
       </div>
+    </div>
+        {login && <LoginModal setLogin={setLogin}/>}
+        {register && <RegisterModal setRegister={setRegister}/>}
     </div>
   );
 };
