@@ -69,6 +69,7 @@ const BrowseClasses = (props)=>{
         return ()=>{
             subjectSelector(category)
             // console.log(selectedSubject)
+            changeCourse(undefined)
         }
     }
     const addCourseToDatabase = (courseId)=>{
@@ -147,16 +148,18 @@ const BrowseClasses = (props)=>{
                     <div>
                         Here is a calendar of this courses lecture times
                     </div>
-                    <BigCalendar
-                        events={lectures}
-                        views={['agenda', 'day', 'week', 'month']}
-                        defaultView='agenda'
-                        step={30}
-                        showMultiDayTimes
-                        max={dates.add(dates.endOf(new Date(2015, 17, 1), 'day'), -1, 'hours')}
-                        // defaultDate={new Date(2015, 3, 1)}
-                        localizer={localizer}
-                    />
+                    <div className='calendar_height'>
+                        <BigCalendar
+                            events={lectures}
+                            views={['agenda', 'day', 'week', 'month']}
+                            defaultView='agenda'
+                            step={30}
+                            showMultiDayTimes
+                            max={dates.add(dates.endOf(new Date(2015, 17, 1), 'day'), -1, 'hours')}
+                            // defaultDate={new Date(2015, 3, 1)}
+                            localizer={localizer}
+                        />
+                    </div>
                 </div>
             )
         }
