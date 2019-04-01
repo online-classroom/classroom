@@ -1,12 +1,14 @@
-import React from 'react'
+import React,{memo} from 'react'
 import './Footer.scss'
 
-export default function Footer() {
+function Footer() {
   return (
     <div className='footer-container'>
       <div>
-          Footer
+          <span className='footer-title'>ClassCast&ensp;|&ensp;2019</span>
       </div>
     </div>
   )
 }
+
+export default memo(Footer)

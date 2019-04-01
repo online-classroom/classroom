@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect, memo} from "react";
 import { connect } from "react-redux";
 import TeacherStream from "./../../Components/Streams/TeacherStream/TeacherStream";
 import StudentStream from "./../../Components/Streams/StudentStream/StudentStream";
@@ -21,7 +21,7 @@ const m2p = state => {
   };
 };
 
-export default connect(
+export default memo(connect(
   m2p,
   {updateUser}
-)(VideoContainer);
+)(VideoContainer));
