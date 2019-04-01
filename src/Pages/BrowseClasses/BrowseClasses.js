@@ -3,18 +3,19 @@ import axios from 'axios';
 import "./BrowseClasses.scss";
 import {connect} from 'react-redux';
 import BigCalendar from 'react-big-calendar';
+import LoginModal from '../../Containers/LoginModal/LoginModal';
 import dates from './../../Components/Schedule/dates';
 import moment from 'moment';
 import {updateCourseInfo} from '../../ducks/reducer';
 
 const BrowseClasses = (props)=>{
-
     const [subject, renderSubject] = useState([])
     const [course, renderCourse] = useState([])
     const [selectedCourse, changeCourse] = useState(undefined)
+    const [selectedCourseInfo, changeCourseInfo] = useState(undefined)
     const [classYouAreIn, addYourClasses] = useState([])
-
     const localizer = BigCalendar.momentLocalizer(moment)
+    const [login,setLogin] = useState(false)
     
     useEffect(() => {
         if(subject.length===0){
@@ -35,9 +36,7 @@ const BrowseClasses = (props)=>{
                 addYourClasses(yourCourses)
             })
         }
-        console.log('course', props.course)
     })
-
     let lectures = []
     let theCourseDates = ()=>{
         // console.log('hit on 41')
@@ -65,28 +64,34 @@ const BrowseClasses = (props)=>{
         }
         )
     }
-
     const [selectedSubject, subjectSelector] = useState('Math')
-
     const hangleCategoriesChange = (category)=>{
         return ()=>{
             subjectSelector(category)
             // console.log(selectedSubject)
         }
     }
-
     const addCourseToDatabase = (courseId)=>{
         addYourClasses([...classYouAreIn, courseId])
         // console.log(props.user_id, courseId)
         axios.post(`/info/students/course/${props.user_id}/${courseId}`)
     }
 
+    //
+
     const handleClickOnDetails = (num)=>{
         return ()=>{
+            axios.get(`/info/course/single/${num}`).then(
+                (res)=>{
+                    // console.log(res.data[0])
+                    changeCourseInfo(res.data[0])
+                }
+            )
             changeCourse(num)
-            props.updateCourseInfo(selectedCourse)
         }
     }
+
+    //
 
     const selectedCategoryCourses = ()=>{
         let categoryCourses = course.filter((ele)=>ele.subject_name === selectedSubject)
@@ -116,7 +121,7 @@ const BrowseClasses = (props)=>{
                             }
                             </>
                         ):(
-                            <div>Login to Join Course</div>
+                            <button className="nav-button" onClick={()=>setLogin(true)}>Login to join class</button>
                         )
                     }
                 </div>
@@ -124,33 +129,38 @@ const BrowseClasses = (props)=>{
         })
         return courseTitles
     }
-
     const viewedCourse = ()=>{
         theCourseDates()
-        const {course} = props;
-        return (
-            <div>
-                <button onClick={handleClickOnDetails(undefined)}>Back</button>
+        
+        // console.log(selectedCourseInfo)
+        // console.log(axios.get(`/archive/course/videos/${selectedCourse}`))
+        if(selectedCourseInfo){
+            return (
                 <div>
-                    you have selected a course {selectedCourse}
+                    <button onClick={handleClickOnDetails(undefined)}>Back</button>
+                    <div>
+                        {selectedCourseInfo.title}
+                    </div>
+                    {/* <div>
+                        taught by {selectedCourseInfo.first_name} {selectedCourseInfo.first_last}
+                    </div> */}
+                    <div>
+                        Here is a calendar of this courses lecture times
+                    </div>
+                    <BigCalendar
+                        events={lectures}
+                        views={['agenda', 'day', 'week', 'month']}
+                        defaultView='agenda'
+                        step={30}
+                        showMultiDayTimes
+                        max={dates.add(dates.endOf(new Date(2015, 17, 1), 'day'), -1, 'hours')}
+                        // defaultDate={new Date(2015, 3, 1)}
+                        localizer={localizer}
+                    />
                 </div>
-                <div>
-                    Here is a calendar of this courses lecture times
-                </div>
-                <BigCalendar
-                    events={lectures}
-                    views={['agenda', 'day', 'week', 'month']}
-                    defaultView='agenda'
-                    step={30}
-                    showMultiDayTimes
-                    max={dates.add(dates.endOf(new Date(2015, 17, 1), 'day'), -1, 'hours')}
-                    // defaultDate={new Date(2015, 3, 1)}
-                    localizer={localizer}
-                />
-            </div>
-        )
+            )
+        }
     }
-
     return (
         <div className='browse_class_container'>
             <div className='side_bar'>
@@ -175,16 +185,20 @@ const BrowseClasses = (props)=>{
                     </div>
                 )
             }
+            {login && <LoginModal setLogin={setLogin} browseClasses={true}/>}
         </div>
     )
 }
-
 const m2p = state => {
     const { user_id, course } = state;
-
     return {
         user_id,
         course
     };
 };
 export default connect(m2p, {updateCourseInfo})(BrowseClasses);
+
+
+
+
+

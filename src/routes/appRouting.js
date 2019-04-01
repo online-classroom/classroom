@@ -12,14 +12,13 @@ import ClassView from '../Pages/BrowseClasses/ClassView/ClassView';
 
 export default (
   <Switch>
-    <Route path='/browseclasses/:course_id' component={ClassView} />
-    <Route path='/browseclasses' component={BrowseClasses} />
-    <Route path='/dashboard' component={Dashboard} />
-    <Route path='/classroom/:course_id' component={Classroom} />
-    <Route path='/login' component={LoginModal} />
-    <Route path='/register' component={RegisterModal} />
-    <Route path='/addCourse' component={AddCourseModal} />
-    <Route path='/addLecture' component={AddLectureModal} />
-    <Route path='/' component={Home} />
+      <Route path='/browseclasses/:course_id' component={ClassView}/>
+      <Route path='/browseclasses/:subject' component={BrowseClasses}/>
+      <Route path='/browseclasses' component={BrowseClasses}/>
+      <Route path='/dashboard' component={Dashboard}/>
+      <Route path='/classroom/:course_id' component={Classroom}/>
+      <Route path='/addCourse' component={AddCourseModal}/>
+      <Route path='/addLecture' component={AddLectureModal} />
+      <Route path='/' component={Home}/>
   </Switch>
 );

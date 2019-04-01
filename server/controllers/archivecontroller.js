@@ -44,6 +44,32 @@ module.exports={
 
     },
 
+    getCourseArchives: async(req,res)=>{
+        const db = req.app.get('db')
+
+        const {course_id} = req.params
+
+        const archive_urls = await db.archive.getCourseArchives([course_id])
+        console.log(archive_urls)
+        res.status(200).send(archive_urls)
+    },
+
+
+    saveArchiveUrls: async(req,res)=> {
+        const db = req.app.get('db')
+
+        const {id, status, url} = req.body
+
+        if(status==='available'){
+            const save = await db.archive.saveUrl([url,id])
+            res.sendStatus(200)
+        }
+        else{
+            res.sendStatus(400)
+        }
+
+    }
+    
     // deleteArchive:async(req,res)=>{
 
     //     const {lecture_id} = req.body

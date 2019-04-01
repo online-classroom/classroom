@@ -78,13 +78,15 @@ app.post(`/info/students/course/:user_id/:course_id`, ic.addStudentToCourse);
 
 app.get(`/info/student/course/all/:student_id`, ic.getAllStudentCourses);
 
+app.get(`/info/course/single/:course_id`, ic.getOneCourse);
 
 // // // // ARCHIVE CONTROLLER // // // // 
 
 app.post(`/archive/record/start`,arc.startArchive);
 app.post(`/archive/record/stop`,arc.stopArchive);
+app.get(`/archive/course/videos/:course_id`,arc.getCourseArchives);
+app.post(`/archive/receive/urls`,arc.saveArchiveUrls)
 
-
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../build/index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+});

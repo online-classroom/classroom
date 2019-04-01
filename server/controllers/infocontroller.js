@@ -181,7 +181,15 @@ module.exports = {
       }
       res.sendStatus(201);
     } catch (error) {
-      console.log(error);
-    }
+      console.log(error);   
+    }   
+  },
+  getOneCourse: async (req, res) => {
+    let { course_id } = req.params;
+    console.log('hit one course', course_id)
+    const db = req.app.get('db');
+    let viewedCourse = await db.info.getOneCourse([course_id]);
+    res.send(viewedCourse).status(200)
+
   }
 };

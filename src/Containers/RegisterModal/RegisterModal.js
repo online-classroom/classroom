@@ -20,6 +20,27 @@ class RegisterModal extends Component {
         teacherOption:false
     }
 
+    componentDidMount=()=>{
+
+        if(this.props.rProp){
+            if(this.props.rProp === 'teacher'){
+                this.setState({
+                    studentOption:false,
+                    teacherOption:true
+                })
+            }
+        }
+
+        const modal = document.getElementById('register-modal')
+        const {setRegister} = this.props
+        console.log(this.props)
+        window.onclick = function (event){
+            if(event.target==modal){
+              setRegister(false)
+            }
+        }
+    }
+
     handleChange = (e) => {
         let { name, value } = e.target
         this.setState({[name]: value})
@@ -51,6 +72,7 @@ class RegisterModal extends Component {
             const regRes = await axios.post(`/auth/register`,newUser)        
             console.log(regRes.data)
             const updateUser = await this.props.updateUser(regRes.data)
+            this.props.setRegister(false)
             this.props.history.push('/dashboard')
         }
         catch(err){
@@ -65,7 +87,7 @@ class RegisterModal extends Component {
         const errMapper = this.state.errMessage.map((err)=><p>{err}</p>)
 
         return (
-            <div className='outer-reg'>
+            <div className='outer-reg' id='register-modal'>
                 <div className='inner-reg'>
                     <div className='left-modal-reg'>
                         <span className='login-left-title-reg'>A world class education for anyone, anywhere. 100% free.

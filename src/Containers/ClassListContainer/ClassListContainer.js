@@ -58,8 +58,22 @@ class ClassListContainer extends Component {
             <PrimaryButton>Add Course</PrimaryButton>
           </NavLink>
         )}
-        <p>Select a course to view course info.</p>
-        {courseMapper}
+        {courses.length ? (
+          <>
+            <p>Select a course to view course info.</p>
+            {courseMapper}
+            <NavLink to='/browseclasses'>
+              <SecondaryButton>Browse Classes</SecondaryButton>
+            </NavLink>
+          </>
+        ) : (
+          <>
+            <p>You are not enrolled in any classes</p>
+            <NavLink to='/browseclasses'>
+              <PrimaryButton>Browse Classes</PrimaryButton>
+            </NavLink>
+          </>
+        )}
       </div>
     );
   }

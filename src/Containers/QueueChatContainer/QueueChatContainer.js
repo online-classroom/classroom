@@ -1,4 +1,4 @@
-import React , {useState,useEffect} from 'react'
+import React , {useState,useEffect,memo} from 'react'
 import Chat from '../../Components/QueueChat/Chat';
 import Queue from '../../Components/QueueChat/Queue';
 import SecondaryButton from './../../Components/Buttons/SecondaryButton';
@@ -38,5 +38,5 @@ const m2p = (state) => {
     }
 }
 
-export default connect(m2p,null)(QueueChatContainer)
+export default memo(connect(m2p,null)(QueueChatContainer))
 
