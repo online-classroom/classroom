@@ -12,6 +12,7 @@ import ClassView from '../Pages/BrowseClasses/ClassView/ClassView';
 export default (
   <Switch>
       <Route path='/browseclasses/:course_id' component={ClassView}/>
+      <Route path='/browseclasses/:subject' component={BrowseClasses}/>
       <Route path='/browseclasses' component={BrowseClasses}/>
       <Route path='/dashboard' component={Dashboard}/>
       <Route path='/classroom/:course_id' component={Classroom}/>

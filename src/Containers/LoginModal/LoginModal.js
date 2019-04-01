@@ -24,7 +24,6 @@ const LoginModal = props => {
       }
     }
 
-    
   },[])
 
 
@@ -36,7 +35,9 @@ const LoginModal = props => {
       const loginRes = await Axios.post(`/auth/login`, userDetails);
       const updateUser = await props.updateUser(loginRes.data);
       setLogin(false)
-      props.history.push("/dashboard");
+      if(!props.browseClasses){        
+        props.history.push("/dashboard");
+      }
     } catch (err) {
       setErrMessage(err.response.data);
     }

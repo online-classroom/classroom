@@ -155,5 +155,13 @@ module.exports = {
       const db = req.app.get('db');
       let coursesYouAreIn = await db.info.getYourCourses([student_id]);
       res.send(coursesYouAreIn).status(200)
+    },
+
+    getOneCourse: async(req, res)=>{
+      let {course_id} = req.params;
+      console.log('hit one course', course_id)
+      const db = req.app.get('db');
+      let viewedCourse = await db.info.getOneCourse([course_id]);
+      res.send(viewedCourse).status(200)
     }
 };
