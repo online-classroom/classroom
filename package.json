@@ -18,6 +18,7 @@
     "opentok-react": "^0.9.0",
     "react": "^16.8.4",
     "react-big-calendar": "^0.20.3",
+    "react-chat-window": "^1.2.1",
     "react-datepicker": "^2.2.0",
     "react-dom": "^16.8.4",
     "react-outside-click-handler": "^1.2.3",
@@ -34,7 +35,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -45,8 +46,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "devDependencies": {
-    "jest": "^24.5.0"
-  }
+  ]
 }
