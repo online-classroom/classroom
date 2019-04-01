@@ -156,23 +156,30 @@ module.exports = {
     res.send(coursesYouAreIn).status(200);
   },
   addNewLecture: async (req, res) => {
+    // console.log('shit hit', req);
     try {
-      let { course_id } = req.params;
-      let {
-        date,
-        lecture_description,
-        lecture_start_time,
-        lecture_end_time
-      } = req.body;
+      console.log('req.body', req.body);
+      const course_id = req.params.course_id;
+      const lectures = req.body;
       const db = req.app.get('db');
-      const addLecture = await db.info.create.lecture([
-        course_id,
-        date,
-        lecture_description,
-        lecture_start_time,
-        lecture_end_time
-      ]);
-      res.sendStatus(200);
+      console.log(lectures.length);
+      for (let i = 0; i < lectures.length; i++) {
+        const lecture = lectures[i];
+        const {
+          date,
+          lecture_description,
+          lecture_start_time,
+          lecture_end_time
+        } = lecture;
+        const addLectures = await db.info.create.lecture([
+          course_id,
+          date,
+          lecture_description,
+          lecture_start_time,
+          lecture_end_time
+        ]);
+      }
+      res.sendStatus(201);
     } catch (error) {
       console.log(error);
     }

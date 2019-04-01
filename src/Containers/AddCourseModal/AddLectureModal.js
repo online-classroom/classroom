@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import SecondaryButton from '../../Components/Buttons/SecondaryButton';
 import './AddCourseModal.scss';
 import PrimaryButton from '../../Components/Buttons/PrimaryButton';
-import Axios from 'axios';
+import axios from 'axios';
 import ReactQuill from 'react-quill';
 import DatePicker from 'react-datepicker';
 import 'react-quill/dist/quill.snow.css';
 import 'react-datepicker/dist/react-datepicker.css';
+import { connect } from 'react-redux';
 
-export default class AddLectureModal extends Component {
+class AddLectureModal extends Component {
   state = {
     subjects: [],
-    choosenSubject: { subject_id: 8, subject_name: 'Math' },
+    // choosenSubject: { subject_id: 8, subject_name: 'Math' },
+    course: '',
     title: '',
     description: '',
     lecture_description: '',
@@ -22,6 +24,11 @@ export default class AddLectureModal extends Component {
     lecture_end_time: new Date(),
     lectures: []
   };
+  componentDidMount() {
+    this.setState({
+      course: this.props.course
+    });
+  }
   handleSubjectChoice = subject => {
     this.setState({
       choosenSubject: subject
@@ -98,6 +105,47 @@ export default class AddLectureModal extends Component {
       lecture_end_time: date
     });
   };
+  submitChanges = () => {
+    const {
+      choosenSubject,
+      title,
+      description,
+      start_date,
+      end_date,
+      lectures
+    } = this.state;
+    console.log(
+      'this.state',
+      choosenSubject,
+      title,
+      description,
+      start_date,
+      end_date,
+      lectures
+    );
+    const { teacher_id } = this.props;
+    console.log('this.props', teacher_id);
+    // const { subject_id } = choosenSubject
+    // console.log('this.props', teacher_id)
+
+    const newLecture = {
+      title,
+      // subject_id,
+      description,
+      teacher_id,
+      start_date,
+      end_date,
+      lectures
+    };
+    axios
+      .post(
+        `/info/addLecture/${this.state.course.course_id}`,
+        newLecture.lectures
+      )
+      .then(res => {
+        // console.log(res);
+      });
+  };
 
   render() {
     const {
@@ -160,8 +208,10 @@ export default class AddLectureModal extends Component {
     });
     return (
       <div className='AddCourseModal'>
+        {/* {console.log('this.props.course in return 164', this.props.course)} */}
         <h1 className='title-type'>LECTURE INFO</h1>
         <br />
+        <h4>Course: {this.state.course.title}</h4>
         <br />
         <div className='lecture-input-box'>
           <DatePicker selected={date} onChange={handleNewLectureDateChange} />
@@ -202,9 +252,22 @@ export default class AddLectureModal extends Component {
         <br />
         <br />
         <div className='lectures'>{lectureMapper}</div>
-        {console.log(this.state)}
-        <PrimaryButton onClick={createNewCourse}>Create Course</PrimaryButton>
+        <PrimaryButton onClick={this.submitChanges}>
+          Submit Changes
+        </PrimaryButton>
       </div>
     );
   }
 }
+
+const m2p = reduxState => {
+  const { course } = reduxState;
+  return {
+    course
+  };
+};
+
+export default connect(
+  m2p,
+  null
+)(AddLectureModal);

@@ -22,7 +22,7 @@ class ClassListContainer extends Component {
 
     this.setState({ courses: cRes.data });
 
-    console.log('the courses on state', this.state.courses);
+    // console.log('the courses on state', this.state.courses);
   };
 
   handleCourseSelection = course => {
@@ -35,7 +35,6 @@ class ClassListContainer extends Component {
   };
 
   render() {
-    console.log(this.state.courses);
     const { courses, selectedCourse } = this.state;
     const { handleCourseSelection } = this;
     const { is_teacher } = this.props;
@@ -57,11 +56,6 @@ class ClassListContainer extends Component {
         {is_teacher && (
           <NavLink to='/addCourse'>
             <PrimaryButton>Add Course</PrimaryButton>
-          </NavLink>
-        )}
-        {is_teacher && (
-          <NavLink to='/addLecture'>
-            <PrimaryButton>Add Lecture</PrimaryButton>
           </NavLink>
         )}
         <p>Select a course to view course info.</p>
