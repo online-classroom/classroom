@@ -15,8 +15,6 @@ export default (
       <Route path='/browseclasses' component={BrowseClasses}/>
       <Route path='/dashboard' component={Dashboard}/>
       <Route path='/classroom/:course_id' component={Classroom}/>
-      <Route path='/login' component={LoginModal}/>
-      <Route path='/register' component={RegisterModal}/>
       <Route path='/addCourse' component={AddCourseModal}/>
       <Route path='/' component={Home}/>
   </Switch>

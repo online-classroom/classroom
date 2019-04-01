@@ -64,15 +64,15 @@ class ProfileInfoContainer extends Component {
             Course Info
           </SecondaryButton>
         </div>
-        <div>
+        {!this.state.toggleCourseInfo && <div>
           <SecondaryButton
             className='editButton'
             onClick={this.setToggleEditProfileInfo}
             isActive={toggleEditProfile}
           >
-            Edit Profile:
+            Edit Profile
           </SecondaryButton>
-        </div>
+        </div>}
         </div>
         {!toggleCourseInfo ? (
           <ProfileInfo editActive={this.state.toggleEditProfile} />

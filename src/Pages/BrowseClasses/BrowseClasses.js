@@ -6,14 +6,11 @@ import BigCalendar from 'react-big-calendar';
 import dates from './../../Components/Schedule/dates';
 import moment from 'moment';
 import {updateCourseInfo} from '../../ducks/reducer';
-
 const BrowseClasses = (props)=>{
-
     const [subject, renderSubject] = useState([])
     const [course, renderCourse] = useState([])
     const [selectedCourse, changeCourse] = useState(undefined)
     const [classYouAreIn, addYourClasses] = useState([])
-
     const localizer = BigCalendar.momentLocalizer(moment)
     
     useEffect(() => {
@@ -37,7 +34,6 @@ const BrowseClasses = (props)=>{
         }
         console.log('course', props.course)
     })
-
     let lectures = []
     let theCourseDates = ()=>{
         // console.log('hit on 41')
@@ -65,29 +61,24 @@ const BrowseClasses = (props)=>{
         }
         )
     }
-
     const [selectedSubject, subjectSelector] = useState('Math')
-
     const hangleCategoriesChange = (category)=>{
         return ()=>{
             subjectSelector(category)
             // console.log(selectedSubject)
         }
     }
-
     const addCourseToDatabase = (courseId)=>{
         addYourClasses([...classYouAreIn, courseId])
         // console.log(props.user_id, courseId)
         axios.post(`/info/students/course/${props.user_id}/${courseId}`)
     }
-
     const handleClickOnDetails = (num)=>{
         return ()=>{
             changeCourse(num)
             props.updateCourseInfo(selectedCourse)
         }
     }
-
     const selectedCategoryCourses = ()=>{
         let categoryCourses = course.filter((ele)=>ele.subject_name === selectedSubject)
         // console.log(categoryCourses)
@@ -124,10 +115,10 @@ const BrowseClasses = (props)=>{
         })
         return courseTitles
     }
-
     const viewedCourse = ()=>{
         theCourseDates()
         const {course} = props;
+        console.log(axios.get(`/archive/course/videos/${selectedCourse}`))
         return (
             <div>
                 <button onClick={handleClickOnDetails(undefined)}>Back</button>
@@ -150,7 +141,6 @@ const BrowseClasses = (props)=>{
             </div>
         )
     }
-
     return (
         <div className='browse_class_container'>
             <div className='side_bar'>
@@ -178,13 +168,16 @@ const BrowseClasses = (props)=>{
         </div>
     )
 }
-
 const m2p = state => {
     const { user_id, course } = state;
-
     return {
         user_id,
         course
     };
 };
 export default connect(m2p, {updateCourseInfo})(BrowseClasses);
+
+
+
+
+

@@ -13,7 +13,7 @@ const TeacherStream = props => {
   const [lectures,setLectures] = useState([])
   const [selectedLecture,setSelectedLecture] = useState({})
   const [record,setRecord] = useState(false)
-  const { session_id, token, course_id} = props;
+  const {session_id, token, course_id} = props;
 
   const sessionHelper = createSession({
     apiKey: process.env.REACT_APP_OPENTOK_API_KEY,
@@ -48,10 +48,10 @@ const TeacherStream = props => {
     );
   })
 
-  const mappedLectures = lectures.map((lecture,i)=>{
+  const mappedLectures = lectures.filter((lecture)=>lecture.archive_id===null).map((lecture,i)=>{
     return(
       <SecondaryButton key={i} onClick={()=>setSelectedLecture(lecture)} isActive={selectedLecture===lecture}>
-        {lecture.lecture_description}     
+        Lecture {i+1}    
       </SecondaryButton>
     )
   })
@@ -76,6 +76,7 @@ const TeacherStream = props => {
     const stopRecording = await Axios.post(`/archive/record/stop`,{lecture_id:selectedLecture.lecture_id})
   
   }
+
 
   return (
     <div className='teacherStream'>
