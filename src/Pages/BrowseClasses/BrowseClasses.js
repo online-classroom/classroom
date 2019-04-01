@@ -3,9 +3,11 @@ import axios from 'axios';
 import "./BrowseClasses.scss";
 import {connect} from 'react-redux';
 import BigCalendar from 'react-big-calendar';
+import LoginModal from '../../Containers/LoginModal/LoginModal';
 import dates from './../../Components/Schedule/dates';
 import moment from 'moment';
 import {updateCourseInfo} from '../../ducks/reducer';
+
 const BrowseClasses = (props)=>{
     const [subject, renderSubject] = useState([])
     const [course, renderCourse] = useState([])
@@ -13,6 +15,7 @@ const BrowseClasses = (props)=>{
     const [selectedCourseInfo, changeCourseInfo] = useState(undefined)
     const [classYouAreIn, addYourClasses] = useState([])
     const localizer = BigCalendar.momentLocalizer(moment)
+    const [login,setLogin] = useState(false)
     
     useEffect(() => {
         if(subject.length===0){
@@ -118,7 +121,7 @@ const BrowseClasses = (props)=>{
                             }
                             </>
                         ):(
-                            <div>Login to Join Course</div>
+                            <button className="nav-button" onClick={()=>setLogin(true)}>Login to join class</button>
                         )
                     }
                 </div>
@@ -182,6 +185,7 @@ const BrowseClasses = (props)=>{
                     </div>
                 )
             }
+            {login && <LoginModal setLogin={setLogin} browseClasses={true}/>}
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import React, {memo, useState, useEffect} from 'react'
+import { NavLink } from "react-router-dom"
 import './subjectNav.scss'
 import Axios from 'axios';
 
@@ -18,7 +19,9 @@ const SubjectNav = () => {
     const mappedSubjects = subject.map((val, i) => {
         return <div className='subject-name-container' key={i}>
                 <div className='subject-name'>
-                    <a href='#sub'>{val.subject_name}</a>
+                    <NavLink to="/browseclasses">
+                        {val.subject_name}
+                    </NavLink>
                 </div>
             </div>
     })
