@@ -15,6 +15,7 @@ class ProfileInfoContainer extends Component {
   };
 
   componentDidUpdate(prevProps) {
+    // console.log(123, prevProps);
     if (prevProps !== this.props) {
       if (this.props.is_teacher) {
         this.setState({
