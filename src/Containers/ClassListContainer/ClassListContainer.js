@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "./ClassListContainer.scss";
 import PrimaryButton from "./../../Components/Buttons/PrimaryButton";
 import Axios from "axios";
@@ -44,8 +44,24 @@ class ClassListContainer extends Component {
     return (
       <div className="listContainer">
           {is_teacher && <NavLink to='/addCourse'><PrimaryButton>Add Course</PrimaryButton></NavLink>}
-          <p>Select a course to view course info.</p>
-        {courseMapper}
+          {
+            courses.length ? (
+              <>
+                <p>Select a course to view course info.</p>
+                {courseMapper}
+                <NavLink to="/browseclasses">
+                  <SecondaryButton>Browse Classes</SecondaryButton>
+                </NavLink>
+              </>
+            ):(
+              <>
+                <p>You are not enrolled in any classes</p>
+                <NavLink to="/browseclasses">
+                  <PrimaryButton>Browse Classes</PrimaryButton>
+                </NavLink>
+              </>
+            )
+          }
       </div>
     );
   }
