@@ -50,7 +50,7 @@ const LoginModal = props => {
           <br />
           <br />
           <span className="login-left-subtitle">
-            By logging into Khan Academy, you agree to our Terms of use and
+            By logging into Classcast, you agree to our Terms of use and
             Privacy Policy.
           </span>
         </div>

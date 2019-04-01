@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,memo } from "react";
 import logo from "./../../assets/logo.png";
 import "./TopNav.scss";
 import { NavLink, withRouter } from "react-router-dom";
@@ -86,9 +86,9 @@ const m2p = state => {
   };
 };
 
-export default withRouter(
+export default memo(withRouter(
   connect(
     m2p,
     { updateUser, clearUser }
   )(TopNav)
-);
+));
