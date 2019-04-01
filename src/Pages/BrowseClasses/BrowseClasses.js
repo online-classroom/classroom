@@ -128,6 +128,7 @@ const BrowseClasses = (props)=>{
     const viewedCourse = ()=>{
         theCourseDates()
         const {course} = props;
+        console.log(axios.get(`/archive/course/videos/${selectedCourse}`))
         return (
             <div>
                 <button onClick={handleClickOnDetails(undefined)}>Back</button>
