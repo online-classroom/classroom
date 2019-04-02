@@ -19,6 +19,13 @@
         display: flex;
         border-radius: 10px;
 
+        @media screen and (max-width: 414px){
+            width: 300px;
+            height: 80%;
+            border: none;
+            outline: none;
+        }
+
         .left-modal-reg{
             width: 50%;
             background-color: #00284A;
@@ -27,6 +34,10 @@
             box-sizing: border-box;
             color: white;
             padding: 80px;
+
+            @media screen and (max-width: 414px) {
+                display: none;
+            }
 
             .login-left-title-reg{
                 font-size: 38px;
@@ -45,6 +56,31 @@
             border-bottom-right-radius: 5px;
             box-sizing: border-box;
             padding: 80px;
+
+            @media screen and (max-width: 414px) {
+                width: 100%;
+                border-radius: 5px;
+                padding: 0 30px;
+                border: none;
+                outline: none;
+
+                input{
+                    width: 100%;
+                }
+
+                input:-webkit-autofill,
+                input:-webkit-autofill:hover, 
+                input:-webkit-autofill:focus
+                textarea:-webkit-autofill,
+                textarea:-webkit-autofill:hover
+                textarea:-webkit-autofill:focus,
+                select:-webkit-autofill,
+                select:-webkit-autofill:hover,
+                select:-webkit-autofill:focus {
+                    -webkit-text-fill-color: rgb(24, 24, 24);
+                    -webkit-box-shadow: 0 0 0px 1000px rgb(230, 247, 255) inset;
+                }
+            }
         }
     }
 }
