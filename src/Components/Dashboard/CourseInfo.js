@@ -17,15 +17,18 @@ function CourseInfo(props) {
           <p>{course.title}</p>
           <h4>Course Description:</h4>
           <p dangerouslySetInnerHTML={{ __html: course.description }} />
-          {props.is_teacher ? (
-            <NavLink to='/addLecture'>
-              <PrimaryButton>Add Lecture</PrimaryButton>
-            </NavLink>
-          ) : (
-            <></>
-          )}
-          <br />
-          <NavLink to={`/classroom/${course}`}>
+          {
+            props.is_teacher ? (
+              <NavLink to='/addLecture'>
+                <PrimaryButton>Add Lecture</PrimaryButton>
+              </NavLink>
+            ):(
+              <></>
+            )
+          }
+          {/* <AddLectureModal /> */}
+          <br/>
+          <NavLink to={`/classroom/${course.course_id}`}>
             <PrimaryButton>Enter Classroom</PrimaryButton>
           </NavLink>
         </div>
