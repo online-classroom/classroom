@@ -20,6 +20,10 @@
         display: flex;
         justify-content: space-between;
 
+        @media screen and (max-width: 414px){
+            height: 400px;      
+        }
+
         .login-container {
             width: 40vw;
             height: 375px;
@@ -56,11 +60,16 @@
             height: 375px;
             margin: 50px auto;
 
+            @media screen and (max-width: 414px){
+             margin: 30px auto;   
+            }
+            
             .register-button-container{
                 height: 100%;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+
 
                 .subtitle-text{
                     color: white;
@@ -95,7 +104,12 @@
         justify-content: space-around;
         flex-wrap: wrap;
         background-color: rgb(235, 235, 235);
+        
+        @media screen and (max-width: 414px){
+            padding: 15px 0 0 0;
+        }
 
+        
         .subjects{
             display: flex;
             height: 200px;
@@ -106,6 +120,11 @@
             font-size: 22px;
             color: rgb(0, 54, 111);
             box-shadow: 5px 7px 24px rgb(201, 201, 201);
+            
+            @media screen and (max-width:414px){
+                width: 80%;
+                margin: 15px auto;    
+            }
 
             .subject-container{
                 // border: 1px solid black;
@@ -114,17 +133,50 @@
                 width: 125px;
                 padding: 10px;
                 border-right: 1px solid rgb(237, 237, 237);
+                text-decoration: none;
+
+                @media screen and (max-width:414px){
+                    width: 100px;
+                    font-size: 18px;
+                }
+
+                a, a:visited{
+                    text-decoration: none;
+                    color: rgb(0, 54, 111);
+                }
+
+                a:hover{
+                    color: green;
+                }
             }
+
 
             .course-container{
                 // border: 1px solid black;
                 width: calc(100% - 150px);
-            }
+                text-decoration: none;
 
+                
+                a, a:visited{
+                    text-decoration: none;
+                    color: rgb(0, 54, 111);
+                }
+                
+                a:hover{
+                    text-decoration: none;
+                    color: green;
+                    
+                }
+            }
+            
             .courses{
                 // border: 1px solid red;
                 margin: 10px 30px;
                 font-size: 16px;
+                
+                @media screen and (max-width:414px){
+                    font-size: 14px;
+                }
             }
         }
     }
