@@ -15,6 +15,9 @@
     .searchbar-container{
         padding: 0px 30px;
         width: 33vw;
+        @media screen and (max-width: 414px){
+            display: none;
+        }
 
         .searchbar::placeholder{
             color: white;
@@ -46,6 +49,13 @@
         font-size: 20px;
         text-decoration: none;
 
+        @media screen and (max-width: 414px){
+            padding: 0px;
+            margin: 10px;
+            justify-content: flex-start;
+            font-size: 16px;
+        }
+
         img{
             height: 60%;
         }
@@ -68,6 +78,12 @@
         color: white;
         font-weight: bold;
 
+        @media screen and (max-width: 414px){
+            padding: 0px;
+            margin: 10px;
+            font-size: 14px;
+        }
+
         a, a:visited{
             text-decoration: none;
             color: white;
@@ -75,6 +91,11 @@
 
         .nav-button {
             padding: 0px 30px;
+
+            @media screen and (max-width: 414px){
+                padding: 10px;
+                font-size: 14px;
+            }
         }
 
         .nav-button:hover{

@@ -1,37 +1,47 @@
-import React, { useState } from "react";
-import "./Queue.scss";
-import SecondaryButton from "./../Buttons/SecondaryButton";
-import PrimaryButton from "./../Buttons/PrimaryButton";
+import React, { useState } from 'react';
+import './Queue.scss';
+import SecondaryButton from './../Buttons/SecondaryButton';
+import PrimaryButton from './../Buttons/PrimaryButton';
 
 const Queue = props => {
-  const [question, handleQuestion] = useState("");
+  const [question, handleQuestion] = useState('');
 
   const { user_id, course_id, socket, queue, is_teacher } = props;
 
   const joinQueue = e => {
     if (e.which === 13) {
-      socket.emit("join queue", { user_id, course_id, question });
-      handleQuestion("");
+      socket.emit('join queue', { user_id, course_id, question });
+      handleQuestion('');
     }
   };
 
   const toggleVideo = (user_id, course_id, display) => {
-    socket.emit("toggle video", { user_id, course_id, display});
+    socket.emit('toggle video', { user_id, course_id, display });
   };
 
   const queueMapper = queue.map((queueItem, i) => {
     return (
       <div key={i}>
         <p>{queueItem.question}</p>
-        {is_teacher && queueItem.display===false 
-        ? (
+        {is_teacher && queueItem.display === false ? (
           <SecondaryButton
-            onClick={() => toggleVideo(queueItem.user_id, queueItem.course_id,true)}
+            onClick={() =>
+              toggleVideo(queueItem.user_id, queueItem.course_id, true)
+            }
           >
             See Stream
           </SecondaryButton>
-        )
-        :is_teacher && (<SecondaryButton onClick={()=>toggleVideo(queueItem.user_id, queueItem.course_id,false)}>Hide Stream</SecondaryButton>)}
+        ) : (
+          is_teacher && (
+            <SecondaryButton
+              onClick={() =>
+                toggleVideo(queueItem.user_id, queueItem.course_id, false)
+              }
+            >
+              Hide Stream
+            </SecondaryButton>
+          )
+        )}
       </div>
     );
   });
@@ -49,17 +59,18 @@ const Queue = props => {
   };
 
   const leaveQueue = () => {
-    socket.emit("leave queue", { user_id, course_id });
+    socket.emit('leave queue', { user_id, course_id });
   };
 
   return (
     <div>
-      {queueMapper}
+      <div className='messageWrapper'>{queueMapper}</div>
       {isUserInQueue(user_id) && (
         <PrimaryButton onClick={leaveQueue}>Leave Queue</PrimaryButton>
       )}
       {!is_teacher && (
         <input
+          className='input_message_field'
           onChange={e => handleQuestion(e.target.value)}
           value={question}
           onKeyDown={e => joinQueue(e)}

@@ -17,6 +17,10 @@ button{
     height: 50px;
     width: 365px;
     transition: background-color 0.2s linear;
+
+    @media screen and (max-width: 414px){
+        width: 250px;      
+    }
 }
 
 .login-button:hover{

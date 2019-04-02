@@ -5,9 +5,9 @@ export function mappedCoursesAgain(course, id){
     const mappedCourses=course.map((course,i)=>{
         if(id===course.subject_id){
             return(
-                <p key={i} className='courses'>
+                <NavLink to="/browseclasses"><p key={i} className='courses'>
                     {course.title}
-                </p>
+                </p></NavLink>
             )
         }
     })
@@ -23,9 +23,7 @@ export function mappedSubjectsAgain(subject,displayLecturesBySubjectId){
                     </NavLink>
                 </div>
                 <div className='course-container'>
-                    <NavLink to="/browseclasses">
-                        {displayLecturesBySubjectId(val.subject_id)}
-                    </NavLink>
+                    {displayLecturesBySubjectId(val.subject_id)}
                 </div>
             </div>
     })
