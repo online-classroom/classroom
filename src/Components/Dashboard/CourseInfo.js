@@ -24,8 +24,9 @@ function CourseInfo(props) {
           ) : (
             <></>
           )}
+          {/* <AddLectureModal /> */}
           <br />
-          <NavLink to={`/classroom/${course}`}>
+          <NavLink to={`/classroom/${course.course_id}`}>
             <PrimaryButton>Enter Classroom</PrimaryButton>
           </NavLink>
         </div>

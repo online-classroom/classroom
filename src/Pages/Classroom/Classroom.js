@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Classroom.scss";
 import VideoContainer from "./../../Containers/VideoContainer/VideoContainer";
 import QueueChatContainer from "./../../Containers/QueueChatContainer/QueueChatContainer";
+import Quiz from '../../Containers/Quiz/Quiz';
 import { connect } from "react-redux";
 import { updateUser } from "./../../ducks/reducer";
 import Axios from "axios";
@@ -89,7 +90,9 @@ const Classroom = props => {
         </div>
       </div>
       <div className="bonus_description_container">
-        <div className="bonus_container">Bonus</div>
+        <div className="bonus_container">
+          <Quiz />
+        </div>
         <div className="description_container">
           <h2>Lecture Description</h2>
           <SecondaryButton isActive={selectedLecture!==0} onClick={()=>{selectedLecture!==0 && setSelectedLecture(selectedLecture-1)}}>{'<'}</SecondaryButton>
