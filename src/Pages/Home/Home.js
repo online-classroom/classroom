@@ -76,9 +76,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="">
+      {/* <div className=""> */}
         <SubjectNav />
-      </div>
+      {/* </div> */}
       <div className='courses-container' id='sub'>
                 {mappedSubjects}
         </div>
