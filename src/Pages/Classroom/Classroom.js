@@ -97,7 +97,10 @@ const Classroom = props => {
           <h2>Lecture Description</h2>
           <SecondaryButton isActive={selectedLecture!==0} onClick={()=>{selectedLecture!==0 && setSelectedLecture(selectedLecture-1)}}>{'<'}</SecondaryButton>
           <SecondaryButton isActive={selectedLecture!==lectures.length-1} onClick={()=>{selectedLecture!==lectures.length-1 && setSelectedLecture(selectedLecture+1)}}>></SecondaryButton>
+          {lectures.length!==0
+            &&
           <div dangerouslySetInnerHTML={{ __html: lectures[selectedLecture].lecture_description }}/>
+        }
         </div>
       </div>
     </div>
