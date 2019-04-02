@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import AddLectureModal from '../../Containers/AddCourseModal/AddLectureModal';
 
 function CourseInfo(props) {
-  // console.log('courseInfo', props);
+  console.log('courseInfo', props);
   const { course } = props;
   // const {title,description,subject_id,teacher_id,start_date,end_date} = course
   return (
