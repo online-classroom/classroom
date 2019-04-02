@@ -1,3 +1,3 @@
 update lectures
-set archive_url = $1
-where id = $2;
+set archive_url = $2
+where archive_id = $1;
