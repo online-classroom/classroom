@@ -158,11 +158,11 @@ module.exports = {
   addNewLecture: async (req, res) => {
     // console.log('shit hit', req);
     try {
-      console.log('req.body', req.body);
+      // console.log('req.body', req.body);
       const course_id = req.params.course_id;
       const lectures = req.body;
       const db = req.app.get('db');
-      console.log(lectures.length);
+      // console.log(lectures.length);
       for (let i = 0; i < lectures.length; i++) {
         const lecture = lectures[i];
         const {
