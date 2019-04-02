@@ -15,10 +15,20 @@ function CourseInfo(props) {
         <div className='infoContainer'>
           <p>{course.title}</p>
           <p dangerouslySetInnerHTML={{ __html: course.description }} />
-          <NavLink to='/addLecture'>
-            <PrimaryButton>Add Lecture</PrimaryButton>
-          </NavLink>
+          {
+            props.is_teacher ? (
+              <NavLink to='/addLecture'>
+                <PrimaryButton>Add Lecture</PrimaryButton>
+              </NavLink>
+            ):(
+              <></>
+            )
+          }
           {/* <AddLectureModal /> */}
+          <br/>
+          <NavLink to={`/classroom/${course}`}>
+            <PrimaryButton>Enter Classroom</PrimaryButton>
+          </NavLink>
         </div>
       ) : (
         <div className='infoContainer'>No course selected</div>
@@ -28,9 +38,10 @@ function CourseInfo(props) {
 }
 
 const m2p = state => {
-  const { course } = state;
+  const { course, is_teacher } = state;
   return {
-    course
+    course,
+    is_teacher
   };
 };
 
