@@ -13,19 +13,18 @@ function CourseInfo(props) {
     <>
       {course ? (
         <div className='infoContainer'>
+          <h4>Course Title:</h4>
           <p>{course.title}</p>
+          <h4>Course Description:</h4>
           <p dangerouslySetInnerHTML={{ __html: course.description }} />
-          {
-            props.is_teacher ? (
-              <NavLink to='/addLecture'>
-                <PrimaryButton>Add Lecture</PrimaryButton>
-              </NavLink>
-            ):(
-              <></>
-            )
-          }
-          {/* <AddLectureModal /> */}
-          <br/>
+          {props.is_teacher ? (
+            <NavLink to='/addLecture'>
+              <PrimaryButton>Add Lecture</PrimaryButton>
+            </NavLink>
+          ) : (
+            <></>
+          )}
+          <br />
           <NavLink to={`/classroom/${course}`}>
             <PrimaryButton>Enter Classroom</PrimaryButton>
           </NavLink>
@@ -33,6 +32,7 @@ function CourseInfo(props) {
       ) : (
         <div className='infoContainer'>No course selected</div>
       )}
+      <button style={{ backgroundColor: 'aqua' }}>Edit Stuff:</button>
     </>
   );
 }
