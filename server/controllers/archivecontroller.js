@@ -50,7 +50,9 @@ module.exports={
         const {course_id} = req.params
 
         const archive_urls = await db.archive.getCourseArchives([course_id])
-        console.log(archive_urls)
+        
+
+
         res.status(200).send(archive_urls)
     },
 
@@ -60,13 +62,11 @@ module.exports={
 
         const {id, status, url} = req.body
 
-        if(status==='available'){
-            const save = await db.archive.saveUrl([url,id])
-            res.sendStatus(200)
-        }
-        else{
-            res.sendStatus(400)
-        }
+       
+        const save = await db.archive.saveUrl([url,id])
+        res.sendStatus(200)
+        
+        
 
     }
     
