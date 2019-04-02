@@ -4,7 +4,7 @@ import dates from './dates'
 import moment from 'moment'
 import axios from 'axios';
 import {connect} from 'react-redux';
-
+import './Calendar.scss'
 
 let Basic = (props) => {
 
@@ -62,16 +62,18 @@ let Basic = (props) => {
   }
 
   return (
-    <BigCalendar
-      events={lectures}
-      views={['agenda', 'day', 'week', 'month']}
-      defaultView='agenda'
-      step={30}
-      showMultiDayTimes
-      max={dates.add(dates.endOf(new Date(2015, 17, 1), 'day'), -1, 'hours')}
-      // defaultDate={new Date(2015, 3, 1)}
-      localizer={localizer}
-    />
+    <div className='rec-height'>
+      <BigCalendar
+        events={lectures}
+        views={['agenda', 'day', 'week', 'month']}
+        defaultView='agenda'
+        step={30}
+        showMultiDayTimes
+        max={dates.add(dates.endOf(new Date(2015, 17, 1), 'day'), -1, 'hours')}
+        // defaultDate={new Date(2015, 3, 1)}
+        localizer={localizer}
+      />
+    </div>
   )
 }
 
