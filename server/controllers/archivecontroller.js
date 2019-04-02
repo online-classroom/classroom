@@ -1,5 +1,5 @@
 const OpenTok = require('opentok');
-const { OPENTOK_API_KEY, OPENTOK_API_SECRET } = process.env;
+const { OPENTOK_API_KEY, OPENTOK_API_SECRET, S3_BUCKET } = process.env;
 const opentok = new OpenTok(OPENTOK_API_KEY, OPENTOK_API_SECRET);
 
 module.exports={
@@ -17,7 +17,7 @@ module.exports={
               return console.log({err},{archive});
             } else {
               // The id property is useful to save off into a database
-              console.log("new archive:" + archive.id);
+            //   console.log("new archive:" + archive.id);
               const saveArchiveId = await db.archive.startArchive([archive.id,lecture_id])
             }
         });
@@ -30,15 +30,21 @@ module.exports={
         const db = req.app.get('db')
 
         const {lecture_id} = req.body
-
+        console.log({lecture_id})
         let archive_id = await db.archive.getArchiveIdByLectureId([lecture_id])
-        console.log({archive_id})
+        archive_id=archive_id[0].archive_id
 
         opentok.stopArchive(archive_id, function(err, archive) {
-            if (err) return console.log(err);
+            if (err) return 
           
             console.log("Stopped archive:" + archive.id);
         });
+
+        const archive_url = `https://${S3_BUCKET}.s3.amazonaws.com/${OPENTOK_API_KEY}/${archive_id}/archive.mp4`
+
+        console.log(archive_url)
+
+        const saveUrl = await db.archive.saveUrl([archive_id,archive_url])
 
         res.sendStatus(201)
 
@@ -54,20 +60,6 @@ module.exports={
 
 
         res.status(200).send(archive_urls)
-    },
-
-
-    saveArchiveUrls: async(req,res)=> {
-        const db = req.app.get('db')
-
-        const {id, status, url} = req.body
-
-       
-        const save = await db.archive.saveUrl([url,id])
-        res.sendStatus(200)
-        
-        
-
     }
     
     // deleteArchive:async(req,res)=>{
