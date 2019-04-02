@@ -17,5 +17,5 @@ export function messageDisplay(messages){
         )
     })
 
-    return mapper
+  return mapper;
 }

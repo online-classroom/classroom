@@ -158,11 +158,11 @@ module.exports = {
   addNewLecture: async (req, res) => {
     // console.log('shit hit', req);
     try {
-      console.log('req.body', req.body);
+      // console.log('req.body', req.body);
       const course_id = req.params.course_id;
       const lectures = req.body;
       const db = req.app.get('db');
-      console.log(lectures.length);
+      // console.log(lectures.length);
       for (let i = 0; i < lectures.length; i++) {
         const lecture = lectures[i];
         const {
@@ -181,15 +181,30 @@ module.exports = {
       }
       res.sendStatus(201);
     } catch (error) {
-      console.log(error);   
-    }   
+      console.log(error);
+    }
   },
   getOneCourse: async (req, res) => {
     let { course_id } = req.params;
-    console.log('hit one course', course_id)
+    console.log('hit one course', course_id);
     const db = req.app.get('db');
     let viewedCourse = await db.info.getOneCourse([course_id]);
-    res.send(viewedCourse).status(200)
-
+    res.send(viewedCourse).status(200);
+  },
+  updateCourse: async (req, res) => {
+    try {
+      let { course_id } = req.params;
+      const db = req.app.get('db');
+      let { title, description } = req.body;
+      let newCourse = await db.info.updateCourse([
+        title,
+        description,
+        course_id
+      ]);
+      res.send(newCourse);
+    } catch (error) {
+      console.log('error updating course', error);
+      res.status(500).send(error);
+    }
   }
 };
