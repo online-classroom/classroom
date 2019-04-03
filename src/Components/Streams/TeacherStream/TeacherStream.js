@@ -82,7 +82,7 @@ const TeacherStream = props => {
     <div className='teacherStream'>
     {publish
       ? <div> 
-      <OTPublisher properties={{width: '100%', height: '58vh', name:'teacher'}} session={sessionHelper.session} />
+      <OTPublisher properties={{width: '100%', height: '58vh', name:'Teacher'}} session={sessionHelper.session} />
       {mappedStreams}
       <PrimaryButton onClick={stopStream}>End Lecture</PrimaryButton>
       </div>
