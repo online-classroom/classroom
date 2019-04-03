@@ -122,7 +122,7 @@ const BrowseClasses = (props)=>{
                             }
                             </>
                         ):(
-                            <SecondaryButton className="nav-button" onClick={()=>setLogin(true)}>Add Class</SecondaryButton>
+                            <SecondaryButton className="nav-button" onClick={()=> {setLogin(true); addCourseToDatabase(ele.course_id)}}>Add Class</SecondaryButton>
                             )
                     }
                     <br/><SecondaryButton onClick={handleClickOnDetails(ele.course_id)} className='course-details'>Details</SecondaryButton><br/>
