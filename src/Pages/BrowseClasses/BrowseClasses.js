@@ -180,6 +180,7 @@ const BrowseClasses = (props)=>{
                 <button onClick={hangleCategoriesChange('Economics')}>Economics</button>
                 <button onClick={hangleCategoriesChange('Other')}>Other</button>
             </div>
+            {/* <div className='class-list-container'> */}
             {
                 selectedCourse ? (
                     <div className='class_list'>
@@ -191,6 +192,7 @@ const BrowseClasses = (props)=>{
                     </div>
                 )
             }
+            {/* </div> */}
             {login && <LoginModal setLogin={setLogin} browseClasses={true}/>}
         </div>
     )
