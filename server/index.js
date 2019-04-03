@@ -68,6 +68,7 @@ app.post(`/info/create/course`, ic.createNewCourse);
 app.post(`/info/generatetoken/:course_id`, ic.generateToken);
 app.post(`/info/addLecture/:course_id`, ic.addNewLecture);
 app.put(`/info/update/profile`, ic.editProfileInfo);
+app.put(`/api/updateCourse/:id`, ic.updateCourse);
 
 app.get(`/info/teacherlectures/:user_id`, ic.getLectureTimesTeacher);
 
@@ -81,11 +82,11 @@ app.get(`/info/student/course/all/:student_id`, ic.getAllStudentCourses);
 
 app.get(`/info/course/single/:course_id`, ic.getOneCourse);
 
-// // // // ARCHIVE CONTROLLER // // // // 
+// // // // ARCHIVE CONTROLLER // // // //
 
-app.post(`/archive/record/start`,arc.startArchive);
-app.post(`/archive/record/stop`,arc.stopArchive);
-app.get(`/archive/course/videos/:course_id`,arc.getCourseArchives);
+app.post(`/archive/record/start`, arc.startArchive);
+app.post(`/archive/record/stop`, arc.stopArchive);
+app.get(`/archive/course/videos/:course_id`, arc.getCourseArchives);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
