@@ -61,13 +61,16 @@ const LoginModal = props => {
           <br/>
           <span>Email or username:</span>
           <br />
+          <br />
           <input
             value={username}
             name="setUsername"
             onChange={e => setUsername(e.target.value)}
           />
           <br />
+          <br />
           <span>Password:</span>
+          <br />
           <br />
           <input
             value={password}
@@ -76,11 +79,7 @@ const LoginModal = props => {
             onChange={e => setPassword(e.target.value)}
           />
           <br />
-          <span>Forgot password?</span>
-          <br />
           <PrimaryButton onClick={login}>Log in</PrimaryButton>
-          <br />
-          <span>Create an account</span>
         </div>
       </div>
     </div>

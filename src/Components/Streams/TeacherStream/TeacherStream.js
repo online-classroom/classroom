@@ -14,6 +14,7 @@ const TeacherStream = props => {
   const [selectedLecture,setSelectedLecture] = useState({})
   const [record,setRecord] = useState(false)
   const {session_id, token, course_id} = props;
+  const [source,setSource] = useState('camera')
 
   const sessionHelper = createSession({
     apiKey: process.env.REACT_APP_OPENTOK_API_KEY,
@@ -51,8 +52,16 @@ const TeacherStream = props => {
   const mappedLectures = lectures.filter((lecture)=>lecture.archive_id===null).map((lecture,i)=>{
     return(
       <SecondaryButton key={i} onClick={()=>setSelectedLecture(lecture)} isActive={selectedLecture===lecture}>
-        Lecture {i+1}    
+        <div dangerouslySetInnerHTML={{ __html: lecture.lecture_description }}/>    
       </SecondaryButton>
+    )
+  })
+
+  const mappedRecordedLectures = lectures.filter((lecture)=>lecture.archive_id!==null).map((lecture,i)=>{
+    return(
+      <p key={i}>
+        <div dangerouslySetInnerHTML={{ __html: lecture.lecture_description }}/>    
+      </p>
     )
   })
 
@@ -74,7 +83,8 @@ const TeacherStream = props => {
     
     setPublish(false)
     const stopRecording = await Axios.post(`/archive/record/stop`,{lecture_id:selectedLecture.lecture_id})
-  
+    window.location.reload()
+
   }
 
 
@@ -82,13 +92,20 @@ const TeacherStream = props => {
     <div className='teacherStream'>
     {publish
       ? <div> 
-      <OTPublisher properties={{width: '100%', height: '58vh'}} session={sessionHelper.session} />
+      <OTPublisher properties={{width: '100%', height: '58vh', name:'Teacher', videoSource:source}} session={sessionHelper.session} />
       {mappedStreams}
       <PrimaryButton onClick={stopStream}>End Lecture</PrimaryButton>
       </div>
       : <div>
-        {mappedLectures}
-        {console.log(record)}
+        <div>
+          <p>Choose Display:</p>
+          <SecondaryButton isActive={source==='screen'} onClick={()=>setSource('screen')}>Screen</SecondaryButton>
+          <SecondaryButton isActive={source==='camera'} onClick={()=>setSource('camera')}>Camera</SecondaryButton>
+        </div>
+        <p>Scheduled Lectures</p>
+        <div>{mappedLectures}</div>
+        <p>Recorded Lectures</p>
+        <div>{mappedRecordedLectures}</div>
         <p>Check to record this lecture</p>
         <input type='checkbox' onChange={()=>setRecord(!record)} value={record}/>
         <PrimaryButton onClick={startStream}>Start Lecture</PrimaryButton>

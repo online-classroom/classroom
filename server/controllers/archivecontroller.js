@@ -57,8 +57,6 @@ module.exports={
 
         const archive_urls = await db.archive.getCourseArchives([course_id])
         
-
-
         res.status(200).send(archive_urls)
     }
     

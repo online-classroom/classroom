@@ -11,6 +11,7 @@ import AddLectureModal from '../../Containers/AddCourseModal/AddLectureModal';
 class CourseInfo extends Component {
   // console.log('courseInfo', props);
   // const {title,description,subject_id,teacher_id,start_date,end_date} = course
+<<<<<<< HEAD
   state = {
     title: '',
     description: '',
@@ -97,11 +98,24 @@ class CourseInfo extends Component {
               style={{ height: '40vh', width: '90vw' }}
             />
             {/* {this.props.is_teacher ? (
+=======
+  return (
+    <>
+      {course ? (
+        <div className='infoContainer'>
+          <h4>Course Title:</h4>
+          <p>{course.title}</p>
+          <h4>Course Description:</h4>
+          <p dangerouslySetInnerHTML={{ __html: course.description }} />
+          {
+            props.is_teacher ? (
+>>>>>>> master
               <NavLink to='/addLecture'>
                 <PrimaryButton>Add Lecture</PrimaryButton>
               </NavLink>
             ) : (
               <></>
+<<<<<<< HEAD
             )} */}
             {/* <AddLectureModal /> */}
             <br />
@@ -114,6 +128,15 @@ class CourseInfo extends Component {
           <button onClick={this.edit} style={{ backgroundColor: 'aqua' }}>
             Edit Stuff:
           </button>
+=======
+            )
+          }
+          {/* <AddLectureModal /> */}
+          <br/>
+          <NavLink to={`/classroom/${course.course_id}`}>
+            <PrimaryButton>Enter Classroom</PrimaryButton>
+          </NavLink>
+>>>>>>> master
         </div>
       </div>
     );

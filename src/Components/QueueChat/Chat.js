@@ -9,6 +9,7 @@ const Chat = props => {
   const sendMessage = e => {
     if (e.which === 13) {
       socket.emit('m2b', { user_id, course_id, message });
+      handleMessage('')
     }
   };
 
