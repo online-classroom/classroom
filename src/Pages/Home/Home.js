@@ -24,7 +24,7 @@ const Home = () => {
         renderCourse(res.data);
       });
     }
-  });
+  },[]);
 
   const displayLecturesBySubjectId = id => {
     return logic.mappedCoursesAgain(course, id);

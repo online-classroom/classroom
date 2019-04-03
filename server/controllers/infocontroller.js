@@ -200,15 +200,19 @@ module.exports = {
     res.send(viewedCourse).status(200);
   },
   updateCourse: async (req, res) => {
+    console.log('edit course hit');
     try {
-      let { course_id } = req.params;
+      let { id } = req.params;
       const db = req.app.get('db');
       let { title, description } = req.body;
+      console.log(req.body);
+      console.log(id);
       let newCourse = await db.info.updateCourse([
         title,
         description,
-        course_id
+        parseInt(id)
       ]);
+      console.log(newCourse);
       res.send(newCourse);
     } catch (error) {
       console.log('error updating course', error);
