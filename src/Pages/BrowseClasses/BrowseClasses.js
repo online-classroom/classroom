@@ -7,6 +7,7 @@ import LoginModal from '../../Containers/LoginModal/LoginModal';
 import dates from './../../Components/Schedule/dates';
 import moment from 'moment';
 import {updateCourseInfo} from '../../ducks/reducer';
+import SecondaryButton from './../../Components/Buttons/SecondaryButton'
 
 const BrowseClasses = (props)=>{
     const [subject, renderSubject] = useState([])
@@ -100,16 +101,15 @@ const BrowseClasses = (props)=>{
         let courseTitles = categoryCourses.map((ele)=>{
             return (
                 <div className='courses_in_browse' key={ele.course_id}>
-                    <div>
-                        {ele.title}
+                    <div className='course-title'>
+                        <button onClick={handleClickOnDetails(ele.course_id)}>
+                            {ele.title}
+                        </button>
                     </div>
-                    <div>
+                    <div className='course-teacher'>
                         Taught by {ele.first_name} {ele.last_name}
                     </div>
-                    <div 
-                        dangerouslySetInnerHTML={{ __html: ele.description }}
-                    />
-                    <button onClick={handleClickOnDetails(ele.course_id)}>Details</button><br/>
+                    <div className='course-buttons'>
                     {
                         props.user_id ? (
                             <>
@@ -117,14 +117,20 @@ const BrowseClasses = (props)=>{
                                 classYouAreIn.includes(ele.course_id) ? (
                                     <div>You are a student in this class</div>
                                 ):(
-                                    <button onClick={()=>addCourseToDatabase(ele.course_id)}>Add Class</button>
+                                    <SecondaryButton onClick={()=>addCourseToDatabase(ele.course_id)}>Add Class</SecondaryButton>
                                 )
                             }
                             </>
                         ):(
-                            <button className="nav-button" onClick={()=>setLogin(true)}>Login to join class</button>
-                        )
+                            <SecondaryButton className="nav-button" onClick={()=>setLogin(true)}>Add Class</SecondaryButton>
+                            )
                     }
+                    <br/><SecondaryButton onClick={handleClickOnDetails(ele.course_id)} className='course-details'>Details</SecondaryButton><br/>
+                    </div>
+                    <div
+                        className='course-desc' 
+                        dangerouslySetInnerHTML={{ __html: ele.description }}
+                    />
                 </div>
             )
         })
@@ -166,9 +172,6 @@ const BrowseClasses = (props)=>{
     }
     return (
         <div className='browse_class_container'>
-            <div className='side_bar'>
-                
-            </div>
             <div className='browse_categories'>
                 <button onClick={hangleCategoriesChange('Math')}>Math</button>
                 <button onClick={hangleCategoriesChange('Science')}>Science</button>

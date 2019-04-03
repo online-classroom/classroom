@@ -1,49 +1,77 @@
 .browse_class_container {
-    height: calc(100vh - 80px);
+    height: calc(100% - 80px);
     display: grid;
     grid-template-columns: 12px 300px 12px 1fr 12px;
     grid-template-rows: 12px 80px 12px 1fr 12px;
+    background-color: rgb(235, 235, 235);
+    padding: 30px 60px;
+
+    .browse_categories {
+        background-color: white;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        grid-column-start: 2;
+        grid-column-end: 5;
+        display: flex;
+        justify-content: space-around;
+        font-size: 22px;
+        color: rgb(0, 28, 58);
+    
+        button:hover{
+            color: green;
+        }
+    }
+
+    .class_list {
+        display: grid;
+        grid-row-start: 4;
+        grid-column-start: 2;
+        grid-column-end: 5;
+        grid-template-columns: 32% 32% 32%;
+        grid-column-gap: 2%;
+        grid-row-gap: 5%;
+        margin: 15px 0 30px 0;
+        
+        .courses_in_browse {
+            background-color: white;
+            color: rgb(0, 54, 111);
+            box-shadow: 5px 7px 24px rgb(201, 201, 201);
+            padding: 30px;
+            overflow: auto;
+            height: 350px;
+
+            .course-title{
+                text-align: center;
+                font-size: 26px;
+                margin: 0 0 10px 0;
+            }
+
+            .course-teacher{
+                font-size: 14px;
+                margin: 0 0 10px 0;
+                color: grey;
+                text-align: center;
+            }
+
+            .course-buttons{
+                display: flex;
+                justify-content: center;
+            }
+
+            .course-details{
+                margin: 10px 0;
+            }
+
+            .course-desc{
+                margin: 10px;
+                color: grey;
+            }
+        }
+
+        .calendar_height {
+            height: 300px;
+            width: 100%;
+        }
+    }
 }
 
-.side_bar {
-    background-color: aqua;
-    grid-row-start: 2;
-    grid-row-end: 5;
-    grid-column-start: 2;
-    grid-column-end: 3;
-}
-
-.class_list {
-    background-color: skyblue;
-    grid-row-start: 4;
-    grid-row-end: 5;
-    grid-column-start: 4;
-    grid-column-end: 5;
-    overflow: scroll;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.browse_categories {
-    background-color: coral;
-    grid-row-start: 2;
-    grid-row-end: 3;
-    grid-column-start: 4;
-    grid-column-end: 5;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-.courses_in_browse {
-    border: solid 1px blue;
-    width: 30%;
-    height: 180px;
-}
-
-.calendar_height {
-    height: 300px;
-    width: 100%;
-}
