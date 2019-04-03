@@ -90,14 +90,14 @@ const Classroom = props => {
         </div>
       </div>
       <div className="bonus_description_container">
-        <div className="bonus_container">
-          <Quiz />
-        </div>
         <div className="description_container">
           <h2>Lecture Description</h2>
           <SecondaryButton isActive={selectedLecture!==0} onClick={()=>{selectedLecture!==0 && setSelectedLecture(selectedLecture-1)}}>{'<'}</SecondaryButton>
           <SecondaryButton isActive={selectedLecture!==lectures.length-1} onClick={()=>{selectedLecture!==lectures.length-1 && setSelectedLecture(selectedLecture+1)}}>></SecondaryButton>
           <div dangerouslySetInnerHTML={{ __html: lectures[selectedLecture].lecture_description }}/>
+        </div>
+        <div className="bonus_container">
+          <Quiz />
         </div>
       </div>
     </div>
