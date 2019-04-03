@@ -11,8 +11,6 @@ import SecondaryButton from "../../Components/Buttons/SecondaryButton";
 
 const socket = io();
 
-
-
 const Classroom = props => {
   const { course_id } = props.match.params;
   const [token, setToken] = useState("");
@@ -23,6 +21,8 @@ const Classroom = props => {
   const [selectedLecture,setSelectedLecture] = useState(0)
 
   useEffect(() => {
+    getLectures()
+    
     if (token === "" || session_id === "") {
       Axios.post(`/info/generatetoken/${course_id}`).then(res => {
         setToken(res.data.token);
@@ -30,14 +30,18 @@ const Classroom = props => {
       });
     }
 
-    getLectures()
   }, []);
   
   const getLectures = async() =>{
     
-    const lRes = await Axios.get(`/info/lectures/course/${course_id}`)
-    setLectures(lRes.data)
-    setSelectedLecture(lRes.data.length-1)
+    try{
+      const lRes = await Axios.get(`/info/lectures/course/${course_id}`)
+      setLectures(lRes.data)
+      setSelectedLecture(lRes.data.length-1)
+    }catch(err){
+      alert('Classroom does not exist')
+      props.history.goBack()
+    }
   
   }
 

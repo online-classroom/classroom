@@ -100,10 +100,18 @@ module.exports = {
 
   getLectureTimesCourse: async (req, res) => {
     let { course_id } = req.params;
-    console.log(course_id);
+
     const db = req.app.get('db');
-    let lectureTimes = await db.info.getLectureFromOneCourse([course_id]);
-    console.log(lectureTimes);
+
+    const courses = await db.info.getOneCourse([course_id])
+    
+    if(courses.length===0){
+      return res.sendStatus(404)
+    }
+    
+    const lectureTimes = await db.info.getLectureFromOneCourse([course_id]);
+    
+
     res.send(lectureTimes).status(200);
   },
 
