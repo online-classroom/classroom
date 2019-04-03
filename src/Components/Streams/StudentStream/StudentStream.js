@@ -37,8 +37,9 @@ const StudentStream = props => {
 
   return (
     <div>
-      {isUserVideoAllowed() && <OTPublisher session={sessionHelper.session} />}
+      {isUserVideoAllowed() && <OTPublisher session={sessionHelper.session} properties={{name:'student'}}/>}
       {streams.map(stream => {
+        console.log(stream.name)
         return (
           <OTSubscriber
             key={stream.id}
