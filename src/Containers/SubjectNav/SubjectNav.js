@@ -19,7 +19,7 @@ const SubjectNav = () => {
     const mappedSubjects = subject.map((val, i) => {
         return <div className='subject-name-container' key={i}>
                 <div className='subject-name'>
-                    <NavLink to="/browseclasses">
+                    <NavLink to={`/browseclasses?subject=${val.subject_name}`}>
                         {val.subject_name}
                     </NavLink>
                 </div>
