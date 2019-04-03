@@ -23,7 +23,10 @@ const LectureVideos = props => {
   
   const mappedLectureVideos = archiveUrls.map(archiveObj => {
     return (
-      <video controls src={archiveObj.archive_url}/>
+        <div>
+            <div dangerouslySetInnerHTML={{ __html: archiveObj.lecture_description }}/>
+            <video controls src={archiveObj.archive_url}/>
+        </div>
     );
   });
 
