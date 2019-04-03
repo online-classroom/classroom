@@ -103,9 +103,15 @@
       }
     }
 
-    .calendar_height {
-      height: 300px;
-      width: 100%;
+    .calendar-container{
+      grid-column: 1 / span 3;
+
+      .calendar_height {
+        padding: 20px;
+        border-radius: 25px;
+        height: 800px;
+        background-color: white;
+      }
     }
   }
 }

@@ -165,7 +165,7 @@ const BrowseClasses = (props)=>{
         // console.log(axios.get(`/archive/course/videos/${selectedCourse}`))
         if(selectedCourseInfo){
             return (
-                <div>
+                <div className='calendar-container'>
                     <button onClick={()=>handleClickOnDetails(undefined)}>Back</button>
                     <div>
                         {selectedCourseInfo.title}
