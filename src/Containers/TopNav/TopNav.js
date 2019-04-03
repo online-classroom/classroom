@@ -63,7 +63,7 @@ const TopNav = props => {
           type="text"
           style={{ color: "white" }}
           onFocus={()=>toggleSearchOptions('block')}
-          onBlur={()=>toggleSearchOptions('none')}
+          // onBlur={()=>toggleSearchOptions('none')}
         />
       </div>
       <span className="logo">
@@ -84,7 +84,11 @@ const TopNav = props => {
         )}
       </div>
     </div>
-    <div className='searchOptions-container'><SearchOptions searchString={searchString}/></div>
+      <div className='searchOptions-container'>
+        <SearchOptions searchString={searchString}
+          toggle={toggleSearchOptions}
+        />
+      </div>
         {login && <LoginModal setLogin={setLogin}/>}
         {register && <RegisterModal setRegister={setRegister}/>}
     </div>
