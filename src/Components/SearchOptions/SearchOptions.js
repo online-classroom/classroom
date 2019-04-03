@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './SearchOptions.scss'
 import Axios from 'axios';
+import { NavLink } from "react-router-dom";
 
 const SearchOptions = (props) => {
     const [subjects,setSubjects] = useState([])
@@ -48,7 +49,11 @@ const SearchOptions = (props) => {
     const mappedCourses = (id) =>{
         const mapper = courses.filter((course)=>course.subject_id===id).map((course)=>{
             return(
-                <p id='course-title' className='course-title'>{course.title}</p>
+                <NavLink to={`/browseclasses?subject=${course.subject_name}&course=${course.course_id}`}
+                    onClick={props.toggle('none')}
+                >                    
+                    <p id='course-title' className='course-title'>{course.title}</p>
+                </NavLink>
             )
         })
         return mapper
