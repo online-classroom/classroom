@@ -51,8 +51,16 @@ const TeacherStream = props => {
   const mappedLectures = lectures.filter((lecture)=>lecture.archive_id===null).map((lecture,i)=>{
     return(
       <SecondaryButton key={i} onClick={()=>setSelectedLecture(lecture)} isActive={selectedLecture===lecture}>
-        Lecture {i+1}    
+        <div dangerouslySetInnerHTML={{ __html: lecture.lecture_description }}/>    
       </SecondaryButton>
+    )
+  })
+
+  const mappedRecordedLectures = lectures.filter((lecture)=>lecture.archive_id!==null).map((lecture,i)=>{
+    return(
+      <p key={i}>
+        <div dangerouslySetInnerHTML={{ __html: lecture.lecture_description }}/>    
+      </p>
     )
   })
 
@@ -87,8 +95,10 @@ const TeacherStream = props => {
       <PrimaryButton onClick={stopStream}>End Lecture</PrimaryButton>
       </div>
       : <div>
-        {mappedLectures}
-        {console.log(record)}
+        <p>Scheduled Lectures</p>
+        <div>{mappedLectures}</div>
+        <p>Recorded Lectures</p>
+        <div>{mappedRecordedLectures}</div>
         <p>Check to record this lecture</p>
         <input type='checkbox' onChange={()=>setRecord(!record)} value={record}/>
         <PrimaryButton onClick={startStream}>Start Lecture</PrimaryButton>
