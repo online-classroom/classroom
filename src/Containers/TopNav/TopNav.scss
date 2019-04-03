@@ -4,7 +4,7 @@
     height: 60px;
     width: 100%;
     color: $accent2;
-    border-bottom: 1px solid rgb(59, 156, 191);
+    border-bottom: 0.1px solid rgb(59, 156, 191);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -36,7 +36,7 @@
             padding: 15px;
             color: white;
             font-family: $primaryfontfam;
-        }
+        }        
     }
 
     .logo{
@@ -133,4 +133,8 @@
 
 .navbackground{
     background-color: #0A2A66;
+}
+
+.searchOptions-container{
+    display:none;
 }
