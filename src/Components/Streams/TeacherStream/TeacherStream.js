@@ -40,12 +40,12 @@ const TeacherStream = props => {
 
   const mappedStreams = streams.map(stream => {
     return (
-      <div className='style-this-div'>
+      <div className='subscriber'>
       <OTSubscriber
         key={stream.id}
         session={sessionHelper.session}
         stream={stream}
-        properties={{width: '100%', height: '100%', insertMode: 'append'}}
+        properties={{width: '35.5vh', height: '20vh', insertMode: 'append'}}
       />
       </div>
     );
