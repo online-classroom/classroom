@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import './lectureVideos.scss'
 
 
 const LectureVideos = props => {
@@ -23,14 +24,22 @@ const LectureVideos = props => {
   
   const mappedLectureVideos = archiveUrls.map(archiveObj => {
     return (
-        <div>
-            <div dangerouslySetInnerHTML={{ __html: archiveObj.lecture_description }}/>
-            <video controls src={archiveObj.archive_url}/>
-        </div>
+      <div className='archived-video-container'>
+
+        <video controls src={archiveObj.archive_url} className='archived-video-div'/>
+
+        <div className='archived-video-description' dangerouslySetInnerHTML={{ __html: archiveObj.lecture_description }}/>
+
+      </div>
     );
   });
 
-  return <div>{mappedLectureVideos}</div>;
+  return (
+    <div className='entire-archived-container'>
+      <span className='browse-previous-lectures-text'>Browse previous lectures:</span>
+      <div>{mappedLectureVideos}</div>
+    </div>
+  )
 };
 
 export default LectureVideos;
