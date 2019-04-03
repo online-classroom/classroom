@@ -14,7 +14,7 @@ const TeacherStream = props => {
   const [selectedLecture,setSelectedLecture] = useState({})
   const [record,setRecord] = useState(false)
   const {session_id, token, course_id} = props;
-  const [source,setSource] = useState('camera')
+  const [source,setSource] = useState('')
 
   const sessionHelper = createSession({
     apiKey: process.env.REACT_APP_OPENTOK_API_KEY,
@@ -91,16 +91,23 @@ const TeacherStream = props => {
   return (
     <div className='teacherStream'>
     {publish
-      ? <div> 
-      <OTPublisher properties={{width: '100%', height: '58vh', name:'Teacher', videoSource:source}} session={sessionHelper.session} />
+      ? <div>
+        {source==='screen'
+      ?
+      <OTPublisher properties={{width: '100%', height: '58vh', name:'Teacher', videoSource:'screen'}} session={sessionHelper.session} />
+      :
+      <OTPublisher properties={{width: '100%', height: '58vh', name:'Teacher'}} session={sessionHelper.session} />
+    } 
       {mappedStreams}
       <PrimaryButton onClick={stopStream}>End Lecture</PrimaryButton>
+      <SecondaryButton isActive={source==='screen'} onClick={()=>setSource('screen')}>Screen</SecondaryButton>
+      <SecondaryButton isActive={source===''} onClick={()=>setSource('')}>Camera</SecondaryButton>
       </div>
       : <div>
         <div>
           <p>Choose Display:</p>
           <SecondaryButton isActive={source==='screen'} onClick={()=>setSource('screen')}>Screen</SecondaryButton>
-          <SecondaryButton isActive={source==='camera'} onClick={()=>setSource('camera')}>Camera</SecondaryButton>
+          <SecondaryButton isActive={source===''} onClick={()=>setSource('')}>Camera</SecondaryButton>
         </div>
         <p>Scheduled Lectures</p>
         <div>{mappedLectures}</div>
