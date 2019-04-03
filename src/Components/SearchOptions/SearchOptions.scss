@@ -1,0 +1,29 @@
+.searchOptions{
+    height:auto;
+    width:100vw;
+    position: absolute;
+    background-color:#f7f9fa;
+    display:flex;
+    justify-content: space-evenly;
+    
+    .subject-container{
+        width:10vw;
+        margin:5vh 0;
+        #subject-name{
+            font-weight: bold;
+            color:grey;
+            height: 3vh;
+            border-bottom: solid grey 0.1px;
+            margin-bottom:2vh;
+        }
+        .courses{
+            display:flex;
+            flex-direction: column;
+            #course-title{
+                margin-bottom:1vh;
+                font-size:16px;
+            }
+        }
+    }
+}
+
