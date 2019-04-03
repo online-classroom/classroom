@@ -1,0 +1,36 @@
+.entire-archived-container{
+    width: 100%;
+    text-align: center;
+    margin: 20px auto;
+    
+    .browse-previous-lectures-text{
+        font-size: 24px;
+        width: 100%;
+    }
+
+    .archived-video-container{
+        display: flex;
+        overflow: auto;
+        margin: 30px;
+
+
+        .archived-video-div{
+            height: 200px;
+            width: 265px;
+            margin: 0 30px;
+            box-shadow: 5px 10px 24px rgb(200, 200, 200);
+        }
+
+        .archived-video-description{
+            margin: 0 30px;
+            background-color: rgb(225, 225, 225);
+            width: 60%;
+            overflow: hidden;
+            box-sizing: border-box;
+            box-shadow: 5px 10px 24px rgb(200, 200, 200);
+            text-align: left;
+            padding: 20px 30px;
+        }
+    }
+
+}
