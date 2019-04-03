@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './InfoContainerStyling.scss';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import SecondaryButton from './../Buttons/SecondaryButton'
 
 class ProfileInfo extends Component {
   state = {
@@ -57,17 +58,6 @@ class ProfileInfo extends Component {
         ) : (
           <div className='infoContainer'>
             <div className='infoRow'>
-              <img
-                className='profileImg'
-                alt='stuff'
-                // src={'https://via.placeholder.com/150'}
-                src={'https://img.labnol.org/di/bo.jpg'}
-              />
-              <button className='submitButton' onClick={this.submitEdit}>
-                Submit
-              </button>
-            </div>
-            <div className='infoRow'>
               <div className='infoCol'>
                 <span>First Name:</span>
                 <p>
@@ -112,6 +102,11 @@ class ProfileInfo extends Component {
                   />
                 </p>
               </div>
+            </div>
+            <div className='infoRow'>
+              <SecondaryButton className='submitButton' onClick={this.submitEdit}>
+                Submit
+              </SecondaryButton>
             </div>
           </div>
         )}

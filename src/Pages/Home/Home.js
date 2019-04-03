@@ -32,7 +32,7 @@ const Home = () => {
 
   const mappedSubjects = logic.mappedSubjectsAgain(
     subject,
-    displayLecturesBySubjectId
+    displayLecturesBySubjectId,
   );
 
   return (

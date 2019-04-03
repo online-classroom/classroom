@@ -7,7 +7,8 @@ import LoginModal from '../../Containers/LoginModal/LoginModal';
 import dates from './../../Components/Schedule/dates';
 import moment from 'moment';
 import {updateCourseInfo} from '../../ducks/reducer';
-import SecondaryButton from './../../Components/Buttons/SecondaryButton'
+import SecondaryButton from './../../Components/Buttons/SecondaryButton';
+import queryString from 'query-string';
 
 const BrowseClasses = (props)=>{
     const [subject, renderSubject] = useState([])
@@ -17,6 +18,13 @@ const BrowseClasses = (props)=>{
     const [classYouAreIn, addYourClasses] = useState([])
     const localizer = BigCalendar.momentLocalizer(moment)
     const [login,setLogin] = useState(false)
+    const [alreadyRoutedTo, setAlreadyRoutedTo] = useState(false)
+    
+    // If you click add course while not logged in, it tries to send the course_id and user_id to 
+        // database, but the user_id dosen't exist yet. courseThatNeedsToBeSet is a waiting 
+        // room for the course_id, and it will only be sent to the database once the user_id is also 
+        // defined.
+    const [courseThatNeedsToBeSet, setCourseThatNeedsToBeSet] = useState(null)
     
     useEffect(() => {
         if(subject.length===0){
@@ -37,7 +45,23 @@ const BrowseClasses = (props)=>{
                 addYourClasses(yourCourses)
             })
         }
+        
+        if(courseThatNeedsToBeSet && props.user_id){
+            axios.post(`/info/students/course/${props.user_id}/${courseThatNeedsToBeSet}`)
+            setCourseThatNeedsToBeSet(null)
+        }
+        if(props.location.search && !alreadyRoutedTo){
+            const values = queryString.parse(props.location.search)
+            console.log(values.subject)
+            console.log(values.course)
+            hangleCategoriesChange(values.subject)
+            if(values.course){
+                handleClickOnDetails(values.course)
+            }
+            setAlreadyRoutedTo(true)
+        }
     })
+
     let lectures = []
     let theCourseDates = ()=>{
         // console.log('hit on 41')
@@ -45,52 +69,50 @@ const BrowseClasses = (props)=>{
         (res)=>{
             // console.log(res.data)
             res.data.forEach((ele, i)=>{
-            let year = parseInt(ele.date.split('-')[0])
-            let month = parseInt(ele.date.split('-')[1]) - 1
-            let day = parseInt(ele.date.split('-')[2])
-            let hour = parseInt(ele.lecture_start_time.split('T')[1].split(':')[0]) - 6
-            let endHour = parseInt(ele.lecture_end_time.split('T')[1].split(':')[0]) - 6
-            let minute = parseInt(ele.lecture_start_time.split('T')[1].split(':')[1])
-            let endMinute = parseInt(ele.lecture_end_time.split('T')[1].split(':')[1])
-            // console.log(ele.date.split('-')[0])
-            lectures.push(
-                {
-                id: i,
-                title: ele.title,
-                start: new Date(year, month, day, hour, minute, 0, 0),
-                end: new Date(year, month, day, endHour, endMinute, 0, 0),
-                }
-            )
+                let year = parseInt(ele.date.split('-')[0])
+                let month = parseInt(ele.date.split('-')[1]) - 1
+                let day = parseInt(ele.date.split('-')[2])
+                let hour = parseInt(ele.lecture_start_time.split('T')[1].split(':')[0]) - 6
+                let endHour = parseInt(ele.lecture_end_time.split('T')[1].split(':')[0]) - 6
+                let minute = parseInt(ele.lecture_start_time.split('T')[1].split(':')[1])
+                let endMinute = parseInt(ele.lecture_end_time.split('T')[1].split(':')[1])
+                // console.log(ele.date.split('-')[0])
+                lectures.push(
+                    {
+                    id: i,
+                    title: ele.title,
+                    start: new Date(year, month, day, hour, minute, 0, 0),
+                    end: new Date(year, month, day, endHour, endMinute, 0, 0),
+                    }
+                )
             })
         }
         )
     }
     const [selectedSubject, subjectSelector] = useState('Math')
     const hangleCategoriesChange = (category)=>{
-        return ()=>{
-            subjectSelector(category)
-            // console.log(selectedSubject)
-            changeCourse(undefined)
-        }
+        subjectSelector(category)
+        // console.log(selectedSubject)
+        changeCourse(undefined)
     }
     const addCourseToDatabase = (courseId)=>{
         addYourClasses([...classYouAreIn, courseId])
-        // console.log(props.user_id, courseId)
+        console.log('student to course', props.user_id, courseId)
+        setCourseThatNeedsToBeSet(courseId)
         axios.post(`/info/students/course/${props.user_id}/${courseId}`)
     }
 
     //
 
     const handleClickOnDetails = (num)=>{
-        return ()=>{
-            axios.get(`/info/course/single/${num}`).then(
-                (res)=>{
-                    // console.log(res.data[0])
-                    changeCourseInfo(res.data[0])
-                }
-            )
-            changeCourse(num)
-        }
+        console.log('hit details', num)
+        axios.get(`/info/course/single/${num}`).then(
+            (res)=>{
+                // console.log(res.data[0])
+                changeCourseInfo(res.data[0])
+            }
+        )
+        changeCourse(num)
     }
 
     //
@@ -102,7 +124,7 @@ const BrowseClasses = (props)=>{
             return (
                 <div className='courses_in_browse' key={ele.course_id}>
                     <div className='course-title'>
-                        <button onClick={handleClickOnDetails(ele.course_id)}>
+                        <button onClick={()=>handleClickOnDetails(ele.course_id)}>
                             {ele.title}
                         </button>
                     </div>
@@ -123,9 +145,9 @@ const BrowseClasses = (props)=>{
                             </>
                         ):(
                             <SecondaryButton className="nav-button" onClick={()=> {setLogin(true); addCourseToDatabase(ele.course_id)}}>Add Class</SecondaryButton>
-                            )
+                        )
                     }
-                    <br/><SecondaryButton onClick={handleClickOnDetails(ele.course_id)} className='course-details'>Details</SecondaryButton><br/>
+                    <br/><SecondaryButton onClick={()=>handleClickOnDetails(ele.course_id)} className='course-details'>Details</SecondaryButton><br/>
                     </div>
                     <div
                         className='course-desc' 
@@ -144,7 +166,7 @@ const BrowseClasses = (props)=>{
         if(selectedCourseInfo){
             return (
                 <div>
-                    <button onClick={handleClickOnDetails(undefined)}>Back</button>
+                    <button onClick={()=>handleClickOnDetails(undefined)}>Back</button>
                     <div>
                         {selectedCourseInfo.title}
                     </div>
@@ -173,12 +195,12 @@ const BrowseClasses = (props)=>{
     return (
         <div className='browse_class_container'>
             <div className='browse_categories'>
-                <button onClick={hangleCategoriesChange('Math')}>Math</button>
-                <button onClick={hangleCategoriesChange('Science')}>Science</button>
-                <button onClick={hangleCategoriesChange('Computing')}>Computing</button>
-                <button onClick={hangleCategoriesChange('Arts & Humanities')}>Arts and Humanities</button>
-                <button onClick={hangleCategoriesChange('Economics')}>Economics</button>
-                <button onClick={hangleCategoriesChange('Other')}>Other</button>
+                <button onClick={()=>hangleCategoriesChange('Math')}>Math</button>
+                <button onClick={()=>hangleCategoriesChange('Science')}>Science</button>
+                <button onClick={()=>hangleCategoriesChange('Computing')}>Computing</button>
+                <button onClick={()=>hangleCategoriesChange('Arts & Humanities')}>Arts and Humanities</button>
+                <button onClick={()=>hangleCategoriesChange('Economics')}>Economics</button>
+                <button onClick={()=>hangleCategoriesChange('Other')}>Other</button>
             </div>
             {/* <div className='class-list-container'> */}
             {
