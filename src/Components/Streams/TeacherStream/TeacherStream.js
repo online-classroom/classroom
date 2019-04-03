@@ -74,7 +74,7 @@ const TeacherStream = props => {
     
     setPublish(false)
     const stopRecording = await Axios.post(`/archive/record/stop`,{lecture_id:selectedLecture.lecture_id})
-  
+    window.location.reload()
   }
 
 
