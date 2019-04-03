@@ -52,8 +52,8 @@ const BrowseClasses = (props)=>{
         }
         if(props.location.search && !alreadyRoutedTo){
             const values = queryString.parse(props.location.search)
-            console.log(values.subject)
-            console.log(values.course)
+            // console.log(values.subject)
+            // console.log(values.course)
             hangleCategoriesChange(values.subject)
             if(values.course){
                 handleClickOnDetails(values.course)
@@ -95,11 +95,17 @@ const BrowseClasses = (props)=>{
         // console.log(selectedSubject)
         changeCourse(undefined)
     }
+
+    // // // // // 
+
     const addCourseToDatabase = (courseId)=>{
         addYourClasses([...classYouAreIn, courseId])
         console.log('student to course', props.user_id, courseId)
-        setCourseThatNeedsToBeSet(courseId)
-        axios.post(`/info/students/course/${props.user_id}/${courseId}`)
+        if(!props.user_id){
+            setCourseThatNeedsToBeSet(courseId)
+        }else{
+            axios.post(`/info/students/course/${props.user_id}/${courseId}`)
+        }
     }
 
     //
