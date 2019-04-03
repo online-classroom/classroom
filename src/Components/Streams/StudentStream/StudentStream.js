@@ -37,15 +37,28 @@ const StudentStream = props => {
 
   return (
     <div>
-      {isUserVideoAllowed() && <OTPublisher session={sessionHelper.session} />}
+      {isUserVideoAllowed() && <OTPublisher session={sessionHelper.session} properties={{name:'Student'}}/>}
       {streams.map(stream => {
-        return (
-          <OTSubscriber
+        if(stream.name==='Teacher'){  // for teachers
+          return (
+            <OTSubscriber
             key={stream.id}
             session={sessionHelper.session}
             stream={stream}
+            properties={{width: '100%', height: '58vh'}}
           />
-        );
+          )
+        }
+        else{                  //for students
+          return (
+            <OTSubscriber
+              key={stream.id}
+              session={sessionHelper.session}
+              stream={stream}
+              properties={{width: '20vw', height: '20vh'}}
+            />
+          );
+        }
       })}
     </div>
   );

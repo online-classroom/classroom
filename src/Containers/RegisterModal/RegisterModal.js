@@ -26,7 +26,8 @@ class RegisterModal extends Component {
             if(this.props.rProp === 'teacher'){
                 this.setState({
                     studentOption:false,
-                    teacherOption:true
+                    teacherOption:true,
+                    isTeacher:true
                 })
             }
         }
