@@ -9,6 +9,7 @@ import moment from 'moment';
 import {updateCourseInfo} from '../../ducks/reducer';
 import SecondaryButton from './../../Components/Buttons/SecondaryButton';
 import queryString from 'query-string';
+import LectureVideos from './../../Components/LectureVideos/LectureVideos'
 
 const BrowseClasses = (props)=>{
     const [subject, renderSubject] = useState([])
@@ -64,10 +65,8 @@ const BrowseClasses = (props)=>{
 
     let lectures = []
     let theCourseDates = ()=>{
-        // console.log('hit on 41')
         axios.get(`/info/lectures/course/${selectedCourse}`).then(
         (res)=>{
-            // console.log(res.data)
             res.data.forEach((ele, i)=>{
                 let year = parseInt(ele.date.split('-')[0])
                 let month = parseInt(ele.date.split('-')[1]) - 1
@@ -76,7 +75,6 @@ const BrowseClasses = (props)=>{
                 let endHour = parseInt(ele.lecture_end_time.split('T')[1].split(':')[0]) - 6
                 let minute = parseInt(ele.lecture_start_time.split('T')[1].split(':')[1])
                 let endMinute = parseInt(ele.lecture_end_time.split('T')[1].split(':')[1])
-                // console.log(ele.date.split('-')[0])
                 lectures.push(
                     {
                     id: i,
@@ -92,7 +90,6 @@ const BrowseClasses = (props)=>{
     const [selectedSubject, subjectSelector] = useState('Math')
     const hangleCategoriesChange = (category)=>{
         subjectSelector(category)
-        // console.log(selectedSubject)
         changeCourse(undefined)
     }
     const addCourseToDatabase = (courseId)=>{
@@ -102,24 +99,18 @@ const BrowseClasses = (props)=>{
         axios.post(`/info/students/course/${props.user_id}/${courseId}`)
     }
 
-    //
-
     const handleClickOnDetails = (num)=>{
         console.log('hit details', num)
         axios.get(`/info/course/single/${num}`).then(
             (res)=>{
-                // console.log(res.data[0])
                 changeCourseInfo(res.data[0])
             }
         )
         changeCourse(num)
     }
 
-    //
-
     const selectedCategoryCourses = ()=>{
         let categoryCourses = course.filter((ele)=>ele.subject_name === selectedSubject)
-        // console.log(categoryCourses)
         let courseTitles = categoryCourses.map((ele)=>{
             return (
                 <div className='courses_in_browse' key={ele.course_id}>
@@ -160,23 +151,20 @@ const BrowseClasses = (props)=>{
     }
     const viewedCourse = ()=>{
         theCourseDates()
-        
-        // console.log(selectedCourseInfo)
-        // console.log(axios.get(`/archive/course/videos/${selectedCourse}`))
+     
         if(selectedCourseInfo){
             return (
                 <div className='calendar-container'>
-                    <button onClick={()=>handleClickOnDetails(undefined)}>Back</button>
-                    <div>
+                    <div style={{fontSize: '28px', margin: '15px'}}>
                         {selectedCourseInfo.title}
                     </div>
-                    {/* <div>
-                        taught by {selectedCourseInfo.first_name} {selectedCourseInfo.first_last}
-                    </div> */}
-                    <div>
+                    
+                    <SecondaryButton onClick={()=>handleClickOnDetails(undefined)} style={{margin: '15px'}}>Back</SecondaryButton>
+                    <LectureVideos course_id={props.course_id}/>
+                    <div className='calendar_height'>
+                    <div style={{margin: '15px'}}>
                         Here is a calendar of this courses lecture times
                     </div>
-                    <div className='calendar_height'>
                         <BigCalendar
                             events={lectures}
                             views={['agenda', 'day', 'week', 'month']}
@@ -184,7 +172,6 @@ const BrowseClasses = (props)=>{
                             step={30}
                             showMultiDayTimes
                             max={dates.add(dates.endOf(new Date(2015, 17, 1), 'day'), -1, 'hours')}
-                            // defaultDate={new Date(2015, 3, 1)}
                             localizer={localizer}
                         />
                     </div>
@@ -202,7 +189,7 @@ const BrowseClasses = (props)=>{
                 <button onClick={()=>hangleCategoriesChange('Economics')}>Economics</button>
                 <button onClick={()=>hangleCategoriesChange('Other')}>Other</button>
             </div>
-            {/* <div className='class-list-container'> */}
+
             {
                 selectedCourse ? (
                     <div className='class_list'>
@@ -214,7 +201,7 @@ const BrowseClasses = (props)=>{
                     </div>
                 )
             }
-            {/* </div> */}
+
             {login && <LoginModal setLogin={setLogin} browseClasses={true}/>}
         </div>
     )
