@@ -68,7 +68,7 @@ const Queue = props => {
       {isUserInQueue(user_id) && (
         <PrimaryButton onClick={leaveQueue}>Leave Queue</PrimaryButton>
       )}
-      {!is_teacher && (
+      {!is_teacher && !isUserInQueue(user_id) && (
         <input
           className='input_message_field'
           onChange={e => handleQuestion(e.target.value)}
