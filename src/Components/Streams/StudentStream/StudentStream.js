@@ -51,7 +51,8 @@ const StudentStream = props => {
 
     return(
     <div>
-      <LectureVideos course_id={course_id} />
+      <LectureVideos 
+        course_id={course_id} />
     </div>
     )
 

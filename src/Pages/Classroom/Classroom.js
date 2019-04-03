@@ -89,6 +89,7 @@ const Classroom = props => {
         <div className="video_container">
           {token && session_id && (
             <VideoContainer
+              
               socket={socket}
               token={token}
               session_id={session_id}
