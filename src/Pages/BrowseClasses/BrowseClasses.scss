@@ -1,17 +1,23 @@
 .browse_class_container {
-    height: calc(100% - 80px);
+    min-height: calc(100vh - 201px);
     display: grid;
-    grid-template-columns: 12px 300px 12px 1fr 12px;
-    grid-template-rows: 12px 80px 12px 1fr 12px;
+    // grid-template-columns: 12px 300px 12px 1fr 12px;
+    // grid-template-rows: 12px 80px 12px 1fr 12px;
     background-color: rgb(235, 235, 235);
     padding: 30px 60px;
+    
+    @media screen and (max-width: 414px){
+        padding: 10px;
+        // min-height: calc(100% + 200px);
+    }
 
     .browse_categories {
         background-color: white;
-        grid-row-start: 2;
-        grid-row-end: 3;
-        grid-column-start: 2;
-        grid-column-end: 5;
+        // grid-row-start: 2;
+        // grid-row-end: 3;
+        // grid-column-start: 2;
+        // grid-column-end: 5;
+        padding: 30px;
         display: flex;
         justify-content: space-around;
         font-size: 22px;
@@ -20,17 +26,33 @@
         button:hover{
             color: green;
         }
+
+        @media screen and (max-width: 414px){
+            font-size: 16px;
+            flex-wrap: wrap;
+            padding: 15px;
+            margin: 0 0 15px 0;
+            
+            button{
+                padding: 5px;
+            }
+        }
     }
 
     .class_list {
         display: grid;
-        grid-row-start: 4;
-        grid-column-start: 2;
-        grid-column-end: 5;
+        // grid-row-start: 4;
+        // grid-column-start: 2;
+        // grid-column-end: 5;
         grid-template-columns: 32% 32% 32%;
         grid-column-gap: 2%;
         grid-row-gap: 5%;
         margin: 15px 0 30px 0;
+
+        @media screen and (max-width: 414px){
+            grid-template-columns: 100%;  
+            grid-row-gap: 3%; 
+        }
         
         .courses_in_browse {
             background-color: white;
@@ -39,11 +61,22 @@
             padding: 30px;
             overflow: auto;
             height: 350px;
+            
+            @media screen and (max-width: 414px){
+                height: 100px;
+                grid-auto-flow: column;
+                padding: 10px;
+                overflow: hidden;
+            }
 
             .course-title{
                 text-align: center;
                 font-size: 26px;
                 margin: 0 0 10px 0;
+
+                @media screen and (max-width: 414px){
+                    padding: 5px;
+                }
             }
 
             .course-teacher{
@@ -61,11 +94,19 @@
 
             .course-details{
                 margin: 10px 0;
+
+                @media screen and (max-width: 414px){
+                    display: none;
+                }
             }
 
             .course-desc{
                 margin: 10px;
                 color: grey;
+
+                @media screen and (max-width: 414px){
+                    display: none;
+                }
             }
         }
 
