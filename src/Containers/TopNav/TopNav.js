@@ -7,6 +7,7 @@ import Axios from "axios";
 import { updateUser, clearUser } from "./../../ducks/reducer";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from '../RegisterModal/RegisterModal';
+import SearchOptions from '../../Components/SearchOptions/SearchOptions';
 
 
 const TopNav = props => {
@@ -14,6 +15,7 @@ const TopNav = props => {
   const {username} = props
   const [login,setLogin] = useState(false)
   const [register,setRegister] = useState(false)
+  const [searchString,setSearchString] = useState('')
 
   useEffect(() => {
     getUser();
@@ -41,6 +43,10 @@ const TopNav = props => {
       console.log(`Error with logout`)
     }
   }
+
+  const toggleSearchOptions = (display) =>{
+    document.getElementsByClassName('searchOptions-container')[0].style.display=display
+  }
   
 
 
@@ -49,10 +55,15 @@ const TopNav = props => {
     <div className={homePage ? "topnav" : "topnav navbackground"}>
       <div className="searchbar-container">
         <input
+          value={searchString}
+          onChange={(e)=>setSearchString(e.target.value)}
           className="searchbar"
+          id='searchbar'
           placeholder="Search"
           type="text"
           style={{ color: "white" }}
+          onFocus={()=>toggleSearchOptions('block')}
+          onBlur={()=>toggleSearchOptions('none')}
         />
       </div>
       <span className="logo">
@@ -73,6 +84,7 @@ const TopNav = props => {
         )}
       </div>
     </div>
+    <div className='searchOptions-container'><SearchOptions searchString={searchString}/></div>
         {login && <LoginModal setLogin={setLogin}/>}
         {register && <RegisterModal setRegister={setRegister}/>}
     </div>
