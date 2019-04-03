@@ -1,3 +1,3 @@
-select archive_id
+select *
 from lectures
-where course_id = $1 and archive_id is not null; 
+where course_id = $1 and archive_url is not null; 

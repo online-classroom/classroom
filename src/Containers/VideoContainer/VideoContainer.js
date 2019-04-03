@@ -9,7 +9,7 @@ const VideoContainer = (props) => {
   
   return (
     <div style={{width: '100%', height: '100%'}}>
-      {is_teacher ? <TeacherStream  course_id={course_id} token={token} session_id={session_id} queue={queue} socket={socket} /> : <StudentStream token={token} session_id={session_id} queue={queue} socket={socket}/>}
+      {is_teacher ? <TeacherStream  course_id={course_id} token={token} session_id={session_id} queue={queue} socket={socket} /> : <StudentStream token={token} session_id={session_id} queue={queue} socket={socket} course_id={course_id}/>}
     </div>
   );
 };

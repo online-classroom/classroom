@@ -100,10 +100,18 @@ module.exports = {
 
   getLectureTimesCourse: async (req, res) => {
     let { course_id } = req.params;
-    console.log(course_id);
+
     const db = req.app.get('db');
-    let lectureTimes = await db.info.getLectureFromOneCourse([course_id]);
-    console.log(lectureTimes);
+
+    const courses = await db.info.getOneCourse([course_id])
+    
+    if(courses.length===0){
+      return res.sendStatus(404)
+    }
+    
+    const lectureTimes = await db.info.getLectureFromOneCourse([course_id]);
+    
+
     res.send(lectureTimes).status(200);
   },
 
@@ -181,15 +189,56 @@ module.exports = {
       }
       res.sendStatus(201);
     } catch (error) {
-      console.log(error);   
-    }   
+      console.log(error);
+    }
   },
   getOneCourse: async (req, res) => {
     let { course_id } = req.params;
-    console.log('hit one course', course_id)
+    console.log('hit one course', course_id);
     const db = req.app.get('db');
     let viewedCourse = await db.info.getOneCourse([course_id]);
-    res.send(viewedCourse).status(200)
+    res.send(viewedCourse).status(200);
+  },
+  updateCourse: async (req, res) => {
+    try {
+      let { course_id } = req.params;
+      const db = req.app.get('db');
+      let { title, description } = req.body;
+      let newCourse = await db.info.updateCourse([
+        title,
+        description,
+        course_id
+      ]);
+      res.send(newCourse);
+    } catch (error) {
+      console.log('error updating course', error);
+      res.status(500).send(error);
+    }
+  },
+  checkPrivacy:async(req,res)=>{
+
+    console.log('hit at check privacy')
+    const db = req.app.get('db')
+    const {user_id, is_teacher, course_id} = req.query
+
+    console.log(req.query)
+    let courses = []
+    if (is_teacher === 'true') {
+
+      courses = await db.info.checkTeacherPrivacy([user_id,course_id])
+      console.log(courses)
+    } else {
+      courses = await db.info.checkStudentPrivacy([user_id,course_id])
+      // console.log(courses)
+    }
+
+    if (courses.length===0){
+      res.sendStatus(403)
+    }
+    else{
+      res.sendStatus(200)
+    }
+
 
   }
 };
