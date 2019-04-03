@@ -19,8 +19,12 @@ const Classroom = props => {
   const [messages, setMessages] = useState([]);
   const [lectures,setLectures] = useState([{lecture_description:""}])
   const [selectedLecture,setSelectedLecture] = useState(0)
+  const {user_id,is_teacher} = props
 
   useEffect(() => {
+    
+    checkPrivacy()
+    
     getLectures()
     
     if (token === "" || session_id === "") {
@@ -30,7 +34,7 @@ const Classroom = props => {
       });
     }
 
-  }, []);
+  }, [props]);
   
   const getLectures = async() =>{
     
@@ -43,6 +47,15 @@ const Classroom = props => {
       props.history.goBack()
     }
   
+  }
+
+  const checkPrivacy = async() =>{
+    try{
+      const lRes = await Axios.get(`/info/course/privacy/?user_id=${user_id}&is_teacher=${is_teacher}&course_id=${course_id}`)
+    }catch{
+        alert('Access Denied!')
+        props.history.push('/dashboard')
+    }
   }
 
   useEffect(() => {
@@ -112,10 +125,11 @@ const Classroom = props => {
 };
 
 const m2p = state => {
-  const { user_id } = state;
+  const { user_id, is_teacher } = state;
 
   return {
-    user_id
+    user_id,
+    is_teacher
   };
 };
 
