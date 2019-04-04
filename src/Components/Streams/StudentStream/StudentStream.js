@@ -61,30 +61,36 @@ const StudentStream = props => {
 
 
   return (
-    <div>
-      {isUserVideoAllowed() && <OTPublisher session={sessionHelper.session} properties={{name:'Student'}}/>}
+    <div className='mapped_streams_container'>
       {streams.map(stream => {
         if(stream.name==='Teacher'){  // for teachers
           return (
-            <OTSubscriber
-            key={stream.id}
-            session={sessionHelper.session}
-            stream={stream}
-            properties={{width: '100%', height: '58vh'}}
-          />
+            <div className='teacher_stream_container'>              
+              <OTSubscriber
+                key={stream.id}
+                session={sessionHelper.session}
+                stream={stream}
+                properties={{width: '35.5vh', height: '20vh',}}
+              />
+            </div>
           )
         }
         else{                  //for students
           return (
-            <OTSubscriber
-              key={stream.id}
-              session={sessionHelper.session}
-              stream={stream}
-              properties={{width: '20vw', height: '20vh'}}
-            />
-          );
+            <div className='student_stream_container'>
+              <OTSubscriber
+                key={stream.id}
+                session={sessionHelper.session}
+                stream={stream}
+                properties={{width: '35.5vh', height: '20vh', insertMode: 'append'}}
+              />
+            </div>
+          ); 
         }
       })}
+
+      {isUserVideoAllowed() && <OTPublisher session={sessionHelper.session} properties={{name:'Student'}}/>}
+
     </div>
   );
 };
