@@ -12,7 +12,7 @@ const LoginModal = props => {
   const [password, setPassword] = useState("");
   const [errMessage, setErrMessage] = useState("");
 
-  const {setLogin} = props
+  const {setLogin, setRegister} = props
 
   useEffect(()=>{
 
@@ -80,6 +80,12 @@ const LoginModal = props => {
           />
           <br />
           <PrimaryButton onClick={login}>Log in</PrimaryButton>
+          <br />
+          <br />
+          <p onClick={()=>{
+            setLogin(false)
+            setRegister(true)
+          }}>Don't have an account? <button style={{color:'#14BF96'}}>Sign up here.</button></p>
         </div>
       </div>
     </div>

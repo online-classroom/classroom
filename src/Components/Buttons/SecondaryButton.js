@@ -5,7 +5,7 @@ const SecondaryButton = (props) => {
     let style={}
     if(props.isActive){
         style={
-            backgroundColor:'#5b8714',
+            backgroundColor:'#14BF96',
             color:'white',
             boxSizing:'border-box',
             padding:'1vh 2vw'
