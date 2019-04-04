@@ -1,13 +1,15 @@
 import { messageDisplay } from "./ChatLogic";
 
-describe("Chat feture test", () => {
-  test("it should exist", () => {
-    expect(messageDisplay).toBeDefined();
+describe("Chat feature test", () => {
+  
+  test("resultant array length should be correct", () => {
+    let result = messageDisplay([{message:'hello'},{message:'there'}])
+    expect(result.length).toBe(2);
   });
 
   test("it should return a array", () => {
     let result = messageDisplay([{message:'fdzs'}]);
-    expect(typeof result).toBe("object");
+    expect(Array.isArray(result)).toBe(true);
   });
 
   test('if length is zero it should return an empty array',()=>{

@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import './ClassListContainer.scss';
-import PrimaryButton from './../../Components/Buttons/PrimaryButton';
-import Axios from 'axios';
-import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { updateCourseInfo } from './../../ducks/reducer';
-import SecondaryButton from '../../Components/Buttons/SecondaryButton';
+import React, { Component } from "react";
+import "./ClassListContainer.scss";
+import PrimaryButton from "./../../Components/Buttons/PrimaryButton";
+import Axios from "axios";
+import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { updateCourseInfo } from "./../../ducks/reducer";
+import SecondaryButton from "../../Components/Buttons/SecondaryButton";
 
 class ClassListContainer extends Component {
   state = {
     courses: [],
-    selectedCourse: ''
+    selectedCourse: ""
   };
 
   componentDidMount = async () => {
@@ -53,7 +53,7 @@ class ClassListContainer extends Component {
 
     const courseMapper = courses.map(course => {
       return (
-        <div key={course.course_id} className='classlist-course-title'>
+        <div key={course.course_id} className="classlist-course-title">
           <SecondaryButton
             isActive={course === selectedCourse}
             onClick={() => handleCourseSelection(course)}
@@ -64,27 +64,31 @@ class ClassListContainer extends Component {
       );
     });
     return (
-      <div className='listContainer'>
+      <div className="listContainer">
         {is_teacher && (
-          <NavLink to='/addCourse'>
+          <NavLink to="/addCourse">
             <PrimaryButton>Add Course</PrimaryButton>
           </NavLink>
         )}
-        
+
         {courses.length ? (
           <>
             <p>Select a course to view course info.</p>
             {courseMapper}
-            <NavLink to='/browseclasses'>
-              <PrimaryButton>Browse Classes</PrimaryButton>
-            </NavLink>
+            {!is_teacher && (
+              <NavLink to="/browseclasses">
+                <PrimaryButton>Browse Classes</PrimaryButton>
+              </NavLink>
+            )}
           </>
         ) : (
           <>
             <p>You are not enrolled in any classes</p>
-            <NavLink to='/browseclasses'>
-              <PrimaryButton>Browse Classes</PrimaryButton>
-            </NavLink>
+            {!is_teacher && (
+              <NavLink to="/browseclasses">
+                <PrimaryButton>Browse Classes</PrimaryButton>
+              </NavLink>
+            )}
           </>
         )}
       </div>
