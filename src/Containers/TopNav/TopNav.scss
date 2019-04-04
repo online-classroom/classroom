@@ -12,8 +12,9 @@
     font-size: 16px;
     font-weight: bold;
     transition: 0.3s background linear;
-    
+    position:fixed;
     .searchbar-container{
+        display:none;
         padding: 0px 30px;
         width: 33vw;
         @media screen and (max-width: 414px){
@@ -45,11 +46,12 @@
         height:80%;
         display:flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         width: 33vw;
         letter-spacing: 2px;
         font-size: 20px;
         text-decoration: none;
+        padding-left:60px;
 
         @media screen and (max-width: 414px){
             padding: 0px;
