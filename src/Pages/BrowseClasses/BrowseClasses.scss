@@ -1,6 +1,8 @@
+@import './../../variables';
+
 .browse_class_container {
   min-height: calc(100vh - 201px);
-  background-color: rgb(235, 235, 235);
+  background-color: $mainbackground;
   padding: 30px 60px;
 
   @media (max-width: 414px) {
@@ -14,10 +16,10 @@
     display: flex;
     justify-content: space-around;
     font-size: 22px;
-    color: rgb(0, 28, 58);
+    color: $bluetext;
 
     button:hover {
-      color: green;
+      color: $primarygreen;
     }
 
     @media (max-width: 414px) {
@@ -48,8 +50,8 @@
 
     .courses_in_browse {
       background-color: white;
-      color: rgb(0, 54, 111);
-      box-shadow: 5px 7px 24px rgb(201, 201, 201);
+      color: $bluetext;
+      box-shadow: 5px 7px 24px $shadow;
       padding: 30px;
       overflow: auto;
       height: 400px;
@@ -109,6 +111,15 @@
 
       @media (max-width: 414px){
         margin: 15px;
+      }
+
+      .browsing-archived-videos{
+        padding: 20px;
+        margin: 30px 15px;
+        background-color: white;
+        height: 600px;
+        overflow: auto;
+        border-radius: 25px;
       }
 
       .calendar_height {

@@ -166,7 +166,9 @@ const BrowseClasses = (props)=>{
                     </div>
                     
                     <SecondaryButton onClick={()=>handleClickOnDetails(undefined)} style={{margin: '15px'}}>Back</SecondaryButton>
-                    <LectureVideos course_id={props.course_id}/>
+                    
+                    <div className='browsing-archived-videos'><LectureVideos course_id={selectedCourseInfo.course_id} style={{margin: '0 auto'}}/></div>
+
                     <div className='calendar_height'>
                     <div style={{margin: '15px'}}>
                         Here is a calendar of this courses lecture times

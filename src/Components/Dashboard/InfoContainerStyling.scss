@@ -1,12 +1,13 @@
 .infoContainer {
-  height: 90%;
+  height: 100%;
   box-sizing: border-box;
   padding: 15px 45px;
 
+  
   .courseinfo-buttons{
     display: flex;
   }
-
+  
   p {
     margin: 10px 30px 30px 20px;
     font-size: 22px;
@@ -16,6 +17,7 @@
     color: grey;
     font-size: 14px;
   }
+  
 }
 .infoRow {
   margin: 1em;
