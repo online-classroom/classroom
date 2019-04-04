@@ -16,9 +16,22 @@ const TopNav = props => {
   const [login,setLogin] = useState(false)
   const [register,setRegister] = useState(false)
   const [searchString,setSearchString] = useState('')
+  const [classname,setClassname] = useState('topnav')
 
   useEffect(() => {
     getUser();
+
+    window.addEventListener('scroll',(event)=>{
+      if(window.scrollY >= 70){
+        setClassname('topnav navbackground')
+        console.log('if')
+      }
+      else{
+        setClassname('topnav')
+        console.log('else')
+      }
+    })
+    
   }, []);
 
   // useEffect(()=>{
@@ -65,7 +78,7 @@ const TopNav = props => {
 
   return (
     <div >
-    <div className={homePage ? "topnav" : "topnav navbackground"} >
+    <div className={homePage ? classname : "topnav navbackground"} >
       <div className="searchbar-container">
         <input
           value={searchString}
