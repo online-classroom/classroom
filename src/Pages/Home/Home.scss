@@ -1,3 +1,5 @@
+@import './../../variables';
+
 .home-container{
     display: flex;
     flex-direction: column;
@@ -20,7 +22,7 @@
         display: flex;
         justify-content: space-between;
 
-        @media screen and (max-width: 414px){
+        @media (max-width: 414px){
             height: 400px;      
         }
 
@@ -28,7 +30,7 @@
             width: 40vw;
             height: 375px;
             margin: 5vw 5vw;
-            background-color: rgb(235, 235, 235);
+            background-color: $mainbackground;
 
             .login-content{
                 margin: 7.5% 10%;
@@ -60,7 +62,7 @@
             height: 375px;
             margin: 50px auto;
 
-            @media screen and (max-width: 414px){
+            @media (max-width: 414px){
              margin: 30px auto;   
             }
             
@@ -86,7 +88,7 @@
                 .reg-button{
                     height: 150px;
                     border-radius: 75px;
-                    background-color: rgb(235, 235, 235);
+                    background-color: $mainbackground;
                     border: none;
                     font-size: 28px;
                 }
@@ -103,9 +105,9 @@
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
-        background-color: rgb(235, 235, 235);
+        background-color: $mainbackground;
         
-        @media screen and (max-width: 414px){
+        @media (max-width: 414px){
             padding: 15px 0 0 0;
         }
 
@@ -118,11 +120,11 @@
             padding: 10px;
             background-color: white;
             font-size: 22px;
-            color: rgb(0, 54, 111);
-            box-shadow: 5px 7px 24px rgb(201, 201, 201);
+            color: $bluetext;
+            box-shadow: 5px 7px 24px $shadow;
             overflow: auto;
             
-            @media screen and (max-width:414px){
+            @media (max-width:414px){
                 width: 80%;
                 margin: 15px auto;    
             }
@@ -136,18 +138,18 @@
                 border-right: 1px solid rgb(237, 237, 237);
                 text-decoration: none;
 
-                @media screen and (max-width:414px){
+                @media (max-width:414px){
                     width: 100px;
                     font-size: 18px;
                 }
 
                 a, a:visited{
                     text-decoration: none;
-                    color: rgb(0, 54, 111);
+                    color: $bluetext;
                 }
 
                 a:hover{
-                    color: green;
+                    color: $primarygreen;
                 }
             }
 
@@ -160,12 +162,12 @@
                 
                 a, a:visited{
                     text-decoration: none;
-                    color: rgb(0, 54, 111);
+                    color: $bluetext;
                 }
                 
                 a:hover{
                     text-decoration: none;
-                    color: green;
+                    color: $primarygreen;
                     
                 }
             }
@@ -175,7 +177,7 @@
                 margin: 10px 30px;
                 font-size: 16px;
                 
-                @media screen and (max-width:414px){
+                @media (max-width:414px){
                     font-size: 14px;
                 }
             }
