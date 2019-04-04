@@ -1,6 +1,7 @@
 @import './../../variables';
 
 .outer-reg {
+    z-index:3;
     @include defaultInputBox;
     position: fixed;
     top: 0px;
@@ -55,7 +56,7 @@
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
             box-sizing: border-box;
-            padding: 80px;
+            padding: 35px 80px;
             
             input:-webkit-autofill,
             input:-webkit-autofill:hover, 
