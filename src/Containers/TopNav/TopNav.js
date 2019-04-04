@@ -21,6 +21,19 @@ const TopNav = props => {
     getUser();
   }, []);
 
+  // useEffect(()=>{
+
+  //   const modal = document.getElementById('searchbar')
+    
+  //   window.onclick = function (event){
+  //     if(event.target==modal){
+  //       console.log('hit')
+  //       toggleSearchOptions('none')
+  //     }
+  //   }
+
+  // },[])
+
   const getUser = async () => {
     if (!props.username) {
       try {
@@ -44,15 +57,15 @@ const TopNav = props => {
     }
   }
 
-  const toggleSearchOptions = (display) =>{
-    document.getElementsByClassName('searchOptions-container')[0].style.display=display
-  }
+  // const toggleSearchOptions = (display) =>{
+  //   document.getElementsByClassName('searchOptions-container')[0].style.display=display
+  // }
   
 
 
   return (
-    <div>
-    <div className={homePage ? "topnav" : "topnav navbackground"}>
+    <div >
+    <div className={homePage ? "topnav" : "topnav navbackground"} >
       <div className="searchbar-container">
         <input
           value={searchString}
@@ -62,8 +75,8 @@ const TopNav = props => {
           placeholder="Search"
           type="text"
           style={{ color: "white" }}
-          onFocus={()=>toggleSearchOptions('block')}
-          // onBlur={()=>toggleSearchOptions('none')}
+          // onFocus={()=>toggleSearchOptions('block')}
+          
         />
       </div>
       <span className="logo">
@@ -84,11 +97,10 @@ const TopNav = props => {
         )}
       </div>
     </div>
-      <div className='searchOptions-container'>
-        <SearchOptions searchString={searchString}
-          toggle={toggleSearchOptions}
+      {/* <div className='searchOptions-container' onBlur={()=>toggleSearchOptions('none')} tabIndex={0}>
+        <SearchOptions searchString={searchString} toggleSearchOptions={toggleSearchOptions}
         />
-      </div>
+      </div>     */}
         {login && <LoginModal setLogin={setLogin}/>}
         {register && <RegisterModal setRegister={setRegister}/>}
     </div>

@@ -53,6 +53,7 @@ const Classroom = props => {
     try{
       const lRes = await Axios.get(`/info/course/privacy/?user_id=${user_id}&is_teacher=${is_teacher}&course_id=${course_id}`)
     }catch{
+        alert('Access Denied!')
         props.history.push('/dashboard')
     }
   }
