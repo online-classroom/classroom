@@ -9,6 +9,14 @@
     .subject-container{
         width:10vw;
         margin:5vh 0;
+        a,a:visited{
+            text-decoration: none;
+            color:black;
+        }
+        a:hover{
+            text-decoration: underline;
+            color:blue;
+        }
         #subject-name{
             font-weight: bold;
             color:grey;

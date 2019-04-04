@@ -57,9 +57,9 @@ const TopNav = props => {
     }
   }
 
-  const toggleSearchOptions = (display) =>{
-    document.getElementsByClassName('searchOptions-container')[0].style.display=display
-  }
+  // const toggleSearchOptions = (display) =>{
+  //   document.getElementsByClassName('searchOptions-container')[0].style.display=display
+  // }
   
 
 
@@ -75,7 +75,7 @@ const TopNav = props => {
           placeholder="Search"
           type="text"
           style={{ color: "white" }}
-          onFocus={()=>toggleSearchOptions('block')}
+          // onFocus={()=>toggleSearchOptions('block')}
           
         />
       </div>
@@ -97,10 +97,10 @@ const TopNav = props => {
         )}
       </div>
     </div>
-      <div className='searchOptions-container' onBlur={()=>toggleSearchOptions('none')}>
+      {/* <div className='searchOptions-container' onBlur={()=>toggleSearchOptions('none')} tabIndex={0}>
         <SearchOptions searchString={searchString} toggleSearchOptions={toggleSearchOptions}
         />
-      </div>
+      </div>     */}
         {login && <LoginModal setLogin={setLogin}/>}
         {register && <RegisterModal setRegister={setRegister}/>}
     </div>
