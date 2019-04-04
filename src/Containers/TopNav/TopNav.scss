@@ -1,6 +1,7 @@
 @import './../../variables';
 
 .topnav{
+    z-index: 2;
     height: 60px;
     width: 100%;
     color: $accent2;
