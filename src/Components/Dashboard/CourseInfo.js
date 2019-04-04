@@ -64,14 +64,17 @@ class CourseInfo extends Component {
                 <h4>Course Description:</h4>
                 <p dangerouslySetInnerHTML={{ __html: course.description }} />
                 {this.props.is_teacher ? (
+                  <div className='courseinfo-buttons'>
                   <NavLink to='/addLecture'>
                     <PrimaryButton>Add Lecture</PrimaryButton>
-                  </NavLink>
+                  </NavLink>&emsp;
+                  <PrimaryButton onClick={this.edit}>
+                  Edit Course
+                 </PrimaryButton>
+                </div>
                 ) : (
                   <></>
                 )}
-                {/* <AddLectureModal /> */}
-                <br />
                 <NavLink to={`/classroom/${course.course_id}`}>
                   <PrimaryButton>Enter Classroom</PrimaryButton>
                 </NavLink>
@@ -112,9 +115,7 @@ class CourseInfo extends Component {
         )}
         {this.props.is_teacher ? (
           <div>
-            <button onClick={this.edit} style={{ backgroundColor: 'aqua' }}>
-              Edit Stuff:
-            </button>
+            
           </div>
         ) : (
           <p />
