@@ -70,7 +70,7 @@ const StudentStream = props => {
                 key={stream.id}
                 session={sessionHelper.session}
                 stream={stream}
-                properties={{width: '35.5vh', height: '20vh',}}
+                properties={{width: '100%', height: '72.5vh'}}
               />
             </div>
           )

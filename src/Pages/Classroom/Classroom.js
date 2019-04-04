@@ -118,7 +118,8 @@ const Classroom = props => {
         }
         </div>
         <div className="bonus_container">
-          <Quiz />
+          {/* <Quiz /> */}
+          More Exciting Features Coming Soon
         </div>
       </div>
     </div>

@@ -22,7 +22,7 @@ const Chat = props => {
       <input
         className='input_message_field'
         value={message}
-        placeholder='Enter message'
+        placeholder='Enter message. Press Enter to send.'
         onChange={e => handleMessage(e.target.value)}
         onKeyDown={e => sendMessage(e)}
       />

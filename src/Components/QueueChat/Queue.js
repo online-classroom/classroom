@@ -74,6 +74,7 @@ const Queue = props => {
           onChange={e => handleQuestion(e.target.value)}
           value={question}
           onKeyDown={e => joinQueue(e)}
+          placeholder='Type in a question. Enter to ask.'
         />
       )}
     </div>
