@@ -144,9 +144,9 @@ const TeacherStream = props => {
           </div>
         </div>
       ) : (
-        <div>
-          <div>
-            <p>Choose Display:</p>
+        <div className='not-streaming'>
+          <div className='choose-source'>
+            <p id='not-streaming-header'>Choose Display:</p>
             <SecondaryButton
               isActive={source === "screen"}
               onClick={() => setSource("screen")}
@@ -160,16 +160,22 @@ const TeacherStream = props => {
               Camera
             </SecondaryButton>
           </div>
-          <p>Scheduled Lectures</p>
-          <div>{mappedLectures}</div>
-          <p>Recorded Lectures</p>
-          <div>{mappedRecordedLectures}</div>
-          <p>Check to record this lecture</p>
-          <input
-            type="checkbox"
-            onChange={() => setRecord(!record)}
-            value={record}
-          />
+          <div className='scheduled-lectures'>
+            <p id="not-streaming-header">Scheduled Lectures:</p>
+            <div className="mapper">{mappedLectures}</div>
+          </div>
+          <div className='scheduled-lectures'>
+            <p id='not-streaming-header'>Recorded Lectures:</p>
+            <div className="mapper">{mappedRecordedLectures}</div>
+          </div>
+          <div className='scheduled-lectures'>
+            <p id="not-streaming-header">Check to record this lecture</p>
+            <input
+              type="checkbox"
+              onChange={() => setRecord(!record)}
+              value={record}
+            />
+          </div>
           <PrimaryButton onClick={startStream}>Start Lecture</PrimaryButton>
         </div>
       )}

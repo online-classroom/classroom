@@ -1,6 +1,41 @@
 .teacherStream {
   width: 100%;
   height: 58vh;
+
+  .not-streaming{
+    padding:50px 30px;
+    display:flex;
+    flex-direction: column;
+
+    .choose-source{
+      display:flex;
+      justify-content: space-between;
+      width: 60%;
+      margin-bottom:30px;
+      #not-streaming-header{
+        font-weight: bold;
+        font-size:20px;
+      }
+    }
+
+    .scheduled-lectures{
+      display:flex;
+      justify-content: flex-start;
+      width: 90%;
+      margin-bottom:30px;
+      #not-streaming-header{
+        font-weight: bold;
+        font-size:20px;
+        margin-right:20px;
+      }
+      .mapper{
+        font-size:18px;
+        font-weight: bold;
+      }
+    }
+
+  }
+  
   
   .subscriber{
       position: absolute;
@@ -9,76 +44,22 @@
       width: 20%;
       height:20%;
   }
-
-.teacherStream{
-    width:100%;
-    height:58vh;
-    .start-recording{
-        display:flex;
-        flex-direction: row;
-        margin-top:40px;
-        margin-left:30px;
-        #record-checkbox{
-            width:20px;
-            height: 20px;
-            margin-right:20px;
-            margin-top:15px;
-        }
-        #recording-instruction{
-        font-weight:bold;
-        margin-right:20px;  
-        }
-    }
-    .start-lecture-button{
-        margin-left:30px;
-    }
-    .display-option{
-        display:flex;
-        margin:40px 20px;
-        p{
-            margin:0 10px;
-            font-size:20px;
-            font-weight:bold;
-        }
-         
-    }
-    .lectures-list-container{
-        display:flex;
-        flex-direction: column;
-        margin:0 30px;
-        p{
-            font-weight: bold;
-            margin-right:10px;
-        }
-        
-        .lectures-list{
-            display:flex;
-            flex-wrap:wrap;
-            flex-direction: row;
-            margin-right:40px;
-            height:10vh;
-        }
-    }
-}
-
-
-
   .OT-Publisher {
     position: relative;
-
-
     .teacher-stream-buttons {
       display: flex;
       justify-content: space-between;
       margin: 0px;
-
       .end-lecture-button {
         align-items: center;
       }
-
       .screen-cam-toggle {
         margin-top: 30px;
       }
     }
   }
 }
+
+
+
+

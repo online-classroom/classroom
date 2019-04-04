@@ -101,8 +101,8 @@ const TopNav = props => {
         <SearchOptions searchString={searchString} toggleSearchOptions={toggleSearchOptions}
         />
       </div>     */}
-        {login && <LoginModal setLogin={setLogin}/>}
-        {register && <RegisterModal setRegister={setRegister}/>}
+        {login && <LoginModal setLogin={setLogin} setRegister={setRegister}/>}
+        {register && <RegisterModal setRegister={setRegister} setLogin={setLogin}/>}
     </div>
   );
 };

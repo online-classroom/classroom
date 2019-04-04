@@ -11,6 +11,8 @@
 
 @mixin defaultInputBox{
     input{
+        margin-top:5px;
+        margin-bottom:5px;
         border: 1.2px solid rgba(0,0,0,0.4);
         padding: 1vh 1vw;
         font-size:20px;
@@ -33,9 +35,9 @@ $accent1:#00284A;
 $accent2:white;
 $accent3:#00284A;
 $accent4:rgb(235,235,235);
-$accent5:#9cb443;
-$accent6:#71b307;
-$accent7:#5b8714;
+$accent5:#14BF96;
+$accent6:#21d0a7;
+$accent7:#14BF96;
 
 $primarygreen: #14BF96;
 $bluetext: rgb(0, 54, 111);
