@@ -7,6 +7,7 @@ import ReactQuill from 'react-quill';
 import { updateCourseInfo } from '../../ducks/reducer';
 import axios from 'axios';
 import AddLectureModal from '../../Containers/AddCourseModal/AddLectureModal';
+import SecondaryButton from '../Buttons/SecondaryButton';
 
 class CourseInfo extends Component {
   // console.log('courseInfo', props);
@@ -70,14 +71,16 @@ class CourseInfo extends Component {
                   </NavLink>&emsp;
                   <PrimaryButton onClick={this.edit}>
                   Edit Course
-                 </PrimaryButton>
-                </div>
-                ) : (
-                  <></>
-                )}
+                 </PrimaryButton>&emsp;
                 <NavLink to={`/classroom/${course.course_id}`}>
                   <PrimaryButton>Enter Classroom</PrimaryButton>
                 </NavLink>
+                </div>
+                ) : (
+                  <><NavLink to={`/classroom/${course.course_id}`}>
+                  <PrimaryButton>Enter Classroom</PrimaryButton>
+                </NavLink></>
+                )}
               </div>
             ) : (
               <div className='infoContainer'>No course selected</div>
@@ -85,20 +88,22 @@ class CourseInfo extends Component {
           </>
         ) : (
           <div className='infoContainer'>
-            <button onClick={this.submitEdit}>Submit</button>
-            <h4>Course Title:</h4>
+            <span className='edit-info-titles'>Course Title:</span><br/>
             <input
               value={this.state.title}
               onChange={e => this.handleTitleInput(e.target.value)}
             />
-            <h4>Course Description:</h4>
+            <br/>
+            <br/>
+            <span id='edit-info-titles'>Course Description:</span><br/>
             <ReactQuill
               className='react-quill'
               value={this.state.description}
               name='lecDescription'
               onChange={this.handlelectureDescInput}
-              style={{ height: '40vh', width: '90vw' }}
+              style={{ height: '100%', width: '100%' }}
             />
+            <PrimaryButton onClick={this.submitEdit}>Submit</PrimaryButton>&emsp;
             {/* {this.props.is_teacher ? (
               <NavLink to='/addLecture'>
                 <PrimaryButton>Add Lecture</PrimaryButton>
@@ -107,7 +112,6 @@ class CourseInfo extends Component {
               <></>
             )} */}
             {/* <AddLectureModal /> */}
-            <br />
             <NavLink to={`/classroom/${course.course_id}`}>
               <PrimaryButton>Enter Classroom</PrimaryButton>
             </NavLink>
