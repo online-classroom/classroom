@@ -225,14 +225,12 @@ module.exports = {
     const db = req.app.get('db')
     const {user_id, is_teacher, course_id} = req.query
 
-    console.log(req.query)
     let courses = []
     if (is_teacher === 'true') {
 
-      courses = await db.info.checkTeacherPrivacy([user_id,course_id])
-      console.log(courses)
+      courses = await db.info.checkTeacherPrivacy([parseInt(user_id),parseInt(course_id)])
     } else {
-      courses = await db.info.checkStudentPrivacy([user_id,course_id])
+      courses = await db.info.checkStudentPrivacy([parseInt(user_id),parseInt(course_id)])
       // console.log(courses)
     }
 
