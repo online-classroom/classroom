@@ -26,17 +26,18 @@
         }
         
         .searchbar, .searchbar:focus, .searchbar:active {
-            height: 40px;
-            width: 200px;
-            background-color: rgba(255, 255, 255, 0.25);
-            border-radius: 4px;
-            border: none;
-            outline: none;
-            text-decoration: none;
-            box-sizing: border-box;
-            padding: 15px;
-            color: white;
-            font-family: $primaryfontfam;
+            display: none;
+            // height: 40px;
+            // width: 200px;
+            // background-color: rgba(255, 255, 255, 0.25);
+            // border-radius: 4px;
+            // border: none;
+            // outline: none;
+            // text-decoration: none;
+            // box-sizing: border-box;
+            // padding: 15px;
+            // color: white;
+            // font-family: $primaryfontfam;
         }        
     }
 
