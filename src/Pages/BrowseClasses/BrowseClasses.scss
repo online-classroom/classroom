@@ -3,7 +3,7 @@
   background-color: rgb(235, 235, 235);
   padding: 30px 60px;
 
-  @media screen and (max-width: 414px) {
+  @media (max-width: 414px) {
     padding: 10px;
   }
 
@@ -20,7 +20,7 @@
       color: green;
     }
 
-    @media screen and (max-width: 414px) {
+    @media (max-width: 414px) {
       font-size: 16px;
       flex-wrap: wrap;
       padding: 15px;
@@ -41,7 +41,7 @@
     grid-row-gap: 30px;
     margin: 15px 0 30px 0;
 
-    @media screen and (max-width: 414px) {
+    @media (max-width: 414px) {
       grid-template-columns: 100%;
       grid-row-gap: 30px;
     }
@@ -55,7 +55,7 @@
       height: 400px;
       box-sizing: border-box;
 
-      @media screen and (max-width: 414px) {
+      @media (max-width: 414px) {
         height: 150px;
         grid-auto-flow: column;
         padding: 10px;
@@ -67,7 +67,7 @@
         font-size: 26px;
         margin: 0 0 10px 0;
 
-        @media screen and (max-width: 414px) {
+        @media (max-width: 414px) {
           padding: 5px;
         }
       }
@@ -88,7 +88,7 @@
       .course-details {
         margin: 10px 0;
 
-        @media screen and (max-width: 414px) {
+        @media (max-width: 414px) {
           display: none;
         }
       }
@@ -97,15 +97,32 @@
         margin: 10px;
         color: grey;
 
-        @media screen and (max-width: 414px) {
+        @media (max-width: 414px) {
           display: none;
         }
       }
     }
 
-    .calendar_height {
-      height: 300px;
-      width: 100%;
+    .calendar-container{
+      grid-column: 1 / span 3;
+      text-align: center;
+
+      @media (max-width: 414px){
+        margin: 15px;
+      }
+
+      .calendar_height {
+        padding: 20px;
+        border-radius: 25px;
+        height: 800px;
+        background-color: white;
+        margin: 15px;
+
+        @media (max-width: 414px){
+          display: none;
+          padding: 10px;
+        }
+      }
     }
   }
 }

@@ -1,3 +1,14 @@
+.teacherStream {
+  width: 100%;
+  height: 58vh;
+  
+  .subscriber{
+      position: absolute;
+      top:15px;
+      left:15px;
+      width: 20%;
+      height:20%;
+  }
 
 .teacherStream{
     width:100%;
@@ -52,3 +63,22 @@
 
 
 
+  .OT-Publisher {
+    position: relative;
+
+
+    .teacher-stream-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin: 0px;
+
+      .end-lecture-button {
+        align-items: center;
+      }
+
+      .screen-cam-toggle {
+        margin-top: 30px;
+      }
+    }
+  }
+}

@@ -40,11 +40,14 @@ const TeacherStream = props => {
 
   const mappedStreams = streams.map(stream => {
     return (
+      <div className='subscriber'>
       <OTSubscriber
         key={stream.id}
         session={sessionHelper.session}
         stream={stream}
+        properties={{width: '35.5vh', height: '20vh', insertMode: 'append'}}
       />
+      </div>
     );
   });
 
@@ -102,7 +105,7 @@ const TeacherStream = props => {
   return (
     <div className="teacherStream">
       {publish ? (
-        <div>
+        <div className='OT-Publisher'>
           {source === "screen" ? (
             <OTPublisher
               properties={{
@@ -120,23 +123,29 @@ const TeacherStream = props => {
             />
           )}
           {mappedStreams}
-          <PrimaryButton onClick={stopStream}>End Lecture</PrimaryButton>
-          <SecondaryButton
-            isActive={source === "screen"}
-            onClick={() => setSource("screen")}
-          >
-            Screen
-          </SecondaryButton>
-          <SecondaryButton
-            isActive={source === ""}
-            onClick={() => setSource("")}
-          >
-            Camera
-          </SecondaryButton>
+          <div className="teacher-stream-buttons">
+            <div className="end-lecture-button">
+              <PrimaryButton onClick={stopStream}>End Lecture</PrimaryButton>
+            </div>
+            <div className="screen-cam-toggle">
+              <SecondaryButton
+                isActive={source === "screen"}
+                onClick={() => setSource("screen")}
+              >
+                Screen
+              </SecondaryButton>
+              <SecondaryButton
+                isActive={source === ""}
+                onClick={() => setSource("")}
+              >
+                Camera
+              </SecondaryButton>
+            </div>
+          </div>
         </div>
       ) : (
         <div>
-          <div className="display-option">
+          <div>
             <p>Choose Display:</p>
             <SecondaryButton
               isActive={source === "screen"}
@@ -151,26 +160,17 @@ const TeacherStream = props => {
               Camera
             </SecondaryButton>
           </div>
-          <div className="lectures-list-container">
-            <div className="lectures-list">
-              <p>Scheduled Lectures:</p>
-              <div>{mappedLectures}</div>
-            </div>
-            <div className="lectures-list">
-              <p>Recorded Lectures:</p>
-              <div>{mappedRecordedLectures}</div>
-            </div>
-          </div>
-          <div className="start-recording">
-            <p id="recording-instruction">Check to record this lecture</p>
-            <input
-              type="checkbox"
-              onChange={() => setRecord(!record)}
-              value={record}
-              id='record-checkbox'
-            />
-          </div>
-            <div className='start-lecture-button'><PrimaryButton onClick={startStream}>Start Lecture</PrimaryButton></div>
+          <p>Scheduled Lectures</p>
+          <div>{mappedLectures}</div>
+          <p>Recorded Lectures</p>
+          <div>{mappedRecordedLectures}</div>
+          <p>Check to record this lecture</p>
+          <input
+            type="checkbox"
+            onChange={() => setRecord(!record)}
+            value={record}
+          />
+          <PrimaryButton onClick={startStream}>Start Lecture</PrimaryButton>
         </div>
       )}
     </div>
