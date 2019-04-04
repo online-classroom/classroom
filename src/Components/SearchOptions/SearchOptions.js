@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 const SearchOptions = (props) => {
     const [subjects,setSubjects] = useState([])
     const [courses, setCourses] = useState([])
-    const {searchString} = props
+    const {searchString, toggleSearchOptions} = props
 
     useEffect(()=>{
         getCoursesAndSubjects()
@@ -50,9 +50,8 @@ const SearchOptions = (props) => {
         const mapper = courses.filter((course)=>course.subject_id===id).map((course)=>{
             return(
                 <NavLink to={`/browseclasses?subject=${course.subject_name}&course=${course.course_id}`}
-                    onClick={props.toggle('none')}
                 >                    
-                    <p id='course-title' className='course-title'>{course.title}</p>
+                    <p id='course-title' className='course-title' onClick={()=>toggleSearchOptions('none')}>{course.title}</p>
                 </NavLink>
             )
         })
