@@ -2,6 +2,14 @@
 
 ![alt text](./src/assets/logo.png) 
 
+![alt text](./src/assets/home.png) 
+
+![alt text](./src/assets/dashboard.png) 
+
+![alt text](./src/assets/classroom.png) 
+
+![alt text](./src/assets/browse.png) 
+
 <!-- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
