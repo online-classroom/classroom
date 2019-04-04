@@ -10,8 +10,6 @@ import AddLectureModal from '../../Containers/AddCourseModal/AddLectureModal';
 import SecondaryButton from '../Buttons/SecondaryButton';
 
 class CourseInfo extends Component {
-  // console.log('courseInfo', props);
-  // const {title,description,subject_id,teacher_id,start_date,end_date} = course
   state = {
     title: '',
     description: '',
@@ -36,9 +34,6 @@ class CourseInfo extends Component {
   };
   submitEdit = () => {
     const { title, description } = this.state;
-    // const { course_id } = this.props;
-    // console.log('props', this.props);
-    // console.log(666, this.state);
     axios
       .put(`/api/updateCourse/${this.props.course.course_id}`, {
         title,
@@ -66,20 +61,24 @@ class CourseInfo extends Component {
                 <p dangerouslySetInnerHTML={{ __html: course.description }} />
                 {this.props.is_teacher ? (
                   <div className='courseinfo-buttons'>
-                  <NavLink to='/addLecture'>
-                    <PrimaryButton>Add Lecture</PrimaryButton>
-                  </NavLink>&emsp;
-                  <PrimaryButton onClick={this.edit}>
-                  Edit Course
-                 </PrimaryButton>&emsp;
-                <NavLink to={`/classroom/${course.course_id}`}>
-                  <PrimaryButton>Enter Classroom</PrimaryButton>
-                </NavLink>
-                </div>
+                    <NavLink to='/addLecture'>
+                      <PrimaryButton>Add Lecture</PrimaryButton>
+                    </NavLink>
+                    &emsp;
+                    <PrimaryButton onClick={this.edit}>
+                      Edit Course
+                    </PrimaryButton>
+                    &emsp;
+                    <NavLink to={`/classroom/${course.course_id}`}>
+                      <PrimaryButton>Enter Classroom</PrimaryButton>
+                    </NavLink>
+                  </div>
                 ) : (
-                  <><NavLink to={`/classroom/${course.course_id}`}>
-                  <PrimaryButton>Enter Classroom</PrimaryButton>
-                </NavLink></>
+                  <>
+                    <NavLink to={`/classroom/${course.course_id}`}>
+                      <PrimaryButton>Enter Classroom</PrimaryButton>
+                    </NavLink>
+                  </>
                 )}
               </div>
             ) : (
@@ -88,14 +87,16 @@ class CourseInfo extends Component {
           </>
         ) : (
           <div className='infoContainer'>
-            <span className='edit-info-titles'>Course Title:</span><br/>
+            <span className='edit-info-titles'>Course Title:</span>
+            <br />
             <input
               value={this.state.title}
               onChange={e => this.handleTitleInput(e.target.value)}
             />
-            <br/>
-            <br/>
-            <span id='edit-info-titles'>Course Description:</span><br/>
+            <br />
+            <br />
+            <span id='edit-info-titles'>Course Description:</span>
+            <br />
             <ReactQuill
               className='react-quill'
               value={this.state.description}
@@ -103,27 +104,14 @@ class CourseInfo extends Component {
               onChange={this.handlelectureDescInput}
               style={{ height: '100%', width: '100%' }}
             />
-            <PrimaryButton onClick={this.submitEdit}>Submit</PrimaryButton>&emsp;
-            {/* {this.props.is_teacher ? (
-              <NavLink to='/addLecture'>
-                <PrimaryButton>Add Lecture</PrimaryButton>
-              </NavLink>
-            ) : (
-              <></>
-            )} */}
-            {/* <AddLectureModal /> */}
+            <PrimaryButton onClick={this.submitEdit}>Submit</PrimaryButton>
+            &emsp;
             <NavLink to={`/classroom/${course.course_id}`}>
               <PrimaryButton>Enter Classroom</PrimaryButton>
             </NavLink>
           </div>
         )}
-        {this.props.is_teacher ? (
-          <div>
-            
-          </div>
-        ) : (
-          <p />
-        )}
+        {this.props.is_teacher ? <div /> : <p />}
       </div>
     );
   }
