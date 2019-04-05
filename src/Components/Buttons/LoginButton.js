@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{memo} from 'react'
 import './LoginButton.scss';
 
 const LoginButton = (props)=>{
@@ -9,4 +9,4 @@ const LoginButton = (props)=>{
     )
 }
 
-export default LoginButton
+export default memo(LoginButton)

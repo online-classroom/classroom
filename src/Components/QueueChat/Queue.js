@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import './Queue.scss';
 import SecondaryButton from './../Buttons/SecondaryButton';
 import PrimaryButton from './../Buttons/PrimaryButton';
+import ScrollToBottom from 'react-scroll-to-bottom';
 
 const Queue = props => {
   const [question, handleQuestion] = useState('');
@@ -64,7 +65,7 @@ const Queue = props => {
 
   return (
     <div>
-      <div className='messageWrapper'>{queueMapper}</div>
+      <ScrollToBottom className='messageWrapper'>{queueMapper}</ScrollToBottom>
       {isUserInQueue(user_id) && (
         <PrimaryButton onClick={leaveQueue}>Leave Queue</PrimaryButton>
       )}
@@ -81,4 +82,4 @@ const Queue = props => {
   );
 };
 
-export default Queue;
+export default memo(Queue);

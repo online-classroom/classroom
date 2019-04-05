@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo} from 'react'
 import BigCalendar from 'react-big-calendar'
 import dates from './dates'
 import moment from 'moment'
@@ -82,4 +82,4 @@ const m2p = (state) => {
   return {user_id, is_teacher}
 }
 
-export default connect(m2p, null)(Basic)
+export default memo(connect(m2p, null)(Basic))

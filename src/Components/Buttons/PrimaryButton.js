@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{memo} from 'react'
 import './PrimaryButton.scss';
 
 const PrimaryButton = (props)=>{
@@ -9,4 +9,4 @@ const PrimaryButton = (props)=>{
     )
 }
 
-export default PrimaryButton
+export default memo(PrimaryButton)

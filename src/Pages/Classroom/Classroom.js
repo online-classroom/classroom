@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import "./Classroom.scss";
 import VideoContainer from "./../../Containers/VideoContainer/VideoContainer";
 import QueueChatContainer from "./../../Containers/QueueChatContainer/QueueChatContainer";
@@ -135,7 +135,7 @@ const m2p = state => {
   };
 };
 
-export default connect(
+export default memo(connect(
   m2p,
   { updateUser }
-)(Classroom);
+)(Classroom));

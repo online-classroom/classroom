@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import PrimaryButton from "./../../Buttons/PrimaryButton";
 
 import { OTPublisher, OTSubscriber, createSession } from "opentok-react";
@@ -183,4 +183,4 @@ const TeacherStream = props => {
   );
 };
 
-export default TeacherStream;
+export default memo(TeacherStream);

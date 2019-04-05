@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import * as logic from './ChatLogic';
 import './Queue.scss';
+import ScrollToBottom from 'react-scroll-to-bottom';
 
 const Chat = props => {
   const [message, handleMessage] = useState('');
   const { socket, course_id, user_id, messages } = props;
 
+
+  
   const sendMessage = e => {
     if (e.which === 13) {
       socket.emit('m2b', { user_id, course_id, message });
       handleMessage('')
-    }
+    }    
   };
+
 
   const messagesMapper = logic.messageDisplay(messages);
 
   return (
     <div className='queue'>
-      <div className='messageWrapper'>{messagesMapper}</div>
+      <ScrollToBottom className='messageWrapper' id='messageWrapper' >{messagesMapper}</ScrollToBottom>
       <br />
       <input
         className='input_message_field'
@@ -31,4 +35,4 @@ const Chat = props => {
   );
 };
 
-export default Chat;
+export default memo(Chat);

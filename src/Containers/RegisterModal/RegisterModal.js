@@ -106,14 +106,14 @@ class RegisterModal extends Component {
         <div className="inner-reg">
           <div className="left-modal-reg">
             <span className="login-left-title-reg">
-              A world class education for anyone, anywhere. 100% free.
+              Real-time interactive classrooms accessible to everyone, everywhere.
             </span>
             <br />
             <br />
             <span className="login-left-subtitle-reg">
-              Join Khan Academy to get personalized help with what you’re
+              Join Classcast to get personalized help with what you’re
               studying or to learn something completely new. We’ll save all of
-              your progress. By signing up for Khan Academy, you agree to our
+              your progress. By signing up for Classcast, you agree to our
               Terms of use and Privacy Policy.
             </span>
           </div>
