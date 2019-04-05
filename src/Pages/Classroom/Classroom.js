@@ -20,6 +20,8 @@ const Classroom = props => {
   const [lectures,setLectures] = useState([{lecture_description:""}])
   const [selectedLecture,setSelectedLecture] = useState(0)
   const {user_id,is_teacher} = props
+  const [unreadQueue,setUnreadQueue] = useState(true)
+  const [unreadMessage,setUnreadMessage] = useState(false)
 
   useEffect(() => {
     
@@ -61,6 +63,7 @@ const Classroom = props => {
   useEffect(() => {
     socket.emit("join classroom", course_id);
 
+
     socket.on("classroom joined", data => {
       setQueue(data.queue);
       setMessages(data.messages);
@@ -68,10 +71,12 @@ const Classroom = props => {
 
     socket.on("queue joined", queue => {
       setQueue(queue);
+      setUnreadQueue(true)
     });
 
     socket.on("messages updated", messages => {
       setMessages(messages);
+      setUnreadMessage(true)
     });
 
     socket.on("queue left", queue => {
@@ -104,6 +109,10 @@ const Classroom = props => {
             course_id={course_id}
             queue={queue}
             messages={messages}
+            unreadQueue={unreadQueue}
+            setUnreadQueue={setUnreadQueue}
+            unreadMessage={unreadMessage}
+            setUnreadMessage={setUnreadMessage}
           />
         </div>
       </div>

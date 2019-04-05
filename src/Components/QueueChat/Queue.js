@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 import './Queue.scss';
 import SecondaryButton from './../Buttons/SecondaryButton';
 import PrimaryButton from './../Buttons/PrimaryButton';
@@ -8,6 +8,7 @@ const Queue = props => {
   const [question, handleQuestion] = useState('');
 
   const { user_id, course_id, socket, queue, is_teacher } = props;
+  
 
   const joinQueue = e => {
     if (e.which === 13) {
