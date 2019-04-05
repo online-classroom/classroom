@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { OTPublisher, OTSubscriber, createSession } from "opentok-react";
 import {connect} from 'react-redux'
 import './StudentStream.scss'
@@ -105,4 +105,4 @@ const m2p = (state) => {
 
 
 
-export default connect(m2p,null)(StudentStream);
+export default memo(connect(m2p,null)(StudentStream));

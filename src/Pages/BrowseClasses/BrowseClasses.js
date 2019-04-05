@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Fragment} from "react";
+import React, {useState, useEffect, memo} from "react";
 import axios from 'axios';
 import "./BrowseClasses.scss";
 import {connect} from 'react-redux';
@@ -221,7 +221,7 @@ const m2p = state => {
         course
     };
 };
-export default connect(m2p, {updateCourseInfo})(BrowseClasses);
+export default memo(connect(m2p, {updateCourseInfo})(BrowseClasses));
 
 
 

@@ -1,5 +1,5 @@
 // started by Joe - march 18 2019
-import React, { useEffect } from "react";
+import React, { memo } from "react";
 import "./Dashboard.scss";
 import ProfileInfoContainer from "../../Containers/ProfileInfoContainer/ProfileInfoContainer";
 import Schedule from "../../Containers/Schedule/Schedule";
@@ -21,4 +21,4 @@ const Dashboard = () => {
 };
 
 
-export default Dashboard;
+export default memo(Dashboard);

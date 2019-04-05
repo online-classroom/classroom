@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import "./SearchOptions.scss";
 import Axios from "axios";
 import { NavLink } from "react-router-dom";
@@ -77,4 +77,4 @@ const SearchOptions = props => {
   return <div className="searchOptions" id='searchOptions'>{mappedSubjects}</div>;
 };
 
-export default SearchOptions;
+export default memo(SearchOptions);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import Axios from "axios";
 import './lectureVideos.scss'
 
@@ -42,4 +42,4 @@ const LectureVideos = props => {
   )
 };
 
-export default LectureVideos;
+export default memo(LectureVideos);
