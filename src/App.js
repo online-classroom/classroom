@@ -1,16 +1,19 @@
-import React,{memo} from 'react'
+import React,{memo, Suspense} from 'react'
 import appRouting from './routes/appRouting'
-import TopNav from './Containers/TopNav/TopNav'
-import Footer from './Containers/Footer/Footer'
 import './App.scss'
+import Loader from './Loader'
+const TopNav = React.lazy(() => import('./Containers/TopNav/TopNav'))
+const Footer = React.lazy(() => import('./Containers/Footer/Footer'))
 
 const App = ()=>{
   return(
     <div className='App'>
-      <TopNav/>
-      <div style={{height: '60px'}}/>
-      {appRouting}
-      <Footer/>
+      <Suspense fallback={<Loader size={120}/>}>
+        <TopNav/>
+        <div style={{height: '60px'}}/>
+        {appRouting}
+        <Footer/>
+      </Suspense>
     </div>
   )
 }
