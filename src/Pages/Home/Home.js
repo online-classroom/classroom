@@ -1,13 +1,15 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useState, useEffect, Suspense } from "react";
 import "./Home.scss";
 import axios from "axios";
 import RegisterButton from "./../../Components/Buttons/RegisterButton";
 import LoginButton from "./../../Components/Buttons/LoginButton";
 import Background from "../../assets/Background.jpg";
-import SubjectNav from "../../Containers/SubjectNav/SubjectNav";
 import { NavLink } from "react-router-dom";
 import * as logic from "./HomeLogic";
 import RegisterModal from "../../Containers/RegisterModal/RegisterModal";
+import Loader from "../../Loader";
+const SubjectNav = React.lazy(() => import('./../../Containers/SubjectNav/SubjectNav'));
+
 
 const Home = () => {
   const [subject, renderSubject] = useState([]);
@@ -76,9 +78,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {/* <div className=""> */}
+      <Suspense fallback={<Loader size={150}/>}>
         <SubjectNav />
-      {/* </div> */}
+      </Suspense>
       <div className='courses-container' id='sub'>
                 {mappedSubjects}
         </div>
