@@ -9,7 +9,8 @@ import moment from 'moment';
 import {updateCourseInfo} from '../../ducks/reducer';
 import SecondaryButton from './../../Components/Buttons/SecondaryButton';
 import queryString from 'query-string';
-import LectureVideos from './../../Components/LectureVideos/LectureVideos'
+import LectureVideos from './../../Components/LectureVideos/LectureVideos';
+import * as logic from './BrowseClassesLogic';
 
 const BrowseClasses = (props)=>{
     const [subject, renderSubject] = useState([])
@@ -71,7 +72,8 @@ const BrowseClasses = (props)=>{
                 let year = parseInt(ele.date.split('-')[0])
                 let month = parseInt(ele.date.split('-')[1]) - 1
                 let day = parseInt(ele.date.split('-')[2])
-                let hour = parseInt(ele.lecture_start_time.split('T')[1].split(':')[0]) - 6
+                // let hour = parseInt(ele.lecture_start_time.split('T')[1].split(':')[0]) - 6
+                let hour = logic.getHour(ele.date)
                 let endHour = parseInt(ele.lecture_end_time.split('T')[1].split(':')[0]) - 6
                 let minute = parseInt(ele.lecture_start_time.split('T')[1].split(':')[1])
                 let endMinute = parseInt(ele.lecture_end_time.split('T')[1].split(':')[1])
@@ -125,9 +127,12 @@ const BrowseClasses = (props)=>{
                             {ele.title}
                         </button>
                     </div>
-                    <div className='course-teacher'>
+                    {/* <div className='course-teacher'>
                         Taught by {ele.first_name} {ele.last_name}
-                    </div>
+                    </div> */}
+                    {
+                        logic.teacherNameDisplay(ele.first_name, ele.last_name)
+                    }
                     <div className='course-buttons'>
                     {
                         props.user_id ? (
@@ -157,7 +162,6 @@ const BrowseClasses = (props)=>{
     }
     const viewedCourse = ()=>{
         theCourseDates()
-     
         if(selectedCourseInfo){
             return (
                 <div className='calendar-container'>
