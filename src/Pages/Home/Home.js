@@ -51,7 +51,7 @@ const Home = () => {
               <br />
               <br />
               <span className="subtitle-subtext">
-                Virtual environment. Live interactions.
+                Virtual environment. Real interactions.
               </span>
             </div>
             <NavLink to="/browseclasses">
