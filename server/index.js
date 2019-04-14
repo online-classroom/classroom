@@ -2,7 +2,7 @@
 
 require('dotenv').config();
 
-const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
+const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, PRERENDER_TOKEN } = process.env;
 
 const express = require('express');
 const massive = require('massive');
@@ -30,7 +30,7 @@ app.use(
   })
 );
 
-app.use(require('prerender-node')); // For SEO integration
+app.use(require('prerender-node').set('prerenderToken', PRERENDER_TOKEN)); // For SEO integration
 
 // // // // DATABASE/SERVER/SOCKET SETUP // // // //
 
