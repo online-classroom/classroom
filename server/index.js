@@ -30,6 +30,8 @@ app.use(
   })
 );
 
+app.use(require('prerender-node')); // For SEO integration
+
 // // // // DATABASE/SERVER/SOCKET SETUP // // // //
 
 massive(CONNECTION_STRING).then(db => {
